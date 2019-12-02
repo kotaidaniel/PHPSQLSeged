@@ -235,12 +235,4 @@
         ybI+w1cAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="szovegLabel.Text" xml:space="preserve">
-    <value>Ez az alkalmazás amiatt jött létre hogy ezzel megkönnyítse a webfejlesztők munkáját azzal, 
-hogy azonnal legenerál egy PHP és egy SQL fájlt. Amennyiben szeretne kezdeni, kérjük
-válassza ki a bal oldali menüpontokból az SQL vagy a a PHP felületet és töltse ki a 
-szükséges adatokat
-
- </value>
-  </data>
 </root>

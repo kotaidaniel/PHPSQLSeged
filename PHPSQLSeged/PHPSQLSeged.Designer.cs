@@ -38,16 +38,7 @@
             this.kezdolapButton = new System.Windows.Forms.Button();
             this.phpButton = new System.Windows.Forms.Button();
             this.sqlButton = new System.Windows.Forms.Button();
-            this.kezdolapPanel = new System.Windows.Forms.Panel();
-            this.sqlPanel = new System.Windows.Forms.Panel();
-            this.phpPanel = new System.Windows.Forms.Panel();
-            this.mentesPanel = new System.Windows.Forms.Panel();
-            this.udvozloLabel = new System.Windows.Forms.Label();
-            this.szovegLabel = new System.Windows.Forms.Label();
             this.vezerloPanel.SuspendLayout();
-            this.kezdolapPanel.SuspendLayout();
-            this.phpPanel.SuspendLayout();
-            this.mentesPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // vezerloPanel
@@ -165,68 +156,12 @@
             this.sqlButton.UseVisualStyleBackColor = false;
             this.sqlButton.Click += new System.EventHandler(this.SqlButton_Click);
             // 
-            // kezdolapPanel
-            // 
-            this.kezdolapPanel.Controls.Add(this.szovegLabel);
-            this.kezdolapPanel.Controls.Add(this.udvozloLabel);
-            this.kezdolapPanel.Location = new System.Drawing.Point(0, 0);
-            this.kezdolapPanel.Name = "kezdolapPanel";
-            this.kezdolapPanel.Size = new System.Drawing.Size(613, 401);
-            this.kezdolapPanel.TabIndex = 2;
-            // 
-            // sqlPanel
-            // 
-            this.sqlPanel.Location = new System.Drawing.Point(187, 1);
-            this.sqlPanel.Name = "sqlPanel";
-            this.sqlPanel.Size = new System.Drawing.Size(613, 401);
-            this.sqlPanel.TabIndex = 3;
-            this.sqlPanel.Visible = false;
-            // 
-            // phpPanel
-            // 
-            this.phpPanel.Controls.Add(this.mentesPanel);
-            this.phpPanel.Location = new System.Drawing.Point(190, 1);
-            this.phpPanel.Name = "phpPanel";
-            this.phpPanel.Size = new System.Drawing.Size(613, 401);
-            this.phpPanel.TabIndex = 4;
-            this.phpPanel.Visible = false;
-            // 
-            // mentesPanel
-            // 
-            this.mentesPanel.Controls.Add(this.kezdolapPanel);
-            this.mentesPanel.Location = new System.Drawing.Point(0, 0);
-            this.mentesPanel.Name = "mentesPanel";
-            this.mentesPanel.Size = new System.Drawing.Size(613, 401);
-            this.mentesPanel.TabIndex = 5;
-            this.mentesPanel.Visible = false;
-            // 
-            // udvozloLabel
-            // 
-            this.udvozloLabel.AutoSize = true;
-            this.udvozloLabel.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.udvozloLabel.Location = new System.Drawing.Point(7, 8);
-            this.udvozloLabel.Name = "udvozloLabel";
-            this.udvozloLabel.Size = new System.Drawing.Size(493, 39);
-            this.udvozloLabel.TabIndex = 0;
-            this.udvozloLabel.Text = "Üdvözöljük alkalmazásunkban!";
-            // 
-            // szovegLabel
-            // 
-            this.szovegLabel.AutoSize = true;
-            this.szovegLabel.Location = new System.Drawing.Point(3, 78);
-            this.szovegLabel.Name = "szovegLabel";
-            this.szovegLabel.Size = new System.Drawing.Size(602, 102);
-            this.szovegLabel.TabIndex = 1;
-            this.szovegLabel.Text = resources.GetString("szovegLabel.Text");
-            // 
             // PHPSQLSeged
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(801, 405);
-            this.Controls.Add(this.phpPanel);
-            this.Controls.Add(this.sqlPanel);
             this.Controls.Add(this.vezerloPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -235,10 +170,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PHP, SQL Segéd";
             this.vezerloPanel.ResumeLayout(false);
-            this.kezdolapPanel.ResumeLayout(false);
-            this.kezdolapPanel.PerformLayout();
-            this.phpPanel.ResumeLayout(false);
-            this.mentesPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -250,16 +181,10 @@
         private System.Windows.Forms.Button phpButton;
         private System.Windows.Forms.Button mentesButton;
         private System.Windows.Forms.Button kezdolapButton;
-        private System.Windows.Forms.Panel kezdolapPanel;
         private System.Windows.Forms.Panel sqlJelolo;
         private System.Windows.Forms.Panel phpJelolo;
         private System.Windows.Forms.Panel kezdolapJelolo;
         private System.Windows.Forms.Panel mentesJelolo;
-        private System.Windows.Forms.Panel sqlPanel;
-        private System.Windows.Forms.Panel phpPanel;
-        private System.Windows.Forms.Panel mentesPanel;
-        private System.Windows.Forms.Label udvozloLabel;
-        private System.Windows.Forms.Label szovegLabel;
     }
 }
 
