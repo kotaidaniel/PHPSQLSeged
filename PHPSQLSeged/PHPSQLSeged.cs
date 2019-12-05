@@ -16,6 +16,7 @@ namespace PHPSQLSeged
     public partial class PHPSQLSeged : Form
     {
         SQLiteConnection conn;
+        public int kivalasztottTablaID;
         public PHPSQLSeged()
         {
             InitializeComponent();
@@ -32,12 +33,12 @@ namespace PHPSQLSeged
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                     oszlopnev VARCHAR(128) NOT NULL,
                                     kiterjesztes VARCHAR(128) NOT NULL,
+                                    hossz INTEGER NOT NULL,
                                     autoinc BOOLEAN,
                                     prikey BOOLEAN,
                                     tablaid INTEGER NOT NULL
                                     );";
             command.ExecuteNonQuery();
-            TablakListazasa();
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
         {
@@ -80,7 +81,7 @@ namespace PHPSQLSeged
 
         private void AdatbazisNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-zA-Z_]*$");
+            var regexItem = new Regex("^[a-z_]*$");
             if (regexItem.IsMatch(adatbazisNeveTextBox.Text) && adatbazisNeveTextBox.Text.Length > 3 && adatbazisNeveTextBox.Text.Length < 128)
             {
                 adatbazisNevAlahuzasPanel.BackColor = Color.Green;
@@ -97,7 +98,7 @@ namespace PHPSQLSeged
 
         private void TablaNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-zA-Z_]*$");
+            var regexItem = new Regex("^[a-z_]*$");
             if (regexItem.IsMatch(tablaNeveTextBox.Text) && tablaNeveTextBox.Text.Length > 3 && tablaNeveTextBox.Text.Length < 128)
             {
                 tablaNeveAlahuzasPanel.BackColor = Color.Green;
@@ -127,13 +128,13 @@ namespace PHPSQLSeged
         {
             if (tablaNeveAlahuzasPanel.BackColor == Color.Green && e.KeyCode == Keys.Enter)
             {
+                
                 var cmd = conn.CreateCommand();
                 /*
                 cmd.CommandText = "SELECT id, tablanev FROM tablak";
-                
                 using (var reader = cmd.ExecuteReader())
                 {
-                    string nev = reader.GetString(1).ToUpper();
+                    string nev = reader.GetString(1);
                     var megadottTablaNev = tablaNeveTextBox.Text.ToUpper();
                     if (nev.Equals(megadottTablaNev))
                     {
@@ -141,12 +142,13 @@ namespace PHPSQLSeged
                     }
                 }
                 */
-                cmd.CommandText = "INSERT INTO tablak(id, tablanev) VALUES (null, @tablanev)";
+                cmd.CommandText = "INSERT INTO tablak(tablanev) VALUES (@tablanev)";
                 cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
                 cmd.ExecuteNonQuery();
 
                 TablakListazasa();
                 tablaNeveTextBox.Clear();
+                tablaNeveAlahuzasPanel.BackColor = Color.Black;
             }
         }
 
@@ -160,6 +162,128 @@ namespace PHPSQLSeged
 
         }
 
-        
+        private void TablakListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tablakListBox.SelectedIndex != -1)
+            {
+                Tablak tabla = (Tablak)tablakListBox.SelectedItem;
+                kivalasztottTablaID = tabla.Id;
+                oszlopNevTextBox.Enabled = true;
+                oszlopNeveAlahuzasPanel.BackColor = Color.Black;
+                OszlopListazas(kivalasztottTablaID);
+            }
+        }
+
+        private void OszlopNevTextBox_TextChanged(object sender, EventArgs e)
+        {
+            var regexItem = new Regex("^[a-z_]*$");
+            if (regexItem.IsMatch(oszlopNevTextBox.Text) && oszlopNevTextBox.Text.Length > 3 && oszlopNevTextBox.Text.Length < 128)
+            {
+                oszlopNeveAlahuzasPanel.BackColor = Color.Green;
+                oszlopKiterjesztesComboBox.Enabled = true;
+            }
+            else
+            {
+                oszlopNeveAlahuzasPanel.BackColor = Color.Red;
+            }
+        }
+
+        private void OszlopKiterjesztesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            oszlopHozzaadasButton.Enabled = true;
+            switch (oszlopKiterjesztesComboBox.Text)
+            {
+                case "INTEGER":
+                    autoIncrementCheckBox.Enabled = true;
+                    primaryKeyCheckBox.Enabled = true;
+                    oszlopHosszNumericUpDown.Maximum = 64;
+                    oszlopHosszNumericUpDown.Enabled = true;
+                    break;
+                case "BOOLEAN":
+                    oszlopHosszNumericUpDown.Value = 1;
+                    oszlopHosszNumericUpDown.Enabled = false;
+                    autoIncrementCheckBox.Checked = false;
+                    primaryKeyCheckBox.Checked = false;
+                    autoIncrementCheckBox.Enabled = false;
+                    primaryKeyCheckBox.Enabled = false;
+                    break;
+                case "VARCHAR":
+                    oszlopHosszNumericUpDown.Maximum = 128;
+                    autoIncrementCheckBox.Checked = false;
+                    primaryKeyCheckBox.Checked = false;
+                    autoIncrementCheckBox.Enabled = false;
+                    primaryKeyCheckBox.Enabled = false;
+                    oszlopHosszNumericUpDown.Enabled = true;
+                    break;
+                case "TEXT":
+                    autoIncrementCheckBox.Checked = false;
+                    primaryKeyCheckBox.Checked = false;
+                    autoIncrementCheckBox.Enabled = false;
+                    primaryKeyCheckBox.Enabled = false;
+                    oszlopHosszNumericUpDown.Enabled = true;
+                    break;
+            }
+        }
+
+        private void OszlopHozzaadasButton_Click(object sender, EventArgs e)
+        {
+            if (oszlopNeveAlahuzasPanel.BackColor == Color.Green && kivalasztottTablaID >= 0)
+            {
+
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO oszlopok(oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid) VALUES (@oszlopnev, @kiterjesztes, @hossz, @autoinc, @prikey, @tablaid)";
+                cmd.Parameters.AddWithValue("@oszlopnev", oszlopNevTextBox.Text);
+                cmd.Parameters.AddWithValue("@kiterjesztes", oszlopKiterjesztesComboBox.SelectedItem);
+                cmd.Parameters.AddWithValue("@hossz", oszlopHosszNumericUpDown.Value);
+                cmd.Parameters.AddWithValue("@autoinc", autoIncrementCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@prikey", primaryKeyCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+
+                OszlopListazas(kivalasztottTablaID);
+                OszlopHozzaadReset();
+            }
+            else
+            {
+                MessageBox.Show("Kérjük válasszon ki egy táblát a listából");
+            }
+        }
+
+        public void OszlopListazas(int index) {
+            OszlopokListBox.Items.Clear();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT id, oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid FROM oszlopok WHERE tablaid = @tablaid";
+            cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var id = reader.GetInt32(0);
+                    var oszlopnev = reader.GetString(1);
+                    var kiterjesztes = reader.GetString(2);
+                    var hossz = reader.GetInt32(3);
+                    var autoinc = reader.GetBoolean(4);
+                    var prikey = reader.GetBoolean(5);
+                    var tablaid = reader.GetInt32(6);
+                    var oszlop = new Oszlopok(id, oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid);
+                    OszlopokListBox.Items.Add(oszlop);
+                }
+            }
+        }
+        public void OszlopHozzaadReset() {
+            oszlopNevTextBox.Clear();
+            oszlopNeveAlahuzasPanel.BackColor = Color.Black;
+            oszlopKiterjesztesComboBox.Text = " ";
+            oszlopHosszNumericUpDown.Value = 1;
+            oszlopKiterjesztesComboBox.Enabled = false;
+            oszlopHosszNumericUpDown.Enabled = false;
+            autoIncrementCheckBox.Checked = false;
+            primaryKeyCheckBox.Checked = false;
+            autoIncrementCheckBox.Enabled = false;
+            primaryKeyCheckBox.Enabled = false;
+            oszlopHozzaadasButton.Enabled = false;
+        }
+
+
     }
 }
