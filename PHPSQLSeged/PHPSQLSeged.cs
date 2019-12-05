@@ -16,6 +16,8 @@ namespace PHPSQLSeged
         public PHPSQLSeged()
         {
             InitializeComponent();
+            sqlPanel.Visible = false;
+              
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
         {
@@ -23,6 +25,8 @@ namespace PHPSQLSeged
             sqlJelolo.Visible = false;
             phpJelolo.Visible = false;
             mentesJelolo.Visible = false;
+            kezdolapPanel.Visible = true;
+            sqlPanel.Visible = false;
         }
 
         private void SqlButton_Click(object sender, EventArgs e)
@@ -31,6 +35,9 @@ namespace PHPSQLSeged
             sqlJelolo.Visible = true;
             phpJelolo.Visible = false;
             mentesJelolo.Visible = false;
+            kezdolapPanel.Visible = false;
+            sqlPanel.Visible = true;
+
         }
 
         private void PhpButton_Click(object sender, EventArgs e)
@@ -48,5 +55,11 @@ namespace PHPSQLSeged
             phpJelolo.Visible = false;
             mentesJelolo.Visible = true;
         }
+
+        private void kilepesButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

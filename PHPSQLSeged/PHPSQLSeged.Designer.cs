@@ -38,7 +38,20 @@
             this.kezdolapButton = new System.Windows.Forms.Button();
             this.phpButton = new System.Windows.Forms.Button();
             this.sqlButton = new System.Windows.Forms.Button();
+            this.kezdolapPanel = new System.Windows.Forms.Panel();
+            this.udvozloLabel = new System.Windows.Forms.Label();
+            this.sqlPanel = new System.Windows.Forms.Panel();
+            this.sqlAdatmegadasLabel = new System.Windows.Forms.Label();
+            this.kilepesButton = new System.Windows.Forms.Button();
+            this.udvozloSzovegAlahuzasPanel = new System.Windows.Forms.Panel();
+            this.instrukcioLabel = new System.Windows.Forms.Label();
+            this.sqlFajlAdatmegazasAlahuzasPanel = new System.Windows.Forms.Panel();
+            this.adatbazisNeveLabel = new System.Windows.Forms.Label();
+            this.adatbazisNeveTextBox = new System.Windows.Forms.TextBox();
+            this.adatbazisNevAlahuzasPanel = new System.Windows.Forms.Panel();
             this.vezerloPanel.SuspendLayout();
+            this.kezdolapPanel.SuspendLayout();
+            this.sqlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // vezerloPanel
@@ -156,20 +169,133 @@
             this.sqlButton.UseVisualStyleBackColor = false;
             this.sqlButton.Click += new System.EventHandler(this.SqlButton_Click);
             // 
+            // kezdolapPanel
+            // 
+            this.kezdolapPanel.Controls.Add(this.instrukcioLabel);
+            this.kezdolapPanel.Controls.Add(this.udvozloSzovegAlahuzasPanel);
+            this.kezdolapPanel.Controls.Add(this.udvozloLabel);
+            this.kezdolapPanel.Location = new System.Drawing.Point(593, 11);
+            this.kezdolapPanel.Name = "kezdolapPanel";
+            this.kezdolapPanel.Size = new System.Drawing.Size(611, 358);
+            this.kezdolapPanel.TabIndex = 1;
+            // 
+            // udvozloLabel
+            // 
+            this.udvozloLabel.AutoSize = true;
+            this.udvozloLabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.udvozloLabel.Location = new System.Drawing.Point(29, 34);
+            this.udvozloLabel.Name = "udvozloLabel";
+            this.udvozloLabel.Size = new System.Drawing.Size(558, 33);
+            this.udvozloLabel.TabIndex = 0;
+            this.udvozloLabel.Text = "Üdvözöljük a PHP, SQL segéd programba!";
+            // 
+            // sqlPanel
+            // 
+            this.sqlPanel.Controls.Add(this.adatbazisNevAlahuzasPanel);
+            this.sqlPanel.Controls.Add(this.adatbazisNeveTextBox);
+            this.sqlPanel.Controls.Add(this.kezdolapPanel);
+            this.sqlPanel.Controls.Add(this.adatbazisNeveLabel);
+            this.sqlPanel.Controls.Add(this.sqlFajlAdatmegazasAlahuzasPanel);
+            this.sqlPanel.Controls.Add(this.sqlAdatmegadasLabel);
+            this.sqlPanel.Location = new System.Drawing.Point(190, 1);
+            this.sqlPanel.Name = "sqlPanel";
+            this.sqlPanel.Size = new System.Drawing.Size(611, 358);
+            this.sqlPanel.TabIndex = 1;
+            this.sqlPanel.Visible = false;
+            // 
+            // sqlAdatmegadasLabel
+            // 
+            this.sqlAdatmegadasLabel.AutoSize = true;
+            this.sqlAdatmegadasLabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sqlAdatmegadasLabel.Location = new System.Drawing.Point(4, 1);
+            this.sqlAdatmegadasLabel.Name = "sqlAdatmegadasLabel";
+            this.sqlAdatmegadasLabel.Size = new System.Drawing.Size(308, 33);
+            this.sqlAdatmegadasLabel.TabIndex = 0;
+            this.sqlAdatmegadasLabel.Text = "SQL fájl adatmegadás";
+            // 
+            // kilepesButton
+            // 
+            this.kilepesButton.Location = new System.Drawing.Point(714, 375);
+            this.kilepesButton.Name = "kilepesButton";
+            this.kilepesButton.Size = new System.Drawing.Size(75, 23);
+            this.kilepesButton.TabIndex = 2;
+            this.kilepesButton.Text = "Kilépés";
+            this.kilepesButton.UseVisualStyleBackColor = true;
+            this.kilepesButton.Click += new System.EventHandler(this.kilepesButton_Click);
+            // 
+            // udvozloSzovegAlahuzasPanel
+            // 
+            this.udvozloSzovegAlahuzasPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.udvozloSzovegAlahuzasPanel.Location = new System.Drawing.Point(59, 70);
+            this.udvozloSzovegAlahuzasPanel.Name = "udvozloSzovegAlahuzasPanel";
+            this.udvozloSzovegAlahuzasPanel.Size = new System.Drawing.Size(498, 5);
+            this.udvozloSzovegAlahuzasPanel.TabIndex = 1;
+            // 
+            // instrukcioLabel
+            // 
+            this.instrukcioLabel.AutoSize = true;
+            this.instrukcioLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.instrukcioLabel.Location = new System.Drawing.Point(31, 100);
+            this.instrukcioLabel.Name = "instrukcioLabel";
+            this.instrukcioLabel.Size = new System.Drawing.Size(573, 231);
+            this.instrukcioLabel.TabIndex = 2;
+            this.instrukcioLabel.Text = resources.GetString("instrukcioLabel.Text");
+            // 
+            // sqlFajlAdatmegazasAlahuzasPanel
+            // 
+            this.sqlFajlAdatmegazasAlahuzasPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.sqlFajlAdatmegazasAlahuzasPanel.Location = new System.Drawing.Point(10, 35);
+            this.sqlFajlAdatmegazasAlahuzasPanel.Name = "sqlFajlAdatmegazasAlahuzasPanel";
+            this.sqlFajlAdatmegazasAlahuzasPanel.Size = new System.Drawing.Size(245, 5);
+            this.sqlFajlAdatmegazasAlahuzasPanel.TabIndex = 1;
+            // 
+            // adatbazisNeveLabel
+            // 
+            this.adatbazisNeveLabel.AutoSize = true;
+            this.adatbazisNeveLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.adatbazisNeveLabel.Location = new System.Drawing.Point(10, 53);
+            this.adatbazisNeveLabel.Name = "adatbazisNeveLabel";
+            this.adatbazisNeveLabel.Size = new System.Drawing.Size(138, 21);
+            this.adatbazisNeveLabel.TabIndex = 2;
+            this.adatbazisNeveLabel.Text = "Adatbázis neve:";
+            // 
+            // adatbazisNeveTextBox
+            // 
+            this.adatbazisNeveTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.adatbazisNeveTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.adatbazisNeveTextBox.Location = new System.Drawing.Point(154, 58);
+            this.adatbazisNeveTextBox.Name = "adatbazisNeveTextBox";
+            this.adatbazisNeveTextBox.Size = new System.Drawing.Size(157, 16);
+            this.adatbazisNeveTextBox.TabIndex = 3;
+            // 
+            // adatbazisNevAlahuzasPanel
+            // 
+            this.adatbazisNevAlahuzasPanel.BackColor = System.Drawing.SystemColors.MenuText;
+            this.adatbazisNevAlahuzasPanel.Location = new System.Drawing.Point(154, 72);
+            this.adatbazisNevAlahuzasPanel.Name = "adatbazisNevAlahuzasPanel";
+            this.adatbazisNevAlahuzasPanel.Size = new System.Drawing.Size(157, 3);
+            this.adatbazisNevAlahuzasPanel.TabIndex = 4;
+            // 
             // PHPSQLSeged
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(801, 405);
+            this.Controls.Add(this.kilepesButton);
+            this.Controls.Add(this.sqlPanel);
             this.Controls.Add(this.vezerloPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PHPSQLSeged";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PHP, SQL Segéd";
             this.vezerloPanel.ResumeLayout(false);
+            this.kezdolapPanel.ResumeLayout(false);
+            this.kezdolapPanel.PerformLayout();
+            this.sqlPanel.ResumeLayout(false);
+            this.sqlPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -185,6 +311,17 @@
         private System.Windows.Forms.Panel phpJelolo;
         private System.Windows.Forms.Panel kezdolapJelolo;
         private System.Windows.Forms.Panel mentesJelolo;
+        private System.Windows.Forms.Panel kezdolapPanel;
+        private System.Windows.Forms.Panel sqlPanel;
+        private System.Windows.Forms.Label sqlAdatmegadasLabel;
+        private System.Windows.Forms.Label udvozloLabel;
+        private System.Windows.Forms.Button kilepesButton;
+        private System.Windows.Forms.Panel udvozloSzovegAlahuzasPanel;
+        private System.Windows.Forms.Label instrukcioLabel;
+        private System.Windows.Forms.Panel sqlFajlAdatmegazasAlahuzasPanel;
+        private System.Windows.Forms.Panel adatbazisNevAlahuzasPanel;
+        private System.Windows.Forms.TextBox adatbazisNeveTextBox;
+        private System.Windows.Forms.Label adatbazisNeveLabel;
     }
 }
 

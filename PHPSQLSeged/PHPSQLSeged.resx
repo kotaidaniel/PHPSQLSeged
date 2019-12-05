@@ -235,4 +235,17 @@
         ybI+w1cAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="instrukcioLabel.Text" xml:space="preserve">
+    <value>Köszönjük hogy a mi programunkat választotta! Kövesse az alábbi 
+instrukciókat, hogy akadálymentesen tudja véghezvinni a generálást:
+     - A program bal oldalán található menüpontokkal tud navigálni az
+        ablakok között.
+     - Minden csillaggal jelölt mezőt töltsön ki!
+     - A mezőket csakis érvényes adatokkal töltse ki (ne használjon speciális
+        karaktereket, kivéve '_')!
+     - A menteni kívánt fájlokat megfelelő helyre mentse el!
+
+Amennyiben kérdésük, problémájuk van a programmal kérjük jelezze
+a phpsqlseged@support.hu e-mail címen.</value>
+  </data>
 </root>
