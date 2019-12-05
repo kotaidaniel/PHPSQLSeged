@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -75,10 +76,7 @@ namespace PHPSQLSeged
             mentesJelolo.Visible = true;
         }
 
-        private void kilepesButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        
 
         private void AdatbazisNeveTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -109,10 +107,8 @@ namespace PHPSQLSeged
                 tablaNeveAlahuzasPanel.BackColor = Color.Red;
             }
         }
-
-        
-
-        public void TablakListazasa() {
+        public void TablakListazasa()
+        {
             tablakListBox.Items.Clear();
             var cmd = conn.CreateCommand();
             cmd.CommandText = "SELECT id, tablanev FROM tablak";
@@ -127,7 +123,6 @@ namespace PHPSQLSeged
                 }
             }
         }
-
         private void TablaNeveTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (tablaNeveAlahuzasPanel.BackColor == Color.Green && e.KeyCode == Keys.Enter)
@@ -154,5 +149,17 @@ namespace PHPSQLSeged
                 tablaNeveTextBox.Clear();
             }
         }
+
+        private void KilepesButton_Click_1(object sender, EventArgs e)
+        {
+            conn.Close();
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+            File.Delete("sql.db");
+            Application.Exit();
+
+        }
+
+        
     }
 }
