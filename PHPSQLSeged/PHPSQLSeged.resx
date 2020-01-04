@@ -249,18 +249,29 @@ instrukciókat, hogy akadálymentesen tudja véghezvinni a generálást:
 Amennyiben kérdésük, problémájuk van a programmal kérjük jelezze
 a phpsqlseged@support.hu e-mail címen.</value>
   </data>
-  <data name="oszlopTorlesButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tablaNeveModositasVegrehajtasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAHoSURBVEhLrdY/SNVRGMbxC81tCRYo6mCDgw42iCDhkhBG
-        Rf6psNT+UYgk5hBSlEtLS2SBbkJERC0hFSSI0NDe2NJSEET/lkik/D5wXni4mOdovfDB83jve+T33t/v
-        XCuFdRIv8DJ5jn78l6rFGv5UWcUubKku4RM+m6/QZhvRa/5e9V7AX2sZ7//REjat/Ti8TV3I1gqq513q
-        FbL1FNHwzdbyM/Hf+XseIVvziIbdeGz5FM5afoB6y/eQrVuIhhrcsXwEuv8j38YeyzeRrSuIhib4HzyK
-        Acsz2Gt5HNkaQTS04rrlYzhu+SraLZ9Atg4hGjoxZVnj0bER+TJ0W0c+gGxp02jowZjlQQxZ1lPba1lX
-        ky2faR/OWNZ4dCdF1lpjidyAbOkAiwZ9Hj5zjWfYsj6T85Z3Ils78Btq0F2hIyA20HhGLR/EZFr/QnF9
-        gZqmoQ8uNjwNf9C6cSOtP6K43kFNegZ0gMWGGs85yx3Qw6b1WxTXG6hpFvvSWjQe3TmR2zCX1jrqi2sR
-        alpAS1qLxnPRcjMepvUTFJc2VpNOVh0XsaHGo2+9yHV4lta6kuK6BjXpsv201EM3YVmn7eu01hNfXGrU
-        96saP6Sf8h0/LMdruoN08m6pGnEf/u9KNb12FxrVBlWprAMxN/n1GQTd2QAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAEiSURBVEhLvZU9TkJREEafpVpqh4U7EJehBRhrt2I0hITC
+        RVnqIgwVFmqjjZZ6JmQm34N5P1zUk5zkMXfmuwQyUP0Xl/iK3z29RWUHJ/iFj3iFNbYJN47xGbWvdoke
+        tJm98zHu4yHeo/c+YKAhfbHwKdrMHE9xF/2STww2vUDD3Q8c4gEu8AYDbewiC3efcA+PsIY2tdEW7p7h
+        GtrQRJ/wa0zRpoyScJsJtHGV0vC75eMSbVZKw2doZ4EOKNmGqtlnbj8Zfh7okDPCbEPdpi9Ue4KsaM+2
+        oSeoG2o2hRveYwZZ0V+/o13iG9oWbmRZaVFrvqED7ELngqyoNfMc+6AzQVosJM1Ki4WkWVr8TYM3zBq2
+        8QWDC9zkf7lLC7dF/Wuq6gcf7Q7C+o5/LgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="oszlopTorlesButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAehJREFUSEut1j9I1VEYxvELzW0JFijqYIODDjaIIOGSEEZF/qmw1P5RiCTmEFKU
+        S0tLZIFuQkRELSEVJIjQ0N7Y0lIQRP+WSKT8PnBeeLiY52i98MHzeO975Pfe3+9cK4V1Ei/wMnmOfvyX
+        qsUa/lRZxS5sqS7hEz6br9BmG9Fr/l71XsBfaxnv/9ESNq39OLxNXcjWCqrnXeoVsvUU0fDN1vIz8d/5
+        ex4hW/OIht14bPkUzlp+gHrL95CtW4iGGtyxfAS6/yPfxh7LN5GtK4iGJvgfPIoByzPYa3kc2RpBNLTi
+        uuVjOG75Ktotn0C2DiEaOjFlWePRsRH5MnRbRz6AbGnTaOjBmOVBDFnWU9trWVeTLZ9pH85Y1nh0J0XW
+        WmOJ3IBs6QCLBn0ePnONZ9iyPpPzlnciWzvwG2rQXaEjIDbQeEYtH8RkWv9CcX2BmqahDy42PA1/0Lpx
+        I60/orjeQU16BnSAxYYazznLHdDDpvVbFNcbqGkW+9JaNB7dOZHbMJfWOuqLaxFqWkBLWovGc9FyMx6m
+        9RMUlzZWk05WHRexocajb73IdXiW1rqS4roGNemy/bTUQzdhWaft67TWE19catT3qxo/pJ/yHT8sx2u6
+        g3TybqkacR/+70o1vXYXGtUGVamsAzE3+fUZBN3ZAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="oszlopModositasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -276,19 +287,19 @@ a phpsqlseged@support.hu e-mail címen.</value>
   </data>
   <data name="tablaTorlesButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAHoSURBVEhLrdY/SNVRGMbxC81tCRYo6mCDgw42iCDhkhBG
-        Rf6psNT+UYgk5hBSlEtLS2SBbkJERC0hFSSI0NDe2NJSEET/lkik/D5wXni4mOdovfDB83jve+T33t/v
-        XCuFdRIv8DJ5jn78l6rFGv5UWcUubKku4RM+m6/QZhvRa/5e9V7AX2sZ7//REjat/Ti8TV3I1gqq513q
-        FbL1FNHwzdbyM/Hf+XseIVvziIbdeGz5FM5afoB6y/eQrVuIhhrcsXwEuv8j38YeyzeRrSuIhib4HzyK
-        Acsz2Gt5HNkaQTS04rrlYzhu+SraLZ9Atg4hGjoxZVnj0bER+TJ0W0c+gGxp02jowZjlQQxZ1lPba1lX
-        ky2faR/OWNZ4dCdF1lpjidyAbOkAiwZ9Hj5zjWfYsj6T85Z3Ils78Btq0F2hIyA20HhGLR/EZFr/QnF9
-        gZqmoQ8uNjwNf9C6cSOtP6K43kFNegZ0gMWGGs85yx3Qw6b1WxTXG6hpFvvSWjQe3TmR2zCX1jrqi2sR
-        alpAS1qLxnPRcjMepvUTFJc2VpNOVh0XsaHGo2+9yHV4lta6kuK6BjXpsv201EM3YVmn7eu01hNfXGrU
-        96saP6Sf8h0/LMdruoN08m6pGnEf/u9KNb12FxrVBlWprAMxN/n1GQTd2QAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAehJREFUSEut1j9I1VEYxvELzW0JFijqYIODDjaIIOGSEEZF/qmw1P5RiCTmEFKU
+        S0tLZIFuQkRELSEVJIjQ0N7Y0lIQRP+WSKT8PnBeeLiY52i98MHzeO975Pfe3+9cK4V1Ei/wMnmOfvyX
+        qsUa/lRZxS5sqS7hEz6br9BmG9Fr/l71XsBfaxnv/9ESNq39OLxNXcjWCqrnXeoVsvUU0fDN1vIz8d/5
+        ex4hW/OIht14bPkUzlp+gHrL95CtW4iGGtyxfAS6/yPfxh7LN5GtK4iGJvgfPIoByzPYa3kc2RpBNLTi
+        uuVjOG75Ktotn0C2DiEaOjFlWePRsRH5MnRbRz6AbGnTaOjBmOVBDFnWU9trWVeTLZ9pH85Y1nh0J0XW
+        WmOJ3IBs6QCLBn0ePnONZ9iyPpPzlnciWzvwG2rQXaEjIDbQeEYtH8RkWv9CcX2BmqahDy42PA1/0Lpx
+        I60/orjeQU16BnSAxYYazznLHdDDpvVbFNcbqGkW+9JaNB7dOZHbMJfWOuqLaxFqWkBLWovGc9FyMx6m
+        9RMUlzZWk05WHRexocajb73IdXiW1rqS4roGNemy/bTUQzdhWaft67TWE19catT3qxo/pJ/yHT8sx2u6
+        g3TybqkacR/+70o1vXYXGtUGVamsAzE3+fUZBN3ZAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="teblakModositasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tablakModositasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         EwAACxMBAJqcGAAAASJJREFUSEu9lT1OQlEQRp+lWmqHhTsQl6EFGGu3YjSEhMJFWeoiDBUWaqONlnom
@@ -315,6 +326,14 @@ a phpsqlseged@support.hu e-mail címen.</value>
         taADZ9C+tS7UxFrQhzvEe+skGYFphmAqcRIoppKMYGLJFuKHyySFZ/ANeYl3wQrSyQjGlmwgXb6EfJwP
         eQQPqCpXnAT58gWUpfAMqj60AaTL51AVa0ELTmBSrlgLFEmm0bI2TgKb/FagAa2Fxpxu+OAG6gxHZpND
         /wCN/Laoi/Kg+wHYwRZcxsgMpgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tablaHozzaadasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAIRJREFUSEu1lUEKhDAUxXp7YcATK8z8iBUpb1GYNBAoKlkoD9ske3mW31vOn1Lj
+        He8epcYY72qkOGqkOGqkOGqkOGqkOGqkOE4xjsjyGeOKePcaY7phGi+arn9FfAgO6YF/pLmVU6QAaqQ4
+        aqQ4aqQ4aqQ4aqQ4aqQ4aiz/6Y9jnBxRaz+8APclBAJkmgAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

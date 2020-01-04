@@ -20,7 +20,7 @@ namespace PHPSQLSeged
         public PHPSQLSeged()
         {
             InitializeComponent();
-            sqlPanel.Visible = false;
+
 
             conn = new SQLiteConnection("Data Source = sql.db");
             conn.Open();
@@ -82,24 +82,29 @@ namespace PHPSQLSeged
         private void AdatbazisNeveTextBox_TextChanged(object sender, EventArgs e)
         {
             var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(adatbazisNeveTextBox.Text) && adatbazisNeveTextBox.Text.Length > 3 && adatbazisNeveTextBox.Text.Length < 128)
+            if (regexItem.IsMatch(adatbazisNeveTextBox.Text) && adatbazisNeveTextBox.Text.Length >= 2 && adatbazisNeveTextBox.Text.Length < 128)
             {
                 adatbazisNevAlahuzasPanel.BackColor = Color.Green;
                 tablaNeveTextBox.Enabled = true;
                 tablaNeveAlahuzasPanel.BackColor = Color.Black;
+                tablaHozzaadasButton.Enabled = true;
+                tablakListBox.Enabled = true;
             }
             else
             {
                 adatbazisNevAlahuzasPanel.BackColor = Color.Red;
                 tablaNeveTextBox.Enabled = false;
                 tablaNeveAlahuzasPanel.BackColor = Color.Gray;
+                tablaHozzaadasButton.Enabled = false;
+                tablakListBox.Enabled = false;
+                oszlopHozzaadasGroupBox.Enabled = false;
             }
         }
 
         private void TablaNeveTextBox_TextChanged(object sender, EventArgs e)
         {
             var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(tablaNeveTextBox.Text) && tablaNeveTextBox.Text.Length > 3 && tablaNeveTextBox.Text.Length < 128)
+            if (regexItem.IsMatch(tablaNeveTextBox.Text) && tablaNeveTextBox.Text.Length >= 2 && tablaNeveTextBox.Text.Length < 128)
             {
                 tablaNeveAlahuzasPanel.BackColor = Color.Green;
             }
@@ -126,29 +131,8 @@ namespace PHPSQLSeged
         }
         private void TablaNeveTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (tablaNeveAlahuzasPanel.BackColor == Color.Green && e.KeyCode == Keys.Enter)
-            {
-                
-                var cmd = conn.CreateCommand();
-                /*
-                cmd.CommandText = "SELECT id, tablanev FROM tablak";
-                using (var reader = cmd.ExecuteReader())
-                {
-                    string nev = reader.GetString(1);
-                    var megadottTablaNev = tablaNeveTextBox.Text.ToUpper();
-                    if (nev.Equals(megadottTablaNev))
-                    {
-                        MessageBox.Show("Ilyen tábla már létre lett hozva egyszer");
-                    }
-                }
-                */
-                cmd.CommandText = "INSERT INTO tablak(tablanev) VALUES (@tablanev)";
-                cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
-                cmd.ExecuteNonQuery();
-
-                TablakListazasa();
-                tablaNeveTextBox.Clear();
-                tablaNeveAlahuzasPanel.BackColor = Color.Black;
+            if (e.KeyCode == Keys.Enter) {
+                TablaHozzaAdas();
             }
         }
 
@@ -168,16 +152,21 @@ namespace PHPSQLSeged
             {
                 Tablak tabla = (Tablak)tablakListBox.SelectedItem;
                 kivalasztottTablaID = tabla.Id;
+                var nev = tabla.Tablanev;
                 oszlopNevTextBox.Enabled = true;
                 oszlopNeveAlahuzasPanel.BackColor = Color.Black;
                 OszlopListazas(kivalasztottTablaID);
+                tablaTorlesButton.Enabled = true;
+                tablakModositasButton.Enabled = true;
+                oszlopHozzaadasGroupBox.Enabled = true;
+                tablaModositottNeveTextBox.Text = nev;
             }
         }
 
         private void OszlopNevTextBox_TextChanged(object sender, EventArgs e)
         {
             var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(oszlopNevTextBox.Text) && oszlopNevTextBox.Text.Length > 3 && oszlopNevTextBox.Text.Length < 128)
+            if (regexItem.IsMatch(oszlopNevTextBox.Text) && oszlopNevTextBox.Text.Length >= 2 && oszlopNevTextBox.Text.Length < 128)
             {
                 oszlopNeveAlahuzasPanel.BackColor = Color.Green;
                 oszlopKiterjesztesComboBox.Enabled = true;
@@ -284,6 +273,85 @@ namespace PHPSQLSeged
             oszlopHozzaadasButton.Enabled = false;
         }
 
+        private void TablaHozzaadasButton_Click(object sender, EventArgs e)
+        {
+            TablaHozzaAdas();
+        }
+        public void TablaHozzaAdas() {
+            if (tablaNeveAlahuzasPanel.BackColor == Color.Green)
+            {
+                var cmd = conn.CreateCommand();
 
+                /*cmd.CommandText = "SELECT id, tablanev FROM tablak";
+                using (var reader = cmd.ExecuteReader())
+                {
+                    string nev = reader.GetString(1);
+                    var megadottTablaNev = tablaNeveTextBox.Text.ToUpper();
+                    if (nev.Equals(megadottTablaNev))
+                    {
+                        MessageBox.Show("Ilyen tábla már létre lett hozva egyszer");
+                    }
+                }
+                */
+                cmd.CommandText = "INSERT INTO tablak(tablanev) VALUES (@tablanev)";
+                cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
+                cmd.ExecuteNonQuery();
+
+                TablakListazasa();
+                tablaNeveTextBox.Clear();
+                tablaNeveAlahuzasPanel.BackColor = Color.Black;
+            }
+        }
+
+        private void TablaTorlesButton_Click(object sender, EventArgs e)
+        {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM tablak WHERE id = @id";
+            cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+            cmd.ExecuteNonQuery();
+            TablakListazasa();
+        }
+
+        private void TablakModositasButton_Click(object sender, EventArgs e)
+        {
+            tablaHozzaadasPanel.Visible = false;
+            tablaModositasPanel.Visible = true;
+            tablaModositottNeveTextBox.Enabled = true;
+            tablaNeveModositasVegrehajtasButton.Enabled = true;
+            tablaModositottNeveEllenorzoPanel.Enabled = true;
+            tablaModositottNeveEllenorzoPanel.BackColor = Color.Black;
+        }
+
+        private void TablaModositottNeveTextBox_TextChanged(object sender, EventArgs e)
+        {
+            var regexItem = new Regex("^[a-z_]*$");
+            if (regexItem.IsMatch(tablaModositottNeveTextBox.Text) && tablaModositottNeveTextBox.Text.Length >= 2 && tablaModositottNeveTextBox.Text.Length < 128)
+            {
+                tablaModositottNeveEllenorzoPanel.BackColor = Color.Green;
+            }
+            else
+            {
+                tablaModositottNeveEllenorzoPanel.BackColor = Color.Red;
+            }
+        }
+
+        private void TablaNeveModositasVegrehajtasButton_Click(object sender, EventArgs e)
+        {
+            if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
+                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                TablakListazasa();
+                tablaModositasPanel.Visible = false;
+                tablaModositottNeveTextBox.Clear();
+                tablaHozzaadasPanel.Visible = true;
+            }
+            else {
+                MessageBox.Show("Nem megfelelő adatot adott meg próbálja újra");
+            }
+        }
     }
 }
