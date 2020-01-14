@@ -17,6 +17,7 @@ namespace PHPSQLSeged
     {
         SQLiteConnection conn;
         public int kivalasztottTablaID;
+        public int kivalasztottOszlopID;
         public PHPSQLSeged()
         {
             InitializeComponent();
@@ -309,7 +310,11 @@ namespace PHPSQLSeged
             cmd.CommandText = "DELETE FROM tablak WHERE id = @id";
             cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
             cmd.ExecuteNonQuery();
+            cmd.CommandText = "DELETE FROM oszlopok WHERE tablaid = @tablaid";
+            cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+            cmd.ExecuteNonQuery();
             TablakListazasa();
+            OszlopListazas(-1);
         }
 
         private void TablakModositasButton_Click(object sender, EventArgs e)
@@ -352,6 +357,24 @@ namespace PHPSQLSeged
             else {
                 MessageBox.Show("Nem megfelelő adatot adott meg próbálja újra");
             }
+        }
+
+        private void OszlopokListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            oszlopTorlesButton.Enabled = true;
+            oszlopModositasButton.Enabled = true;
+            var oszlop = (Oszlopok)OszlopokListBox.SelectedItem;
+            kivalasztottOszlopID = oszlop.Id;
+
+        }
+
+        private void OszlopTorlesButton_Click(object sender, EventArgs e)
+        {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM oszlopok WHERE id = @id";
+            cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
+            cmd.ExecuteNonQuery();
+            OszlopListazas(kivalasztottTablaID);
         }
     }
 }
