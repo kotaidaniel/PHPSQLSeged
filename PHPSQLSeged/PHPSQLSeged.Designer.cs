@@ -79,6 +79,18 @@
             this.sqlFajlAdatfelvetelAlahuzasPanel = new System.Windows.Forms.Panel();
             this.sqlAdatfelvetelLabel = new System.Windows.Forms.Label();
             this.kilepesButton = new System.Windows.Forms.Button();
+            this.oszlopModositasGroupBox = new System.Windows.Forms.GroupBox();
+            this.oszlopModositasokVegrehajtasaButton = new System.Windows.Forms.Button();
+            this.modositottPrimaryKeyCheckBox = new System.Windows.Forms.CheckBox();
+            this.modositottAutoIncrementCheckBox = new System.Windows.Forms.CheckBox();
+            this.modositottOszlopHosszaLabel = new System.Windows.Forms.Label();
+            this.oszlopModositottHosszaNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.figyelmeztetesModositottLabel = new System.Windows.Forms.Label();
+            this.oszlopModositottKiterjesztésComboBox = new System.Windows.Forms.ComboBox();
+            this.modositottOszlopKiterjeszteseLabel = new System.Windows.Forms.Label();
+            this.modositottOszlopNeveEllenorzoPanel = new System.Windows.Forms.Panel();
+            this.oszlopModositottNeveTextBox = new System.Windows.Forms.TextBox();
+            this.modositottOszlopNeveLabel = new System.Windows.Forms.Label();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -86,6 +98,8 @@
             this.tablaHozzaadasPanel.SuspendLayout();
             this.oszlopHozzaadasGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.oszlopHosszNumericUpDown)).BeginInit();
+            this.oszlopModositasGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.oszlopModositottHosszaNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // vezerloPanel
@@ -243,6 +257,7 @@
             // 
             // sqlPanel
             // 
+            this.sqlPanel.Controls.Add(this.oszlopModositasGroupBox);
             this.sqlPanel.Controls.Add(this.tablaModositasPanel);
             this.sqlPanel.Controls.Add(this.tablaHozzaadasPanel);
             this.sqlPanel.Controls.Add(this.oszlopTorlesButton);
@@ -267,6 +282,7 @@
             // 
             // tablaModositasPanel
             // 
+            this.tablaModositasPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tablaModositasPanel.Controls.Add(this.modositottTablaNevLabel);
             this.tablaModositasPanel.Controls.Add(this.tablaNeveModositasVegrehajtasButton);
             this.tablaModositasPanel.Controls.Add(this.tablaModositottNeveTextBox);
@@ -312,6 +328,7 @@
             this.tablaModositottNeveTextBox.Size = new System.Drawing.Size(120, 20);
             this.tablaModositottNeveTextBox.TabIndex = 8;
             this.tablaModositottNeveTextBox.TextChanged += new System.EventHandler(this.TablaModositottNeveTextBox_TextChanged);
+            this.tablaModositottNeveTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablaModositottNeveTextBox_KeyDown);
             // 
             // tablaModositottNeveEllenorzoPanel
             // 
@@ -403,6 +420,7 @@
             this.oszlopModositasButton.Size = new System.Drawing.Size(44, 33);
             this.oszlopModositasButton.TabIndex = 16;
             this.oszlopModositasButton.UseVisualStyleBackColor = true;
+            this.oszlopModositasButton.Click += new System.EventHandler(this.OszlopModositasButton_Click);
             // 
             // tablaTorlesButton
             // 
@@ -525,8 +543,8 @@
             // 
             this.figyelmeztetesLabel.AutoSize = true;
             this.figyelmeztetesLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.figyelmeztetesLabel.ForeColor = System.Drawing.Color.Red;
-            this.figyelmeztetesLabel.Location = new System.Drawing.Point(6, 19);
+            this.figyelmeztetesLabel.ForeColor = System.Drawing.Color.Black;
+            this.figyelmeztetesLabel.Location = new System.Drawing.Point(7, 19);
             this.figyelmeztetesLabel.Name = "figyelmeztetesLabel";
             this.figyelmeztetesLabel.Size = new System.Drawing.Size(202, 17);
             this.figyelmeztetesLabel.TabIndex = 23;
@@ -683,13 +701,170 @@
             this.kilepesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.kilepesButton.FlatAppearance.BorderSize = 0;
             this.kilepesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.kilepesButton.Location = new System.Drawing.Point(796, 1);
+            this.kilepesButton.Location = new System.Drawing.Point(804, 1);
             this.kilepesButton.Margin = new System.Windows.Forms.Padding(0);
             this.kilepesButton.Name = "kilepesButton";
-            this.kilepesButton.Size = new System.Drawing.Size(44, 33);
+            this.kilepesButton.Size = new System.Drawing.Size(29, 33);
             this.kilepesButton.TabIndex = 18;
             this.kilepesButton.UseVisualStyleBackColor = true;
             this.kilepesButton.Click += new System.EventHandler(this.KilepesButton_Click_1);
+            // 
+            // oszlopModositasGroupBox
+            // 
+            this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositasokVegrehajtasaButton);
+            this.oszlopModositasGroupBox.Controls.Add(this.modositottPrimaryKeyCheckBox);
+            this.oszlopModositasGroupBox.Controls.Add(this.modositottAutoIncrementCheckBox);
+            this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopHosszaLabel);
+            this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottHosszaNumericUpDown);
+            this.oszlopModositasGroupBox.Controls.Add(this.figyelmeztetesModositottLabel);
+            this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottKiterjesztésComboBox);
+            this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopKiterjeszteseLabel);
+            this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopNeveEllenorzoPanel);
+            this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottNeveTextBox);
+            this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopNeveLabel);
+            this.oszlopModositasGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.oszlopModositasGroupBox.Location = new System.Drawing.Point(151, 144);
+            this.oszlopModositasGroupBox.Margin = new System.Windows.Forms.Padding(0);
+            this.oszlopModositasGroupBox.Name = "oszlopModositasGroupBox";
+            this.oszlopModositasGroupBox.Size = new System.Drawing.Size(303, 221);
+            this.oszlopModositasGroupBox.TabIndex = 29;
+            this.oszlopModositasGroupBox.TabStop = false;
+            this.oszlopModositasGroupBox.Text = "Oszlop Módosítás";
+            this.oszlopModositasGroupBox.Visible = false;
+            // 
+            // oszlopModositasokVegrehajtasaButton
+            // 
+            this.oszlopModositasokVegrehajtasaButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("oszlopModositasokVegrehajtasaButton.BackgroundImage")));
+            this.oszlopModositasokVegrehajtasaButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.oszlopModositasokVegrehajtasaButton.Enabled = false;
+            this.oszlopModositasokVegrehajtasaButton.FlatAppearance.BorderSize = 0;
+            this.oszlopModositasokVegrehajtasaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.oszlopModositasokVegrehajtasaButton.Location = new System.Drawing.Point(9, 185);
+            this.oszlopModositasokVegrehajtasaButton.Name = "oszlopModositasokVegrehajtasaButton";
+            this.oszlopModositasokVegrehajtasaButton.Size = new System.Drawing.Size(286, 23);
+            this.oszlopModositasokVegrehajtasaButton.TabIndex = 28;
+            this.oszlopModositasokVegrehajtasaButton.UseVisualStyleBackColor = true;
+            this.oszlopModositasokVegrehajtasaButton.Click += new System.EventHandler(this.OszlopModositasokVegrehajtasaButton_Click);
+            // 
+            // modositottPrimaryKeyCheckBox
+            // 
+            this.modositottPrimaryKeyCheckBox.AutoSize = true;
+            this.modositottPrimaryKeyCheckBox.Enabled = false;
+            this.modositottPrimaryKeyCheckBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.modositottPrimaryKeyCheckBox.Location = new System.Drawing.Point(174, 154);
+            this.modositottPrimaryKeyCheckBox.Name = "modositottPrimaryKeyCheckBox";
+            this.modositottPrimaryKeyCheckBox.Size = new System.Drawing.Size(116, 25);
+            this.modositottPrimaryKeyCheckBox.TabIndex = 27;
+            this.modositottPrimaryKeyCheckBox.Text = "Primary Key";
+            this.modositottPrimaryKeyCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // modositottAutoIncrementCheckBox
+            // 
+            this.modositottAutoIncrementCheckBox.AutoSize = true;
+            this.modositottAutoIncrementCheckBox.Enabled = false;
+            this.modositottAutoIncrementCheckBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.modositottAutoIncrementCheckBox.Location = new System.Drawing.Point(10, 154);
+            this.modositottAutoIncrementCheckBox.Name = "modositottAutoIncrementCheckBox";
+            this.modositottAutoIncrementCheckBox.Size = new System.Drawing.Size(155, 25);
+            this.modositottAutoIncrementCheckBox.TabIndex = 26;
+            this.modositottAutoIncrementCheckBox.Text = "Auto Increment";
+            this.modositottAutoIncrementCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // modositottOszlopHosszaLabel
+            // 
+            this.modositottOszlopHosszaLabel.AutoSize = true;
+            this.modositottOszlopHosszaLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.modositottOszlopHosszaLabel.Location = new System.Drawing.Point(6, 114);
+            this.modositottOszlopHosszaLabel.Name = "modositottOszlopHosszaLabel";
+            this.modositottOszlopHosszaLabel.Size = new System.Drawing.Size(143, 21);
+            this.modositottOszlopHosszaLabel.TabIndex = 25;
+            this.modositottOszlopHosszaLabel.Text = "Módosított hossz:";
+            // 
+            // oszlopModositottHosszaNumericUpDown
+            // 
+            this.oszlopModositottHosszaNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.oszlopModositottHosszaNumericUpDown.Enabled = false;
+            this.oszlopModositottHosszaNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.oszlopModositottHosszaNumericUpDown.Location = new System.Drawing.Point(174, 116);
+            this.oszlopModositottHosszaNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.oszlopModositottHosszaNumericUpDown.Name = "oszlopModositottHosszaNumericUpDown";
+            this.oszlopModositottHosszaNumericUpDown.Size = new System.Drawing.Size(121, 23);
+            this.oszlopModositottHosszaNumericUpDown.TabIndex = 24;
+            this.oszlopModositottHosszaNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // figyelmeztetesModositottLabel
+            // 
+            this.figyelmeztetesModositottLabel.AutoSize = true;
+            this.figyelmeztetesModositottLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.figyelmeztetesModositottLabel.ForeColor = System.Drawing.Color.Black;
+            this.figyelmeztetesModositottLabel.Location = new System.Drawing.Point(7, 19);
+            this.figyelmeztetesModositottLabel.Name = "figyelmeztetesModositottLabel";
+            this.figyelmeztetesModositottLabel.Size = new System.Drawing.Size(202, 17);
+            this.figyelmeztetesModositottLabel.TabIndex = 23;
+            this.figyelmeztetesModositottLabel.Text = "*kérjük válasszon ki egy táblát";
+            // 
+            // oszlopModositottKiterjesztésComboBox
+            // 
+            this.oszlopModositottKiterjesztésComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.oszlopModositottKiterjesztésComboBox.Enabled = false;
+            this.oszlopModositottKiterjesztésComboBox.FormattingEnabled = true;
+            this.oszlopModositottKiterjesztésComboBox.Items.AddRange(new object[] {
+            "INTEGER",
+            "VARCHAR",
+            "BOOLEAN",
+            "TEXT"});
+            this.oszlopModositottKiterjesztésComboBox.Location = new System.Drawing.Point(188, 74);
+            this.oszlopModositottKiterjesztésComboBox.Name = "oszlopModositottKiterjesztésComboBox";
+            this.oszlopModositottKiterjesztésComboBox.Size = new System.Drawing.Size(107, 25);
+            this.oszlopModositottKiterjesztésComboBox.TabIndex = 22;
+            this.oszlopModositottKiterjesztésComboBox.SelectedIndexChanged += new System.EventHandler(this.OszlopModositottKiterjesztésComboBox_SelectedIndexChanged);
+            // 
+            // modositottOszlopKiterjeszteseLabel
+            // 
+            this.modositottOszlopKiterjeszteseLabel.AutoSize = true;
+            this.modositottOszlopKiterjeszteseLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.modositottOszlopKiterjeszteseLabel.Location = new System.Drawing.Point(5, 77);
+            this.modositottOszlopKiterjeszteseLabel.Name = "modositottOszlopKiterjeszteseLabel";
+            this.modositottOszlopKiterjeszteseLabel.Size = new System.Drawing.Size(186, 21);
+            this.modositottOszlopKiterjeszteseLabel.TabIndex = 21;
+            this.modositottOszlopKiterjeszteseLabel.Text = "Módosított kiterjesztés:";
+            // 
+            // modositottOszlopNeveEllenorzoPanel
+            // 
+            this.modositottOszlopNeveEllenorzoPanel.BackColor = System.Drawing.Color.Black;
+            this.modositottOszlopNeveEllenorzoPanel.Location = new System.Drawing.Point(136, 62);
+            this.modositottOszlopNeveEllenorzoPanel.Name = "modositottOszlopNeveEllenorzoPanel";
+            this.modositottOszlopNeveEllenorzoPanel.Size = new System.Drawing.Size(161, 3);
+            this.modositottOszlopNeveEllenorzoPanel.TabIndex = 20;
+            // 
+            // oszlopModositottNeveTextBox
+            // 
+            this.oszlopModositottNeveTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.oszlopModositottNeveTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.oszlopModositottNeveTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.oszlopModositottNeveTextBox.Location = new System.Drawing.Point(136, 41);
+            this.oszlopModositottNeveTextBox.Name = "oszlopModositottNeveTextBox";
+            this.oszlopModositottNeveTextBox.Size = new System.Drawing.Size(161, 20);
+            this.oszlopModositottNeveTextBox.TabIndex = 19;
+            this.oszlopModositottNeveTextBox.TextChanged += new System.EventHandler(this.OszlopModositottNeveTextBox_TextChanged);
+            // 
+            // modositottOszlopNeveLabel
+            // 
+            this.modositottOszlopNeveLabel.AutoSize = true;
+            this.modositottOszlopNeveLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.modositottOszlopNeveLabel.Location = new System.Drawing.Point(5, 43);
+            this.modositottOszlopNeveLabel.Name = "modositottOszlopNeveLabel";
+            this.modositottOszlopNeveLabel.Size = new System.Drawing.Size(136, 21);
+            this.modositottOszlopNeveLabel.TabIndex = 18;
+            this.modositottOszlopNeveLabel.Text = "Módosított Név:";
             // 
             // PHPSQLSeged
             // 
@@ -719,6 +894,9 @@
             this.oszlopHozzaadasGroupBox.ResumeLayout(false);
             this.oszlopHozzaadasGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.oszlopHosszNumericUpDown)).EndInit();
+            this.oszlopModositasGroupBox.ResumeLayout(false);
+            this.oszlopModositasGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.oszlopModositottHosszaNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -775,6 +953,18 @@
         private System.Windows.Forms.TextBox tablaModositottNeveTextBox;
         private System.Windows.Forms.Panel tablaModositottNeveEllenorzoPanel;
         private System.Windows.Forms.Panel tablaHozzaadasPanel;
+        private System.Windows.Forms.GroupBox oszlopModositasGroupBox;
+        private System.Windows.Forms.Button oszlopModositasokVegrehajtasaButton;
+        private System.Windows.Forms.CheckBox modositottPrimaryKeyCheckBox;
+        private System.Windows.Forms.CheckBox modositottAutoIncrementCheckBox;
+        private System.Windows.Forms.Label modositottOszlopHosszaLabel;
+        private System.Windows.Forms.NumericUpDown oszlopModositottHosszaNumericUpDown;
+        private System.Windows.Forms.Label figyelmeztetesModositottLabel;
+        private System.Windows.Forms.ComboBox oszlopModositottKiterjesztésComboBox;
+        private System.Windows.Forms.Label modositottOszlopKiterjeszteseLabel;
+        private System.Windows.Forms.Panel modositottOszlopNeveEllenorzoPanel;
+        private System.Windows.Forms.TextBox oszlopModositottNeveTextBox;
+        private System.Windows.Forms.Label modositottOszlopNeveLabel;
     }
 }
 

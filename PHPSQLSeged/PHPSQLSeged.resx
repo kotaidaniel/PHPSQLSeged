@@ -249,6 +249,14 @@ instrukciókat, hogy akadálymentesen tudja véghezvinni a generálást:
 Amennyiben kérdésük, problémájuk van a programmal kérjük jelezze
 a phpsqlseged@support.hu e-mail címen.</value>
   </data>
+  <data name="oszlopModositasokVegrehajtasaButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAIRJREFUSEu1lUEKhDAUxXp7YcATK8z8iBUpb1GYNBAoKlkoD9ske3mW31vOn1Lj
+        He8epcYY72qkOGqkOGqkOGqkOGqkOGqkOE4xjsjyGeOKePcaY7phGi+arn9FfAgO6YF/pLmVU6QAaqQ4
+        aqQ4aqQ4aqQ4aqQ4aqQ4aiz/6Y9jnBxRaz+8APclBAJkmgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="oszlopTorlesButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
