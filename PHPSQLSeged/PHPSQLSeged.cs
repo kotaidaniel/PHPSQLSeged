@@ -18,6 +18,7 @@ namespace PHPSQLSeged
         SQLiteConnection conn;
         public int kivalasztottTablaID;
         public int kivalasztottOszlopID;
+        public bool kezdolap, sql, php, mentes = false;
         public PHPSQLSeged()
         {
             InitializeComponent();
@@ -43,42 +44,45 @@ namespace PHPSQLSeged
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
         {
-            kezdolapJelolo.Visible = true;
-            sqlJelolo.Visible = false;
-            phpJelolo.Visible = false;
-            mentesJelolo.Visible = false;
-            kezdolapPanel.Visible = true;
-            sqlPanel.Visible = false;
+            Oldalvaltas(1);
         }
 
         private void SqlButton_Click(object sender, EventArgs e)
         {
-            kezdolapJelolo.Visible = false;
-            sqlJelolo.Visible = true;
-            phpJelolo.Visible = false;
-            mentesJelolo.Visible = false;
-            kezdolapPanel.Visible = false;
-            sqlPanel.Visible = true;
-
+            Oldalvaltas(2);
         }
 
         private void PhpButton_Click(object sender, EventArgs e)
         {
-            kezdolapJelolo.Visible = false;
-            sqlJelolo.Visible = false;
-            phpJelolo.Visible = true;
-            mentesJelolo.Visible = false;
+            Oldalvaltas(3);
         }
 
         private void MentesButton_Click(object sender, EventArgs e)
         {
-            kezdolapJelolo.Visible = false;
-            sqlJelolo.Visible = false;
-            phpJelolo.Visible = false;
-            mentesJelolo.Visible = true;
+            Oldalvaltas(4);
         }
 
-        
+        public void Oldalvaltas(int oldal) {
+            kezdolap = false;
+            sql = false;
+            php = false;
+            mentes = false;
+            switch (oldal) {
+                case 1: kezdolap = true; break;
+                case 2: sql = true;  break;
+                case 3: php = true;  break;
+                case 4: mentes = true; break;
+            }
+            kezdolapJelolo.Visible = kezdolap;
+            kezdolapPanel.Visible = kezdolap;
+            sqlJelolo.Visible = sql;
+            sqlPanel.Visible = sql;
+            phpJelolo.Visible = php;
+            phpPanel.Visible = php;
+            mentesJelolo.Visible = mentes;
+            /*mentesPanel.Visible = mentes;*/
+        }
+
 
         private void AdatbazisNeveTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -424,8 +428,6 @@ namespace PHPSQLSeged
             {
                 modositottOszlopNeveEllenorzoPanel.BackColor = Color.Green;
                 oszlopModositottKiterjesztésComboBox.Enabled = true;
-
-                
             }
             else
             {
