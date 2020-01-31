@@ -18,6 +18,7 @@ namespace PHPSQLSeged
         SQLiteConnection conn;
         public int kivalasztottTablaID;
         public int kivalasztottOszlopID;
+        public int kivalasztottPHPTablaID;
         public bool kezdolap, sql, php, mentes = false;
         public PHPSQLSeged()
         {
@@ -38,6 +39,14 @@ namespace PHPSQLSeged
                                     hossz INTEGER NOT NULL,
                                     autoinc BOOLEAN,
                                     prikey BOOLEAN,
+                                    tablaid INTEGER NOT NULL
+                                    );
+                                    CREATE TABLE IF NOT EXISTS muveletek(
+                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    cmd_select BOOLEAN,
+                                    cmd_insert BOOLEAN,
+                                    cmd_delete BOOLEAN,
+                                    cmd_update BOOLEAN,
                                     tablaid INTEGER NOT NULL
                                     );";
             command.ExecuteNonQuery();
@@ -129,6 +138,7 @@ namespace PHPSQLSeged
                     string tablanev = reader.GetString(1);
                     var tabla = new Tablak(id, tablanev);
                     tablakListBox.Items.Add(tabla);
+                    phpTablakListBox.Items.Add(tabla);
                 }
             }
         }
@@ -430,6 +440,18 @@ namespace PHPSQLSeged
             }
         }
 
+        private void PhpTablakListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (phpTablakListBox.SelectedIndex != -1) {
+                selectCheckBox.Enabled = true;
+                insertCheckBox.Enabled = true;
+                deleteCheckBox.Enabled = true;
+                updateCheckBox.Enabled = true;
+                var tabla = (Tablak)phpTablakListBox.SelectedItem;
+                kivalasztottPHPTablaID = tabla.Id;
+            }
+        }
+
         private void OszlopModositottKiterjesztésComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             oszlopModositasokVegrehajtasaButton.Enabled = true;
@@ -466,6 +488,25 @@ namespace PHPSQLSeged
                     break;
             }
         }
+        private void SelectCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBoxEsemeny(selectCheckBox, selectCheckBox.Checked);
+        }
+
+        private void InsertCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBoxEsemeny(insertCheckBox, insertCheckBox.Checked);
+        }
+
+        private void DeleteCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBoxEsemeny(deleteCheckBox, deleteCheckBox.Checked);
+        }
+
+        private void UpdateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBoxEsemeny(updateCheckBox, updateCheckBox.Checked);
+        }
 
         private void OszlopModositasokVegrehajtasaButton_Click(object sender, EventArgs e)
         {
@@ -501,6 +542,19 @@ namespace PHPSQLSeged
                 return false;
             }
         }
+
+        private void CheckBoxEsemeny(CheckBox checkbox, bool valasz)
+        {
+            if (valasz)
+            {
+                checkbox.BackColor = Color.Green;
+            }
+            else
+            {
+                checkbox.BackColor = Color.Red;
+            }
+        }
+        
 
     }
 }

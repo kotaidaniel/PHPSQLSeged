@@ -39,9 +39,9 @@
             this.phpButton = new System.Windows.Forms.Button();
             this.sqlButton = new System.Windows.Forms.Button();
             this.kezdolapPanel = new System.Windows.Forms.Panel();
+            this.udvozloLabel = new System.Windows.Forms.Label();
             this.instrukcioLabel = new System.Windows.Forms.Label();
             this.udvozloSzovegAlahuzasPanel = new System.Windows.Forms.Panel();
-            this.udvozloLabel = new System.Windows.Forms.Label();
             this.sqlPanel = new System.Windows.Forms.Panel();
             this.oszlopModositasGroupBox = new System.Windows.Forms.GroupBox();
             this.oszlopModositasokVegrehajtasaButton = new System.Windows.Forms.Button();
@@ -92,14 +92,14 @@
             this.sqlAdatfelvetelLabel = new System.Windows.Forms.Label();
             this.kilepesButton = new System.Windows.Forms.Button();
             this.phpPanel = new System.Windows.Forms.Panel();
-            this.phpTablakListBox = new System.Windows.Forms.ListBox();
+            this.updateCheckBox = new System.Windows.Forms.CheckBox();
+            this.deleteCheckBox = new System.Windows.Forms.CheckBox();
+            this.insertCheckBox = new System.Windows.Forms.CheckBox();
+            this.selectCheckBox = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.selectCheckBox = new System.Windows.Forms.CheckBox();
-            this.insertCheckBox = new System.Windows.Forms.CheckBox();
-            this.deleteCheckBox = new System.Windows.Forms.CheckBox();
-            this.updateCheckBox = new System.Windows.Forms.CheckBox();
+            this.phpTablakListBox = new System.Windows.Forms.ListBox();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -237,6 +237,16 @@
             this.kezdolapPanel.Size = new System.Drawing.Size(611, 358);
             this.kezdolapPanel.TabIndex = 1;
             // 
+            // udvozloLabel
+            // 
+            this.udvozloLabel.AutoSize = true;
+            this.udvozloLabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.udvozloLabel.Location = new System.Drawing.Point(29, 34);
+            this.udvozloLabel.Name = "udvozloLabel";
+            this.udvozloLabel.Size = new System.Drawing.Size(558, 33);
+            this.udvozloLabel.TabIndex = 0;
+            this.udvozloLabel.Text = "Üdvözöljük a PHP, SQL segéd programba!";
+            // 
             // instrukcioLabel
             // 
             this.instrukcioLabel.AutoSize = true;
@@ -254,16 +264,6 @@
             this.udvozloSzovegAlahuzasPanel.Name = "udvozloSzovegAlahuzasPanel";
             this.udvozloSzovegAlahuzasPanel.Size = new System.Drawing.Size(498, 5);
             this.udvozloSzovegAlahuzasPanel.TabIndex = 1;
-            // 
-            // udvozloLabel
-            // 
-            this.udvozloLabel.AutoSize = true;
-            this.udvozloLabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.udvozloLabel.Location = new System.Drawing.Point(29, 34);
-            this.udvozloLabel.Name = "udvozloLabel";
-            this.udvozloLabel.Size = new System.Drawing.Size(558, 33);
-            this.udvozloLabel.TabIndex = 0;
-            this.udvozloLabel.Text = "Üdvözöljük a PHP, SQL segéd programba!";
             // 
             // sqlPanel
             // 
@@ -892,14 +892,84 @@
             this.phpPanel.TabIndex = 32;
             this.phpPanel.Visible = false;
             // 
-            // phpTablakListBox
+            // updateCheckBox
             // 
-            this.phpTablakListBox.FormattingEnabled = true;
-            this.phpTablakListBox.ItemHeight = 17;
-            this.phpTablakListBox.Location = new System.Drawing.Point(106, 92);
-            this.phpTablakListBox.Name = "phpTablakListBox";
-            this.phpTablakListBox.Size = new System.Drawing.Size(165, 242);
-            this.phpTablakListBox.TabIndex = 0;
+            this.updateCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.updateCheckBox.AutoSize = true;
+            this.updateCheckBox.BackColor = System.Drawing.Color.Red;
+            this.updateCheckBox.Enabled = false;
+            this.updateCheckBox.FlatAppearance.BorderSize = 0;
+            this.updateCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.updateCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.updateCheckBox.Location = new System.Drawing.Point(353, 253);
+            this.updateCheckBox.Name = "updateCheckBox";
+            this.updateCheckBox.Size = new System.Drawing.Size(95, 34);
+            this.updateCheckBox.TabIndex = 8;
+            this.updateCheckBox.Text = "UPDATE";
+            this.updateCheckBox.UseVisualStyleBackColor = false;
+            this.updateCheckBox.CheckedChanged += new System.EventHandler(this.UpdateCheckBox_CheckedChanged);
+            // 
+            // deleteCheckBox
+            // 
+            this.deleteCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.deleteCheckBox.AutoSize = true;
+            this.deleteCheckBox.BackColor = System.Drawing.Color.Red;
+            this.deleteCheckBox.Enabled = false;
+            this.deleteCheckBox.FlatAppearance.BorderSize = 0;
+            this.deleteCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.deleteCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.deleteCheckBox.Location = new System.Drawing.Point(353, 206);
+            this.deleteCheckBox.Name = "deleteCheckBox";
+            this.deleteCheckBox.Size = new System.Drawing.Size(87, 34);
+            this.deleteCheckBox.TabIndex = 7;
+            this.deleteCheckBox.Text = "DELETE";
+            this.deleteCheckBox.UseVisualStyleBackColor = false;
+            this.deleteCheckBox.CheckedChanged += new System.EventHandler(this.DeleteCheckBox_CheckedChanged);
+            // 
+            // insertCheckBox
+            // 
+            this.insertCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.insertCheckBox.AutoSize = true;
+            this.insertCheckBox.BackColor = System.Drawing.Color.Red;
+            this.insertCheckBox.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.insertCheckBox.Enabled = false;
+            this.insertCheckBox.FlatAppearance.BorderSize = 0;
+            this.insertCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.insertCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.insertCheckBox.Location = new System.Drawing.Point(353, 156);
+            this.insertCheckBox.Name = "insertCheckBox";
+            this.insertCheckBox.Size = new System.Drawing.Size(83, 34);
+            this.insertCheckBox.TabIndex = 6;
+            this.insertCheckBox.Text = "INSERT";
+            this.insertCheckBox.UseVisualStyleBackColor = false;
+            this.insertCheckBox.CheckedChanged += new System.EventHandler(this.InsertCheckBox_CheckedChanged);
+            // 
+            // selectCheckBox
+            // 
+            this.selectCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.selectCheckBox.AutoSize = true;
+            this.selectCheckBox.BackColor = System.Drawing.Color.Red;
+            this.selectCheckBox.Enabled = false;
+            this.selectCheckBox.FlatAppearance.BorderSize = 0;
+            this.selectCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.selectCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.selectCheckBox.Location = new System.Drawing.Point(353, 109);
+            this.selectCheckBox.Name = "selectCheckBox";
+            this.selectCheckBox.Size = new System.Drawing.Size(87, 34);
+            this.selectCheckBox.TabIndex = 5;
+            this.selectCheckBox.Text = "SELECT";
+            this.selectCheckBox.UseVisualStyleBackColor = false;
+            this.selectCheckBox.CheckedChanged += new System.EventHandler(this.SelectCheckBox_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(157, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 22);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Táblák";
             // 
             // panel1
             // 
@@ -919,63 +989,15 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "PHP adatmegadás";
             // 
-            // label2
+            // phpTablakListBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(157, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 22);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Táblák";
-            // 
-            // selectCheckBox
-            // 
-            this.selectCheckBox.AutoSize = true;
-            this.selectCheckBox.Enabled = false;
-            this.selectCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.selectCheckBox.Location = new System.Drawing.Point(353, 109);
-            this.selectCheckBox.Name = "selectCheckBox";
-            this.selectCheckBox.Size = new System.Drawing.Size(96, 28);
-            this.selectCheckBox.TabIndex = 5;
-            this.selectCheckBox.Text = "SELECT";
-            this.selectCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // insertCheckBox
-            // 
-            this.insertCheckBox.AutoSize = true;
-            this.insertCheckBox.Enabled = false;
-            this.insertCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.insertCheckBox.Location = new System.Drawing.Point(353, 156);
-            this.insertCheckBox.Name = "insertCheckBox";
-            this.insertCheckBox.Size = new System.Drawing.Size(92, 28);
-            this.insertCheckBox.TabIndex = 6;
-            this.insertCheckBox.Text = "INSERT";
-            this.insertCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // deleteCheckBox
-            // 
-            this.deleteCheckBox.AutoSize = true;
-            this.deleteCheckBox.Enabled = false;
-            this.deleteCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.deleteCheckBox.Location = new System.Drawing.Point(353, 206);
-            this.deleteCheckBox.Name = "deleteCheckBox";
-            this.deleteCheckBox.Size = new System.Drawing.Size(96, 28);
-            this.deleteCheckBox.TabIndex = 7;
-            this.deleteCheckBox.Text = "DELETE";
-            this.deleteCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // updateCheckBox
-            // 
-            this.updateCheckBox.AutoSize = true;
-            this.updateCheckBox.Enabled = false;
-            this.updateCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.updateCheckBox.Location = new System.Drawing.Point(353, 253);
-            this.updateCheckBox.Name = "updateCheckBox";
-            this.updateCheckBox.Size = new System.Drawing.Size(104, 28);
-            this.updateCheckBox.TabIndex = 8;
-            this.updateCheckBox.Text = "UPDATE";
-            this.updateCheckBox.UseVisualStyleBackColor = true;
+            this.phpTablakListBox.FormattingEnabled = true;
+            this.phpTablakListBox.ItemHeight = 17;
+            this.phpTablakListBox.Location = new System.Drawing.Point(106, 92);
+            this.phpTablakListBox.Name = "phpTablakListBox";
+            this.phpTablakListBox.Size = new System.Drawing.Size(165, 242);
+            this.phpTablakListBox.TabIndex = 0;
+            this.phpTablakListBox.SelectedIndexChanged += new System.EventHandler(this.PhpTablakListBox_SelectedIndexChanged);
             // 
             // PHPSQLSeged
             // 
