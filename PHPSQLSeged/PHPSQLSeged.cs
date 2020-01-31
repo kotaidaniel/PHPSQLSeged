@@ -86,8 +86,7 @@ namespace PHPSQLSeged
 
         private void AdatbazisNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(adatbazisNeveTextBox.Text) && adatbazisNeveTextBox.Text.Length >= 2 && adatbazisNeveTextBox.Text.Length < 128)
+            if (SzovegEllenorzes(adatbazisNeveTextBox.Text))
             {
                 adatbazisNevAlahuzasPanel.BackColor = Color.Green;
                 tablaNeveTextBox.Enabled = true;
@@ -108,8 +107,7 @@ namespace PHPSQLSeged
 
         private void TablaNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(tablaNeveTextBox.Text) && tablaNeveTextBox.Text.Length >= 2 && tablaNeveTextBox.Text.Length < 128)
+            if (SzovegEllenorzes(tablaNeveTextBox.Text))
             {
                 tablaNeveAlahuzasPanel.BackColor = Color.Green;
             }
@@ -170,8 +168,7 @@ namespace PHPSQLSeged
 
         private void OszlopNevTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(oszlopNevTextBox.Text) && oszlopNevTextBox.Text.Length >= 2 && oszlopNevTextBox.Text.Length < 128)
+            if (SzovegEllenorzes(oszlopNevTextBox.Text))
             {
                 oszlopNeveAlahuzasPanel.BackColor = Color.Green;
                 oszlopKiterjesztesComboBox.Enabled = true;
@@ -332,8 +329,7 @@ namespace PHPSQLSeged
 
         private void TablaModositottNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(tablaModositottNeveTextBox.Text) && tablaModositottNeveTextBox.Text.Length >= 2 && tablaModositottNeveTextBox.Text.Length < 128)
+            if (SzovegEllenorzes(tablaModositottNeveTextBox.Text))
             {
                 tablaModositottNeveEllenorzoPanel.BackColor = Color.Green;
             }
@@ -423,8 +419,7 @@ namespace PHPSQLSeged
 
         private void OszlopModositottNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(oszlopModositottNeveTextBox.Text) && oszlopModositottNeveTextBox.Text.Length >= 2 && oszlopModositottNeveTextBox.Text.Length < 128)
+            if (SzovegEllenorzes(oszlopModositottNeveTextBox.Text))
             {
                 modositottOszlopNeveEllenorzoPanel.BackColor = Color.Green;
                 oszlopModositottKiterjesztésComboBox.Enabled = true;
@@ -493,5 +488,19 @@ namespace PHPSQLSeged
                 MessageBox.Show("Kérjük érvényes adatokkat adjon meg!");
             }
         }
+
+        private bool SzovegEllenorzes(string szoveg)
+        {
+            var regexItem = new Regex("^[a-z_]*$");
+            if (regexItem.IsMatch(szoveg) && szoveg.Length >= 2 && szoveg.Length < 128)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
