@@ -544,24 +544,47 @@ namespace PHPSQLSeged
             if (valasz)
             {
                 checkbox.BackColor = Color.Green;
-                /*
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE tablak SET @command = true WHERE id = @id";
-                cmd.Parameters.AddWithValue("@command", command);
+                switch (command)
+                {
+                    case "cmd_select":
+                        cmd.CommandText = "UPDATE tablak SET cmd_select = true WHERE id = @id";
+                        break;
+                    case "cmd_insert":
+                        cmd.CommandText = "UPDATE tablak SET cmd_insert = true WHERE id = @id";
+                        break;
+                    case "cmd_delete":
+                        cmd.CommandText = "UPDATE tablak SET cmd_delete = true WHERE id = @id";
+                        break;
+                    case "cmd_update": 
+                        cmd.CommandText = "UPDATE tablak SET cmd_update = true WHERE id = @id";
+                        break;
+                }
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
                 cmd.ExecuteNonQuery();
-                */        
+                        
             }
             else
             {
                 checkbox.BackColor = Color.Red;
-                /*
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE tablak SET @command = false WHERE id = @id";
-                cmd.Parameters.AddWithValue("@command", command);
+                switch (command)
+                {
+                    case "cmd_select":
+                        cmd.CommandText = "UPDATE tablak SET cmd_select = false WHERE id = @id";
+                        break;
+                    case "cmd_insert":
+                        cmd.CommandText = "UPDATE tablak SET cmd_insert = false WHERE id = @id";
+                        break;
+                    case "cmd_delete":
+                        cmd.CommandText = "UPDATE tablak SET cmd_delete = false WHERE id = @id";
+                        break;
+                    case "cmd_update":
+                        cmd.CommandText = "UPDATE tablak SET cmd_update = false WHERE id = @id";
+                        break;
+                }
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
                 cmd.ExecuteNonQuery();
-                */
             }
         }
         
