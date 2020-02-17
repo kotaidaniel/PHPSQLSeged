@@ -30,7 +30,11 @@ namespace PHPSQLSeged
             var command = conn.CreateCommand();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS tablak(
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    tablanev VARCHAR(128) NOT NULL
+                                    tablanev VARCHAR(128) NOT NULL,
+                                    cmd_select BOOLEAN,
+                                    cmd_insert BOOLEAN,
+                                    cmd_delete BOOLEAN,
+                                    cmd_update BOOLEAN
                                     );
                                     CREATE TABLE IF NOT EXISTS oszlopok(
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,14 +43,6 @@ namespace PHPSQLSeged
                                     hossz INTEGER NOT NULL,
                                     autoinc BOOLEAN,
                                     prikey BOOLEAN,
-                                    tablaid INTEGER NOT NULL
-                                    );
-                                    CREATE TABLE IF NOT EXISTS muveletek(
-                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    cmd_select BOOLEAN,
-                                    cmd_insert BOOLEAN,
-                                    cmd_delete BOOLEAN,
-                                    cmd_update BOOLEAN,
                                     tablaid INTEGER NOT NULL
                                     );";
             command.ExecuteNonQuery();
@@ -304,7 +300,7 @@ namespace PHPSQLSeged
                     }
                 }
                 */
-                cmd.CommandText = "INSERT INTO tablak(tablanev) VALUES (@tablanev)";
+                cmd.CommandText = "INSERT INTO tablak(tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (@tablanev, 0, 0, 0, 0)";
                 cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
                 cmd.ExecuteNonQuery();
 
@@ -490,22 +486,22 @@ namespace PHPSQLSeged
         }
         private void SelectCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBoxEsemeny(selectCheckBox, selectCheckBox.Checked);
+            CheckBoxEsemeny(selectCheckBox, selectCheckBox.Checked, "cmd_select");
         }
 
         private void InsertCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBoxEsemeny(insertCheckBox, insertCheckBox.Checked);
+            CheckBoxEsemeny(insertCheckBox, insertCheckBox.Checked, "cmd_insert");
         }
 
         private void DeleteCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBoxEsemeny(deleteCheckBox, deleteCheckBox.Checked);
+            CheckBoxEsemeny(deleteCheckBox, deleteCheckBox.Checked, "cmd_delete");
         }
 
         private void UpdateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBoxEsemeny(updateCheckBox, updateCheckBox.Checked);
+            CheckBoxEsemeny(updateCheckBox, updateCheckBox.Checked, "cmd_update");
         }
 
         private void OszlopModositasokVegrehajtasaButton_Click(object sender, EventArgs e)
@@ -543,15 +539,29 @@ namespace PHPSQLSeged
             }
         }
 
-        private void CheckBoxEsemeny(CheckBox checkbox, bool valasz)
+        private void CheckBoxEsemeny(CheckBox checkbox, bool valasz, string command)
         {
             if (valasz)
             {
                 checkbox.BackColor = Color.Green;
+                /*
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE tablak SET @command = true WHERE id = @id";
+                cmd.Parameters.AddWithValue("@command", command);
+                cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
+                cmd.ExecuteNonQuery();
+                */        
             }
             else
             {
                 checkbox.BackColor = Color.Red;
+                /*
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE tablak SET @command = false WHERE id = @id";
+                cmd.Parameters.AddWithValue("@command", command);
+                cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
+                cmd.ExecuteNonQuery();
+                */
             }
         }
         
