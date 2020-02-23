@@ -85,7 +85,7 @@ namespace PHPSQLSeged
             phpJelolo.Visible = php;
             phpPanel.Visible = php;
             mentesJelolo.Visible = mentes;
-            /*mentesPanel.Visible = mentes;*/
+            mentesPanel.Visible = mentes;
         }
 
 

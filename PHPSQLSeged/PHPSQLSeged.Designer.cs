@@ -92,14 +92,27 @@
             this.sqlAdatfelvetelLabel = new System.Windows.Forms.Label();
             this.kilepesButton = new System.Windows.Forms.Button();
             this.phpPanel = new System.Windows.Forms.Panel();
-            this.updateCheckBox = new System.Windows.Forms.CheckBox();
             this.deleteCheckBox = new System.Windows.Forms.CheckBox();
+            this.updateCheckBox = new System.Windows.Forms.CheckBox();
             this.insertCheckBox = new System.Windows.Forms.CheckBox();
             this.selectCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.mentesAlahuzasPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.phpTablakListBox = new System.Windows.Forms.ListBox();
+            this.mentesPanel = new System.Windows.Forms.Panel();
+            this.sqlFajlMentesiHelyeLabel = new System.Windows.Forms.Label();
+            this.sqlPathAlahuzasPanel = new System.Windows.Forms.Panel();
+            this.sqlPathTextBox = new System.Windows.Forms.TextBox();
+            this.mentesDesignPanel = new System.Windows.Forms.Panel();
+            this.mentesLabel = new System.Windows.Forms.Label();
+            this.sqlTallozasButton = new System.Windows.Forms.Button();
+            this.saveFileDialogSQL = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialogPHP = new System.Windows.Forms.SaveFileDialog();
+            this.phpTallozasButton = new System.Windows.Forms.Button();
+            this.phpFajlMentesiHelyeLabel = new System.Windows.Forms.Label();
+            this.phpPathAlahuzasPanel = new System.Windows.Forms.Panel();
+            this.phpPathTextBox = new System.Windows.Forms.TextBox();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -110,6 +123,7 @@
             this.oszlopHozzaadasGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.oszlopHosszNumericUpDown)).BeginInit();
             this.phpPanel.SuspendLayout();
+            this.mentesPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // vezerloPanel
@@ -878,12 +892,12 @@
             // 
             // phpPanel
             // 
-            this.phpPanel.Controls.Add(this.updateCheckBox);
             this.phpPanel.Controls.Add(this.deleteCheckBox);
+            this.phpPanel.Controls.Add(this.updateCheckBox);
             this.phpPanel.Controls.Add(this.insertCheckBox);
             this.phpPanel.Controls.Add(this.selectCheckBox);
             this.phpPanel.Controls.Add(this.label2);
-            this.phpPanel.Controls.Add(this.panel1);
+            this.phpPanel.Controls.Add(this.mentesAlahuzasPanel);
             this.phpPanel.Controls.Add(this.label1);
             this.phpPanel.Controls.Add(this.phpTablakListBox);
             this.phpPanel.Location = new System.Drawing.Point(187, 7);
@@ -891,23 +905,6 @@
             this.phpPanel.Size = new System.Drawing.Size(614, 367);
             this.phpPanel.TabIndex = 32;
             this.phpPanel.Visible = false;
-            // 
-            // updateCheckBox
-            // 
-            this.updateCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
-            this.updateCheckBox.AutoSize = true;
-            this.updateCheckBox.BackColor = System.Drawing.Color.Red;
-            this.updateCheckBox.Enabled = false;
-            this.updateCheckBox.FlatAppearance.BorderSize = 0;
-            this.updateCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.updateCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.updateCheckBox.Location = new System.Drawing.Point(353, 253);
-            this.updateCheckBox.Name = "updateCheckBox";
-            this.updateCheckBox.Size = new System.Drawing.Size(95, 34);
-            this.updateCheckBox.TabIndex = 8;
-            this.updateCheckBox.Text = "UPDATE";
-            this.updateCheckBox.UseVisualStyleBackColor = false;
-            this.updateCheckBox.CheckedChanged += new System.EventHandler(this.UpdateCheckBox_CheckedChanged);
             // 
             // deleteCheckBox
             // 
@@ -925,6 +922,23 @@
             this.deleteCheckBox.Text = "DELETE";
             this.deleteCheckBox.UseVisualStyleBackColor = false;
             this.deleteCheckBox.CheckedChanged += new System.EventHandler(this.DeleteCheckBox_CheckedChanged);
+            // 
+            // updateCheckBox
+            // 
+            this.updateCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
+            this.updateCheckBox.AutoSize = true;
+            this.updateCheckBox.BackColor = System.Drawing.Color.Red;
+            this.updateCheckBox.Enabled = false;
+            this.updateCheckBox.FlatAppearance.BorderSize = 0;
+            this.updateCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.updateCheckBox.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.updateCheckBox.Location = new System.Drawing.Point(353, 253);
+            this.updateCheckBox.Name = "updateCheckBox";
+            this.updateCheckBox.Size = new System.Drawing.Size(95, 34);
+            this.updateCheckBox.TabIndex = 8;
+            this.updateCheckBox.Text = "UPDATE";
+            this.updateCheckBox.UseVisualStyleBackColor = false;
+            this.updateCheckBox.CheckedChanged += new System.EventHandler(this.UpdateCheckBox_CheckedChanged);
             // 
             // insertCheckBox
             // 
@@ -971,13 +985,13 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Táblák";
             // 
-            // panel1
+            // mentesAlahuzasPanel
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(9, 36);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(245, 5);
-            this.panel1.TabIndex = 3;
+            this.mentesAlahuzasPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.mentesAlahuzasPanel.Location = new System.Drawing.Point(9, 36);
+            this.mentesAlahuzasPanel.Name = "mentesAlahuzasPanel";
+            this.mentesAlahuzasPanel.Size = new System.Drawing.Size(245, 5);
+            this.mentesAlahuzasPanel.TabIndex = 3;
             // 
             // label1
             // 
@@ -999,17 +1013,136 @@
             this.phpTablakListBox.TabIndex = 0;
             this.phpTablakListBox.SelectedIndexChanged += new System.EventHandler(this.PhpTablakListBox_SelectedIndexChanged);
             // 
+            // mentesPanel
+            // 
+            this.mentesPanel.Controls.Add(this.phpTallozasButton);
+            this.mentesPanel.Controls.Add(this.phpFajlMentesiHelyeLabel);
+            this.mentesPanel.Controls.Add(this.phpPathAlahuzasPanel);
+            this.mentesPanel.Controls.Add(this.phpPathTextBox);
+            this.mentesPanel.Controls.Add(this.sqlTallozasButton);
+            this.mentesPanel.Controls.Add(this.sqlFajlMentesiHelyeLabel);
+            this.mentesPanel.Controls.Add(this.sqlPathAlahuzasPanel);
+            this.mentesPanel.Controls.Add(this.sqlPathTextBox);
+            this.mentesPanel.Controls.Add(this.mentesDesignPanel);
+            this.mentesPanel.Controls.Add(this.mentesLabel);
+            this.mentesPanel.Location = new System.Drawing.Point(190, 7);
+            this.mentesPanel.Name = "mentesPanel";
+            this.mentesPanel.Size = new System.Drawing.Size(611, 386);
+            this.mentesPanel.TabIndex = 33;
+            this.mentesPanel.Visible = false;
+            // 
+            // sqlFajlMentesiHelyeLabel
+            // 
+            this.sqlFajlMentesiHelyeLabel.AutoSize = true;
+            this.sqlFajlMentesiHelyeLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sqlFajlMentesiHelyeLabel.Location = new System.Drawing.Point(3, 77);
+            this.sqlFajlMentesiHelyeLabel.Name = "sqlFajlMentesiHelyeLabel";
+            this.sqlFajlMentesiHelyeLabel.Size = new System.Drawing.Size(179, 21);
+            this.sqlFajlMentesiHelyeLabel.TabIndex = 8;
+            this.sqlFajlMentesiHelyeLabel.Text = "SQL fájl mentési helye:";
+            // 
+            // sqlPathAlahuzasPanel
+            // 
+            this.sqlPathAlahuzasPanel.BackColor = System.Drawing.SystemColors.MenuText;
+            this.sqlPathAlahuzasPanel.Location = new System.Drawing.Point(56, 125);
+            this.sqlPathAlahuzasPanel.Name = "sqlPathAlahuzasPanel";
+            this.sqlPathAlahuzasPanel.Size = new System.Drawing.Size(348, 3);
+            this.sqlPathAlahuzasPanel.TabIndex = 7;
+            // 
+            // sqlPathTextBox
+            // 
+            this.sqlPathTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.sqlPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.sqlPathTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sqlPathTextBox.Location = new System.Drawing.Point(56, 105);
+            this.sqlPathTextBox.Name = "sqlPathTextBox";
+            this.sqlPathTextBox.Size = new System.Drawing.Size(348, 20);
+            this.sqlPathTextBox.TabIndex = 6;
+            // 
+            // mentesDesignPanel
+            // 
+            this.mentesDesignPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.mentesDesignPanel.Location = new System.Drawing.Point(6, 36);
+            this.mentesDesignPanel.Name = "mentesDesignPanel";
+            this.mentesDesignPanel.Size = new System.Drawing.Size(128, 5);
+            this.mentesDesignPanel.TabIndex = 5;
+            // 
+            // mentesLabel
+            // 
+            this.mentesLabel.AutoSize = true;
+            this.mentesLabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.mentesLabel.Location = new System.Drawing.Point(0, 2);
+            this.mentesLabel.Name = "mentesLabel";
+            this.mentesLabel.Size = new System.Drawing.Size(112, 33);
+            this.mentesLabel.TabIndex = 4;
+            this.mentesLabel.Text = "Mentés";
+            // 
+            // sqlTallozasButton
+            // 
+            this.sqlTallozasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sqlTallozasButton.BackgroundImage")));
+            this.sqlTallozasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.sqlTallozasButton.Enabled = false;
+            this.sqlTallozasButton.FlatAppearance.BorderSize = 0;
+            this.sqlTallozasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sqlTallozasButton.Location = new System.Drawing.Point(415, 101);
+            this.sqlTallozasButton.Name = "sqlTallozasButton";
+            this.sqlTallozasButton.Size = new System.Drawing.Size(44, 33);
+            this.sqlTallozasButton.TabIndex = 16;
+            this.sqlTallozasButton.UseVisualStyleBackColor = true;
+            // 
+            // phpTallozasButton
+            // 
+            this.phpTallozasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("phpTallozasButton.BackgroundImage")));
+            this.phpTallozasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.phpTallozasButton.Enabled = false;
+            this.phpTallozasButton.FlatAppearance.BorderSize = 0;
+            this.phpTallozasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.phpTallozasButton.Location = new System.Drawing.Point(418, 188);
+            this.phpTallozasButton.Name = "phpTallozasButton";
+            this.phpTallozasButton.Size = new System.Drawing.Size(44, 33);
+            this.phpTallozasButton.TabIndex = 20;
+            this.phpTallozasButton.UseVisualStyleBackColor = true;
+            // 
+            // phpFajlMentesiHelyeLabel
+            // 
+            this.phpFajlMentesiHelyeLabel.AutoSize = true;
+            this.phpFajlMentesiHelyeLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.phpFajlMentesiHelyeLabel.Location = new System.Drawing.Point(6, 164);
+            this.phpFajlMentesiHelyeLabel.Name = "phpFajlMentesiHelyeLabel";
+            this.phpFajlMentesiHelyeLabel.Size = new System.Drawing.Size(179, 21);
+            this.phpFajlMentesiHelyeLabel.TabIndex = 19;
+            this.phpFajlMentesiHelyeLabel.Text = "SQL fájl mentési helye:";
+            // 
+            // phpPathAlahuzasPanel
+            // 
+            this.phpPathAlahuzasPanel.BackColor = System.Drawing.SystemColors.MenuText;
+            this.phpPathAlahuzasPanel.Location = new System.Drawing.Point(59, 212);
+            this.phpPathAlahuzasPanel.Name = "phpPathAlahuzasPanel";
+            this.phpPathAlahuzasPanel.Size = new System.Drawing.Size(348, 3);
+            this.phpPathAlahuzasPanel.TabIndex = 18;
+            // 
+            // phpPathTextBox
+            // 
+            this.phpPathTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.phpPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.phpPathTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.phpPathTextBox.Location = new System.Drawing.Point(59, 192);
+            this.phpPathTextBox.Name = "phpPathTextBox";
+            this.phpPathTextBox.Size = new System.Drawing.Size(348, 20);
+            this.phpPathTextBox.TabIndex = 17;
+            // 
             // PHPSQLSeged
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(836, 405);
+            this.Controls.Add(this.mentesPanel);
+            this.Controls.Add(this.sqlPanel);
             this.Controls.Add(this.phpPanel);
             this.Controls.Add(this.kilepesButton);
             this.Controls.Add(this.vezerloPanel);
             this.Controls.Add(this.kezdolapPanel);
-            this.Controls.Add(this.sqlPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1033,6 +1166,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.oszlopHosszNumericUpDown)).EndInit();
             this.phpPanel.ResumeLayout(false);
             this.phpPanel.PerformLayout();
+            this.mentesPanel.ResumeLayout(false);
+            this.mentesPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1107,9 +1242,22 @@
         private System.Windows.Forms.CheckBox insertCheckBox;
         private System.Windows.Forms.CheckBox selectCheckBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel mentesAlahuzasPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox phpTablakListBox;
+        private System.Windows.Forms.Panel mentesPanel;
+        private System.Windows.Forms.Label sqlFajlMentesiHelyeLabel;
+        private System.Windows.Forms.Panel sqlPathAlahuzasPanel;
+        private System.Windows.Forms.TextBox sqlPathTextBox;
+        private System.Windows.Forms.Panel mentesDesignPanel;
+        private System.Windows.Forms.Label mentesLabel;
+        private System.Windows.Forms.Button sqlTallozasButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogSQL;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogPHP;
+        private System.Windows.Forms.Button phpTallozasButton;
+        private System.Windows.Forms.Label phpFajlMentesiHelyeLabel;
+        private System.Windows.Forms.Panel phpPathAlahuzasPanel;
+        private System.Windows.Forms.TextBox phpPathTextBox;
     }
 }
 

@@ -344,4 +344,36 @@ a phpsqlseged@support.hu e-mail címen.</value>
         /wCN/Laoi/Kg+wHYwRZcxsgMpgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="sqlTallozasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAGuSURBVEhLrdU9KP1RHMfxqzyH5GFQEoVIBmXBZPpLZpnE
+        7GGQgUV5GEjKSiSLEv7CICwMlGSwKCGLsChRHiK8P7+c0nHv7/5O3U+9hvP9nYf7O51zf6EIacIirvD1
+        4xnHGEc5nFOA/zATyiPu8fKr9oA+BE4JTqHBr5hGA/KQAT1vxRbMIjOIh280+AgacIZaREocuvEG9R+E
+        bwagjjcoUyFAOqAx2q4qFcKlArdQx3YVHLIOjZvzWmHSC3W4QIoKDvmHT1wjWwU7S9Dks17LLTm4g8ZX
+        q2BnD3o47LXcY05YvdeysgM9HPNabknAOTS+TgU7U9DDDa/llmI8Qbe3VAU7LdDkuolFKjjEHEfdEb3F
+        n2RhH+qkWxk0ubiExnWpECmN0JFSx04VoiQda1D/Q6TBN6NQZ5lEPsKlBrswfTeRDN/oP2MCZpDO7zz0
+        Jm3oxzY+YPoYy0hF1DTjBPYExju0qNkWYwWBbrh+hf5u9WHQEdVdWEAPKqEkQhPaC0TdoqDRRPYCq0hC
+        TKKtsBfQ1ywTMYm20f48jiBm0QI6NZr4AIWIaXSZhsAdCYW+AYQahOIo2XgmAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="saveFileDialogSQL.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="saveFileDialogPHP.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>168, 17</value>
+  </metadata>
+  <data name="phpTallozasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAa5JREFUSEut1T0o/VEcx/GrPIfkYVAShUgGZcFk+ktmmcTsYZCBRXkYSMpKJIsS
+        /sIgLAyUZLAoIYuwKFEeIrw/v5zSce/v/k7dT72G8/2dh/s7nXN/oQhpwiKu8PXjGccYRzmcU4D/MBPK
+        I+7x8qv2gD4ETglOocGvmEYD8pABPW/FFswiM4iHbzT4CBpwhlpEShy68Qb1H4RvBqCONyhTIUA6oDHa
+        rioVwqUCt1DHdhUcsg6Nm/NaYdILdbhAigoO+YdPXCNbBTtL0OSzXsstObiDxlerYGcPejjstdxjTli9
+        17KyAz0c81puScA5NL5OBTtT0MMNr+WWYjxBt7dUBTst0OS6iUUqOMQcR90RvcWfZGEf6qRbGTS5uITG
+        dakQKY3QkVLHThWiJB1rUP9DpME3o1BnmUQ+wqUGuzB9N5EM3+g/YwJmkM7vPPQmbejHNj5g+hjLSEXU
+        NOME9gTGO7So2RZjBYFuuH6F/m71YdAR1V1YQA8qoSRCE9oLRN2ioNFE9gKrSEJMoq2wF9DXLBMxibbR
+        /jyOIGbRAjo1mvgAhYhpdJmGwB0Jhb4BhBqE4ijZeCYAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>
