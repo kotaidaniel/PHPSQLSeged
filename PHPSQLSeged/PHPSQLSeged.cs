@@ -124,8 +124,9 @@ namespace PHPSQLSeged
         public void TablakListazasa()
         {
             tablakListBox.Items.Clear();
+            phpTablakListBox.Items.Clear();
             var cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT id, tablanev FROM tablak";
+            cmd.CommandText = "SELECT * FROM tablak";
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -147,12 +148,17 @@ namespace PHPSQLSeged
 
         private void KilepesButton_Click_1(object sender, EventArgs e)
         {
-            conn.Close();
-            System.GC.Collect();
-            System.GC.WaitForPendingFinalizers();
-            File.Delete("sql.db");
-            Application.Exit();
-
+            string uzenet = "Biztosan ki szeretne lépni az alkalmazásból? Kilépésnél a nem mentett munkák törlésre kerülnek!";
+            string cim = "Kilépés";
+            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (ablak == DialogResult.Yes)
+            {
+                conn.Close();
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
+                File.Delete("sql.db");
+                Application.Exit();
+            }
         }
 
         private void TablakListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -300,7 +306,7 @@ namespace PHPSQLSeged
                     }
                 }
                 */
-                cmd.CommandText = "INSERT INTO tablak(tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (@tablanev, 0, 0, 0, 0)";
+                cmd.CommandText = "INSERT INTO tablak(id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (NULL, @tablanev, 0, 0, 0, 0)";
                 cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
                 cmd.ExecuteNonQuery();
 
@@ -312,15 +318,18 @@ namespace PHPSQLSeged
 
         private void TablaTorlesButton_Click(object sender, EventArgs e)
         {
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = "DELETE FROM tablak WHERE id = @id";
-            cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
-            cmd.ExecuteNonQuery();
-            cmd.CommandText = "DELETE FROM oszlopok WHERE tablaid = @tablaid";
-            cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
-            cmd.ExecuteNonQuery();
-            TablakListazasa();
-            OszlopListazas(-1);
+            if (DeleteMessageBox())
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM tablak WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "DELETE FROM oszlopok WHERE tablaid = @tablaid";
+                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                TablakListazasa();
+                OszlopListazas(-1);
+            }
         }
 
         private void TablakModositasButton_Click(object sender, EventArgs e)
@@ -381,11 +390,14 @@ namespace PHPSQLSeged
 
         private void OszlopTorlesButton_Click(object sender, EventArgs e)
         {
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = "DELETE FROM oszlopok WHERE id = @id";
-            cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
-            cmd.ExecuteNonQuery();
-            OszlopListazas(kivalasztottTablaID);
+            if (DeleteMessageBox())
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM oszlopok WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
+                cmd.ExecuteNonQuery();
+                OszlopListazas(kivalasztottTablaID);
+            }
         }
 
         private void TablaModositottNeveTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -445,6 +457,42 @@ namespace PHPSQLSeged
                 updateCheckBox.Enabled = true;
                 var tabla = (Tablak)phpTablakListBox.SelectedItem;
                 kivalasztottPHPTablaID = tabla.Id;
+                /*
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT cmd_select, cmd_insert, cmd_delete, cmd_update FROM tablak WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
+                using (var reader = cmd.ExecuteReader())
+                {
+                        bool select = Convert.ToBoolean(reader.GetInt32(0));
+                        bool insert = Convert.ToBoolean(reader.GetString(1));
+                        bool delete = Convert.ToBoolean(reader.GetString(2));
+                        bool update = Convert.ToBoolean(reader.GetString(3));
+                    if (select)
+                    {
+                        selectCheckBox.Checked = true;
+                    }
+                    if (insert)
+                    {
+                        insertCheckBox.Checked = true;
+                    }
+                    if (delete)
+                    {
+                        deleteCheckBox.Checked = true;
+                    }
+                    if (update)
+                    {
+                        updateCheckBox.Checked = true;
+                    }
+                    else
+                    {
+                        selectCheckBox.Checked = false;
+                        insertCheckBox.Checked = false;
+                        deleteCheckBox.Checked = false;
+                        updateCheckBox.Checked = false;
+                    }
+                    
+                }
+                */
             }
         }
 
@@ -586,6 +634,18 @@ namespace PHPSQLSeged
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
                 cmd.ExecuteNonQuery();
             }
+        }
+        public bool DeleteMessageBox()
+        {
+            bool valasz = false;
+            string uzenet = "Biztos törölni szeretné a kiválaszott sort?";
+            string cim = "Sor törlés";
+            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (ablak == DialogResult.Yes)
+            {
+                valasz = true;
+            }
+            return valasz;
         }
         
 
