@@ -370,10 +370,7 @@ a phpsqlseged@support.hu e-mail címen.</value>
         /jyOIGbRAjo1mvgAhYhpdJmGwB0Jhb4BhBqE4ijZeCYAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="saveFileDialogSQL.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="ideiglenesSaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="saveFileDialogPHP.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>168, 17</value>
   </metadata>
 </root>

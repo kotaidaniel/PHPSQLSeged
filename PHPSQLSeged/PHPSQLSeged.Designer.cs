@@ -111,8 +111,10 @@
             this.sqlPathTextBox = new System.Windows.Forms.TextBox();
             this.mentesDesignPanel = new System.Windows.Forms.Panel();
             this.mentesLabel = new System.Windows.Forms.Label();
-            this.saveFileDialogSQL = new System.Windows.Forms.SaveFileDialog();
-            this.saveFileDialogPHP = new System.Windows.Forms.SaveFileDialog();
+            this.ideiglenesMentesBetoltesLabel = new System.Windows.Forms.Label();
+            this.IdeiglenesMentesButton = new System.Windows.Forms.Button();
+            this.betoltesButton = new System.Windows.Forms.Button();
+            this.ideiglenesSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -1015,6 +1017,9 @@
             // 
             // mentesPanel
             // 
+            this.mentesPanel.Controls.Add(this.betoltesButton);
+            this.mentesPanel.Controls.Add(this.IdeiglenesMentesButton);
+            this.mentesPanel.Controls.Add(this.ideiglenesMentesBetoltesLabel);
             this.mentesPanel.Controls.Add(this.phpTallozasButton);
             this.mentesPanel.Controls.Add(this.phpFajlMentesiHelyeLabel);
             this.mentesPanel.Controls.Add(this.phpPathAlahuzasPanel);
@@ -1131,14 +1136,55 @@
             this.mentesLabel.TabIndex = 4;
             this.mentesLabel.Text = "Mentés";
             // 
+            // ideiglenesMentesBetoltesLabel
+            // 
+            this.ideiglenesMentesBetoltesLabel.AutoSize = true;
+            this.ideiglenesMentesBetoltesLabel.Location = new System.Drawing.Point(11, 292);
+            this.ideiglenesMentesBetoltesLabel.Name = "ideiglenesMentesBetoltesLabel";
+            this.ideiglenesMentesBetoltesLabel.Size = new System.Drawing.Size(599, 34);
+            this.ideiglenesMentesBetoltesLabel.TabIndex = 21;
+            this.ideiglenesMentesBetoltesLabel.Text = "Amennyiben el szeretné menteni eddigi munkáját, vagy betölteni az előzőt, kérjük " +
+    "válassza \r\nki az ehhez megfelelő gombot!\r\n";
+            // 
+            // IdeiglenesMentesButton
+            // 
+            this.IdeiglenesMentesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.IdeiglenesMentesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdeiglenesMentesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.IdeiglenesMentesButton.Location = new System.Drawing.Point(22, 339);
+            this.IdeiglenesMentesButton.Name = "IdeiglenesMentesButton";
+            this.IdeiglenesMentesButton.Size = new System.Drawing.Size(96, 33);
+            this.IdeiglenesMentesButton.TabIndex = 22;
+            this.IdeiglenesMentesButton.Text = "Mentés";
+            this.IdeiglenesMentesButton.UseVisualStyleBackColor = true;
+            this.IdeiglenesMentesButton.Click += new System.EventHandler(this.IdeiglenesMentesButton_Click);
+            // 
+            // betoltesButton
+            // 
+            this.betoltesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.betoltesButton.Enabled = false;
+            this.betoltesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.betoltesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.betoltesButton.Location = new System.Drawing.Point(128, 339);
+            this.betoltesButton.Name = "betoltesButton";
+            this.betoltesButton.Size = new System.Drawing.Size(96, 33);
+            this.betoltesButton.TabIndex = 23;
+            this.betoltesButton.Text = "Betöltés";
+            this.betoltesButton.UseVisualStyleBackColor = true;
+            // 
+            // ideiglenesSaveFileDialog
+            // 
+            this.ideiglenesSaveFileDialog.DefaultExt = "sql";
+            this.ideiglenesSaveFileDialog.Filter = "SQL fájl |*.sql;";
+            // 
             // PHPSQLSeged
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(836, 405);
-            this.Controls.Add(this.phpPanel);
             this.Controls.Add(this.mentesPanel);
+            this.Controls.Add(this.phpPanel);
             this.Controls.Add(this.sqlPanel);
             this.Controls.Add(this.kilepesButton);
             this.Controls.Add(this.vezerloPanel);
@@ -1252,12 +1298,14 @@
         private System.Windows.Forms.Panel mentesDesignPanel;
         private System.Windows.Forms.Label mentesLabel;
         private System.Windows.Forms.Button sqlTallozasButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialogSQL;
-        private System.Windows.Forms.SaveFileDialog saveFileDialogPHP;
         private System.Windows.Forms.Button phpTallozasButton;
         private System.Windows.Forms.Label phpFajlMentesiHelyeLabel;
         private System.Windows.Forms.Panel phpPathAlahuzasPanel;
         private System.Windows.Forms.TextBox phpPathTextBox;
+        private System.Windows.Forms.Button betoltesButton;
+        private System.Windows.Forms.Button IdeiglenesMentesButton;
+        private System.Windows.Forms.Label ideiglenesMentesBetoltesLabel;
+        private System.Windows.Forms.SaveFileDialog ideiglenesSaveFileDialog;
     }
 }
 

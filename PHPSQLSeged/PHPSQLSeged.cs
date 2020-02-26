@@ -46,6 +46,9 @@ namespace PHPSQLSeged
                                     tablaid INTEGER NOT NULL
                                     );";
             command.ExecuteNonQuery();
+            ideiglenesMentes();
+
+            
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
         {
@@ -457,16 +460,16 @@ namespace PHPSQLSeged
                 updateCheckBox.Enabled = true;
                 var tabla = (Tablak)phpTablakListBox.SelectedItem;
                 kivalasztottPHPTablaID = tabla.Id;
-                /*
+                
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "SELECT cmd_select, cmd_insert, cmd_delete, cmd_update FROM tablak WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
                 using (var reader = cmd.ExecuteReader())
                 {
-                        bool select = Convert.ToBoolean(reader.GetInt32(0));
-                        bool insert = Convert.ToBoolean(reader.GetString(1));
-                        bool delete = Convert.ToBoolean(reader.GetString(2));
-                        bool update = Convert.ToBoolean(reader.GetString(3));
+                        bool select = reader.GetBoolean(0);
+                        bool insert = reader.GetBoolean(1);
+                        bool delete = reader.GetBoolean(2);
+                        bool update = reader.GetBoolean(3);
                     if (select)
                     {
                         selectCheckBox.Checked = true;
@@ -492,7 +495,7 @@ namespace PHPSQLSeged
                     }
                     
                 }
-                */
+                
             }
         }
 
@@ -587,6 +590,11 @@ namespace PHPSQLSeged
             }
         }
 
+        private void IdeiglenesMentesButton_Click(object sender, EventArgs e)
+        {
+            ideiglenesSaveFileDialog.ShowDialog();
+        }
+
         private void CheckBoxEsemeny(CheckBox checkbox, bool valasz, string command)
         {
             if (valasz)
@@ -646,6 +654,64 @@ namespace PHPSQLSeged
                 valasz = true;
             }
             return valasz;
+        }
+        public void ideiglenesMentes()
+        {
+            ideiglenesSaveFileDialog.FileOk += (senderFile, eFile) =>
+            {
+                try
+                {
+                    string fileName = ideiglenesSaveFileDialog.FileName;
+                    var sw = new StreamWriter(fileName);
+                    string adatbazisneve = "";
+                    if (adatbazisNevAlahuzasPanel.BackColor == Color.Green)
+                    {
+                        adatbazisneve = adatbazisNeveTextBox.Text;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Érvénytelen az adatbázis neve! Kérjük változtassa meg!");
+                        return;
+                    }
+                    sw.WriteLine(adatbazisneve);
+                    sw.WriteLine(tablakListBox.Items.Count);
+                    var cmd = conn.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM tablak";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(0);
+                            string tablanev = reader.GetString(1);
+                            bool cmd_select = reader.GetBoolean(2);
+                            bool cmd_insert = reader.GetBoolean(3);
+                            bool cmd_delete = reader.GetBoolean(4);
+                            bool cmd_update = reader.GetBoolean(5);
+                            sw.WriteLine(id + ";" + tablanev + ";" + cmd_select + ";" + cmd_insert + ";" + cmd_delete + ";" + cmd_update);
+                        }
+                    }
+                    cmd.CommandText = "SELECT * FROM oszlopok";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(0);
+                            string oszlopnev = reader.GetString(1);
+                            string kiterjesztes = reader.GetString(2);
+                            int hossz = reader.GetInt32(3);
+                            bool autoinc = reader.GetBoolean(4);
+                            bool prikey = reader.GetBoolean(5);
+                            int tablaid = reader.GetInt32(6);
+                            sw.WriteLine(id + ";" + oszlopnev + ";" + kiterjesztes + ";" + hossz + ";" + autoinc + ";" + prikey + ";" + tablaid);
+                        }
+                    }
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Hiba, nem sikerült a mentés");
+                }
+            };
         }
         
 
