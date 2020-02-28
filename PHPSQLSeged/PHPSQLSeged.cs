@@ -49,6 +49,7 @@ namespace PHPSQLSeged
 
             ideiglenesMentes();
             Betoltes();
+            sqlMentes();
             
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
@@ -744,6 +745,12 @@ namespace PHPSQLSeged
                 
             };
         }
+
+        private void SqlTallozasButton_Click(object sender, EventArgs e)
+        {
+            sqlSaveFileDialog.ShowDialog();
+        }
+
         public void Betoltes()
         {
             betoltesOpenFileDialog.FileOk += (senderFile, eFile) =>
@@ -771,7 +778,7 @@ namespace PHPSQLSeged
                     }
                     TablakListazasa();
                     index += 1;
-                    while (sorok[index] != null)
+                    while (index != sorok.Length)
                     {
                         string[] adatok2 = sorok[index].Split(';');
                         var cmd = conn.CreateCommand();
@@ -816,7 +823,44 @@ namespace PHPSQLSeged
             }
             OszlopHozzaadReset();
         }
-        
+        public void sqlMentes()
+        {
+            sqlSaveFileDialog.FileOk += (senderFile, eFile) =>
+            {
+                try
+                {
+                    string fileName = ideiglenesSaveFileDialog.FileName;
+                    using (var sw = new StreamWriter(fileName))
+                    {
+                        List<int> tablaid = new List<int>();
+                        List<string> tablanevek = new List<string>();
+                        var cmd = conn.CreateCommand();
+                        cmd.CommandText = "SELECT * FROM tablak";
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string tablanev = reader.GetString(1);
+                                tablaid.Add(id);
+                                tablanevek.Add(tablanev);
+                            }
+                        }
+                        sw.WriteLine("CREATE DATABASE {0};", adatbazisNeveTextBox.Text);
+                        for (int i = 0; i < tablanevek.Count; i++)
+                        { 
+                            sw.WriteLine("CREATE TABLE IF NOT EXIST {0}(" +
+                                "\n" +
+                                "\n)", tablanevek[i]);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Nem sikerült a fájl mentése");
+                }
+            };
+        }
 
     }
 }

@@ -37,7 +37,7 @@ namespace PHPSQLSeged
 
         public override string ToString()
         {
-            return oszlopNeve;
+            return string.Format(oszlopNeve + " - (" + kiterjesztes + ") : " + hossz);
         }
     }
 }

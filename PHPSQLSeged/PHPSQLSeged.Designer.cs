@@ -116,6 +116,7 @@
             this.mentesLabel = new System.Windows.Forms.Label();
             this.ideiglenesSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.betoltesOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.sqlSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -804,6 +805,7 @@
             // 
             this.OszlopokListBox.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.OszlopokListBox.FormattingEnabled = true;
+            this.OszlopokListBox.HorizontalScrollbar = true;
             this.OszlopokListBox.ItemHeight = 20;
             this.OszlopokListBox.Location = new System.Drawing.Point(467, 168);
             this.OszlopokListBox.Name = "OszlopokListBox";
@@ -1118,7 +1120,6 @@
             // 
             this.sqlTallozasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sqlTallozasButton.BackgroundImage")));
             this.sqlTallozasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.sqlTallozasButton.Enabled = false;
             this.sqlTallozasButton.FlatAppearance.BorderSize = 0;
             this.sqlTallozasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sqlTallozasButton.Location = new System.Drawing.Point(415, 101);
@@ -1126,6 +1127,7 @@
             this.sqlTallozasButton.Size = new System.Drawing.Size(44, 33);
             this.sqlTallozasButton.TabIndex = 16;
             this.sqlTallozasButton.UseVisualStyleBackColor = true;
+            this.sqlTallozasButton.Click += new System.EventHandler(this.SqlTallozasButton_Click);
             // 
             // sqlFajlMentesiHelyeLabel
             // 
@@ -1189,8 +1191,8 @@
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(836, 405);
             this.Controls.Add(this.mentesPanel);
-            this.Controls.Add(this.phpPanel);
             this.Controls.Add(this.sqlPanel);
+            this.Controls.Add(this.phpPanel);
             this.Controls.Add(this.kilepesButton);
             this.Controls.Add(this.vezerloPanel);
             this.Controls.Add(this.kezdolapPanel);
@@ -1312,6 +1314,7 @@
         private System.Windows.Forms.Label ideiglenesMentesBetoltesLabel;
         private System.Windows.Forms.SaveFileDialog ideiglenesSaveFileDialog;
         private System.Windows.Forms.OpenFileDialog betoltesOpenFileDialog;
+        private System.Windows.Forms.SaveFileDialog sqlSaveFileDialog;
     }
 }
 
