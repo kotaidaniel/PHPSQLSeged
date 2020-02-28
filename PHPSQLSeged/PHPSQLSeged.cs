@@ -462,40 +462,47 @@ namespace PHPSQLSeged
                 kivalasztottPHPTablaID = tabla.Id;
                 
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT cmd_select, cmd_insert, cmd_delete, cmd_update FROM tablak WHERE id = @id";
+                cmd.CommandText = "SELECT cmd_select FROM tablak WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
-                using (var reader = cmd.ExecuteReader())
+                var select = (bool)cmd.ExecuteScalar();
+                cmd.CommandText = "SELECT cmd_insert FROM tablak WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
+                var insert = (bool)cmd.ExecuteScalar();
+                cmd.CommandText = "SELECT cmd_delete FROM tablak WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
+                var delete = (bool)cmd.ExecuteScalar();
+                cmd.CommandText = "SELECT cmd_update FROM tablak WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
+                var update = (bool)cmd.ExecuteScalar();
+
+                switch (select)
                 {
-                        bool select = reader.GetBoolean(0);
-                        bool insert = reader.GetBoolean(1);
-                        bool delete = reader.GetBoolean(2);
-                        bool update = reader.GetBoolean(3);
-                    if (select)
-                    {
-                        selectCheckBox.Checked = true;
-                    }
-                    if (insert)
-                    {
-                        insertCheckBox.Checked = true;
-                    }
-                    if (delete)
-                    {
-                        deleteCheckBox.Checked = true;
-                    }
-                    if (update)
-                    {
-                        updateCheckBox.Checked = true;
-                    }
-                    else
-                    {
+                    case true: selectCheckBox.Checked = true; break;
+                    default:
                         selectCheckBox.Checked = false;
-                        insertCheckBox.Checked = false;
-                        deleteCheckBox.Checked = false;
-                        updateCheckBox.Checked = false;
-                    }
-                    
+                        break;
                 }
-                
+                switch (insert)
+                {
+                    case true: insertCheckBox.Checked = true; break;
+                    default:
+                        insertCheckBox.Checked = false;
+                        break;
+                }
+                switch (delete)
+                {
+                    case true: deleteCheckBox.Checked = true; break;
+                    default:
+                        deleteCheckBox.Checked = false;
+                        break;
+                }
+                switch (update)
+                {
+                    case true: updateCheckBox.Checked = true; break;
+                    default:
+                        updateCheckBox.Checked = false;
+                        break;
+                }
             }
         }
 
