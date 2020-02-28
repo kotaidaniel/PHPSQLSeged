@@ -115,6 +115,7 @@
             this.mentesDesignPanel = new System.Windows.Forms.Panel();
             this.mentesLabel = new System.Windows.Forms.Label();
             this.ideiglenesSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.betoltesOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -1039,7 +1040,6 @@
             // betoltesButton
             // 
             this.betoltesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.betoltesButton.Enabled = false;
             this.betoltesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.betoltesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.betoltesButton.Location = new System.Drawing.Point(128, 339);
@@ -1048,6 +1048,7 @@
             this.betoltesButton.TabIndex = 23;
             this.betoltesButton.Text = "Betöltés";
             this.betoltesButton.UseVisualStyleBackColor = true;
+            this.betoltesButton.Click += new System.EventHandler(this.BetoltesButton_Click);
             // 
             // IdeiglenesMentesButton
             // 
@@ -1093,7 +1094,7 @@
             this.phpFajlMentesiHelyeLabel.Name = "phpFajlMentesiHelyeLabel";
             this.phpFajlMentesiHelyeLabel.Size = new System.Drawing.Size(179, 21);
             this.phpFajlMentesiHelyeLabel.TabIndex = 19;
-            this.phpFajlMentesiHelyeLabel.Text = "SQL fájl mentési helye:";
+            this.phpFajlMentesiHelyeLabel.Text = "PHP fájl mentési helye:";
             // 
             // phpPathAlahuzasPanel
             // 
@@ -1176,6 +1177,10 @@
             // 
             this.ideiglenesSaveFileDialog.DefaultExt = "txt";
             this.ideiglenesSaveFileDialog.Filter = "Szövegfájl |*.txt";
+            // 
+            // betoltesOpenFileDialog
+            // 
+            this.betoltesOpenFileDialog.FileName = "openFileDialog1";
             // 
             // PHPSQLSeged
             // 
@@ -1306,6 +1311,7 @@
         private System.Windows.Forms.Button IdeiglenesMentesButton;
         private System.Windows.Forms.Label ideiglenesMentesBetoltesLabel;
         private System.Windows.Forms.SaveFileDialog ideiglenesSaveFileDialog;
+        private System.Windows.Forms.OpenFileDialog betoltesOpenFileDialog;
     }
 }
 

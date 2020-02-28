@@ -48,7 +48,7 @@ namespace PHPSQLSeged
             command.ExecuteNonQuery();
 
             ideiglenesMentes();
-
+            Betoltes();
             
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
@@ -651,6 +651,23 @@ namespace PHPSQLSeged
                 cmd.ExecuteNonQuery();
             }
         }
+
+        private void BetoltesButton_Click(object sender, EventArgs e)
+        {
+            string uzenet = "Biztosan be szeretné tölteni a fájlt? Betöltésnél a nem mentett munkák törlésre kerülnek!";
+            string cim = "Betöltés";
+            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (ablak == DialogResult.Yes)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM tablak WHERE 1";
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "DELETE FROM oszlopok WHERE 1";
+                cmd.ExecuteNonQuery();
+                betoltesOpenFileDialog.ShowDialog();
+            }
+        }
+
         public bool DeleteMessageBox()
         {
             bool valasz = false;
@@ -662,6 +679,8 @@ namespace PHPSQLSeged
                 valasz = true;
             }
             return valasz;
+
+
         }
         public void ideiglenesMentes()
         {
@@ -724,6 +743,78 @@ namespace PHPSQLSeged
                 }
                 
             };
+        }
+        public void Betoltes()
+        {
+            betoltesOpenFileDialog.FileOk += (senderFile, eFile) =>
+            {
+                try
+                {
+                    ResetComponents(sqlPanel);
+                    ResetComponents(phpPanel);
+                    string[] sorok = File.ReadAllLines(betoltesOpenFileDialog.FileName);
+                    adatbazisNeveTextBox.Text = sorok[0];
+                    int index = 1;
+                    while (sorok[index] != "#")
+                    { 
+                        string[] adatok = sorok[index].Split(';');
+                        var cmd = conn.CreateCommand();
+                        cmd.CommandText = "INSERT INTO tablak (id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) " +
+                        "VALUES (NULL, @tablanev, @cmd_select, @cmd_insert, @cmd_delete, @cmd_update)";
+                        cmd.Parameters.AddWithValue("@tablanev", adatok[1]);
+                        cmd.Parameters.AddWithValue("@cmd_select", Convert.ToBoolean(adatok[2]));
+                        cmd.Parameters.AddWithValue("@cmd_insert", Convert.ToBoolean(adatok[3]));
+                        cmd.Parameters.AddWithValue("@cmd_delete", Convert.ToBoolean(adatok[4]));
+                        cmd.Parameters.AddWithValue("@cmd_update", Convert.ToBoolean(adatok[5]));
+                        cmd.ExecuteNonQuery();
+                        index++;
+                    }
+                    TablakListazasa();
+                    index += 1;
+                    while (sorok[index] != null)
+                    {
+                        string[] adatok2 = sorok[index].Split(';');
+                        var cmd = conn.CreateCommand();
+                        cmd.CommandText = "INSERT INTO oszlopok (id, oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid) " +
+                        "VALUES (NULL, @oszlopnev, @kiterjesztes, @hossz, @autoinc, @prikey, @tablaid)";
+                        cmd.Parameters.AddWithValue("@oszlopnev", adatok2[1]);
+                        cmd.Parameters.AddWithValue("@kiterjesztes", adatok2[2]);
+                        cmd.Parameters.AddWithValue("@hossz", Convert.ToInt32(adatok2[3]));
+                        cmd.Parameters.AddWithValue("@autoinc", Convert.ToBoolean(adatok2[4]));
+                        cmd.Parameters.AddWithValue("@prikey", Convert.ToBoolean(adatok2[5]));
+                        cmd.Parameters.AddWithValue("@tablaid", Convert.ToInt32(adatok2[6]));
+                        cmd.ExecuteNonQuery();
+                        index++;
+                        
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Nem sikerült megnyitni a fájlt");
+                }
+        };
+        }
+        public void ResetComponents(Panel panel)
+        {
+            foreach (var control in panel.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textbox = (TextBox)control;
+                    textbox.Text = null;
+                }
+                if (control is CheckBox)
+                {
+                    CheckBox checkbox = (CheckBox)control;
+                    checkbox.Checked = false;
+                }
+                if (control is ListBox)
+                {
+                    ListBox listBox = (ListBox)control;
+                    listBox.Items.Clear();
+                }
+            }
+            OszlopHozzaadReset();
         }
         
 
