@@ -46,6 +46,7 @@ namespace PHPSQLSeged
                                     tablaid INTEGER NOT NULL
                                     );";
             command.ExecuteNonQuery();
+
             ideiglenesMentes();
 
             
@@ -669,55 +670,59 @@ namespace PHPSQLSeged
                 try
                 {
                     string fileName = ideiglenesSaveFileDialog.FileName;
-                    var sw = new StreamWriter(fileName);
-                    string adatbazisneve = "";
-                    if (adatbazisNevAlahuzasPanel.BackColor == Color.Green)
+                    using (var sw = new StreamWriter(fileName))
                     {
-                        adatbazisneve = adatbazisNeveTextBox.Text;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Érvénytelen az adatbázis neve! Kérjük változtassa meg!");
-                        return;
-                    }
-                    sw.WriteLine(adatbazisneve);
-                    sw.WriteLine(tablakListBox.Items.Count);
-                    var cmd = conn.CreateCommand();
-                    cmd.CommandText = "SELECT * FROM tablak";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
+                        string adatbazisneve = "";
+                        if (adatbazisNevAlahuzasPanel.BackColor == Color.Green)
                         {
-                            int id = reader.GetInt32(0);
-                            string tablanev = reader.GetString(1);
-                            bool cmd_select = reader.GetBoolean(2);
-                            bool cmd_insert = reader.GetBoolean(3);
-                            bool cmd_delete = reader.GetBoolean(4);
-                            bool cmd_update = reader.GetBoolean(5);
-                            sw.WriteLine(id + ";" + tablanev + ";" + cmd_select + ";" + cmd_insert + ";" + cmd_delete + ";" + cmd_update);
+                            adatbazisneve = adatbazisNeveTextBox.Text;
                         }
-                    }
-                    cmd.CommandText = "SELECT * FROM oszlopok";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
+                        else
                         {
-                            int id = reader.GetInt32(0);
-                            string oszlopnev = reader.GetString(1);
-                            string kiterjesztes = reader.GetString(2);
-                            int hossz = reader.GetInt32(3);
-                            bool autoinc = reader.GetBoolean(4);
-                            bool prikey = reader.GetBoolean(5);
-                            int tablaid = reader.GetInt32(6);
-                            sw.WriteLine(id + ";" + oszlopnev + ";" + kiterjesztes + ";" + hossz + ";" + autoinc + ";" + prikey + ";" + tablaid);
+                            MessageBox.Show("Érvénytelen az adatbázis neve! Kérjük változtassa meg!");
+                            return;
                         }
-                    }
+                        sw.WriteLine(adatbazisneve);
 
+                        var cmd = conn.CreateCommand();
+                        cmd.CommandText = "SELECT * FROM tablak";
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string tablanev = reader.GetString(1);
+                                bool cmd_select = reader.GetBoolean(2);
+                                bool cmd_insert = reader.GetBoolean(3);
+                                bool cmd_delete = reader.GetBoolean(4);
+                                bool cmd_update = reader.GetBoolean(5);
+                                sw.WriteLine(id + ";" + tablanev + ";" + cmd_select + ";" + cmd_insert + ";" + cmd_delete + ";" + cmd_update);
+                            }
+                        }
+                        sw.WriteLine("#");
+                        cmd.CommandText = "SELECT * FROM oszlopok";
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string oszlopnev = reader.GetString(1);
+                                string kiterjesztes = reader.GetString(2);
+                                int hossz = reader.GetInt32(3);
+                                bool autoinc = reader.GetBoolean(4);
+                                bool prikey = reader.GetBoolean(5);
+                                int tablaid = reader.GetInt32(6);
+                                sw.WriteLine(id + ";" + oszlopnev + ";" + kiterjesztes + ";" + hossz + ";" + autoinc + ";" + prikey + ";" + tablaid);
+                            }
+                        }
+
+                    }
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Hiba, nem sikerült a mentés");
                 }
+                
             };
         }
         

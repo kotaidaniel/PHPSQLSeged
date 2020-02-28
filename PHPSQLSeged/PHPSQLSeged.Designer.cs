@@ -101,6 +101,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.phpTablakListBox = new System.Windows.Forms.ListBox();
             this.mentesPanel = new System.Windows.Forms.Panel();
+            this.betoltesButton = new System.Windows.Forms.Button();
+            this.IdeiglenesMentesButton = new System.Windows.Forms.Button();
+            this.ideiglenesMentesBetoltesLabel = new System.Windows.Forms.Label();
             this.phpTallozasButton = new System.Windows.Forms.Button();
             this.phpFajlMentesiHelyeLabel = new System.Windows.Forms.Label();
             this.phpPathAlahuzasPanel = new System.Windows.Forms.Panel();
@@ -111,9 +114,6 @@
             this.sqlPathTextBox = new System.Windows.Forms.TextBox();
             this.mentesDesignPanel = new System.Windows.Forms.Panel();
             this.mentesLabel = new System.Windows.Forms.Label();
-            this.ideiglenesMentesBetoltesLabel = new System.Windows.Forms.Label();
-            this.IdeiglenesMentesButton = new System.Windows.Forms.Button();
-            this.betoltesButton = new System.Windows.Forms.Button();
             this.ideiglenesSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
@@ -1036,6 +1036,42 @@
             this.mentesPanel.TabIndex = 33;
             this.mentesPanel.Visible = false;
             // 
+            // betoltesButton
+            // 
+            this.betoltesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.betoltesButton.Enabled = false;
+            this.betoltesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.betoltesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.betoltesButton.Location = new System.Drawing.Point(128, 339);
+            this.betoltesButton.Name = "betoltesButton";
+            this.betoltesButton.Size = new System.Drawing.Size(96, 33);
+            this.betoltesButton.TabIndex = 23;
+            this.betoltesButton.Text = "Betöltés";
+            this.betoltesButton.UseVisualStyleBackColor = true;
+            // 
+            // IdeiglenesMentesButton
+            // 
+            this.IdeiglenesMentesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.IdeiglenesMentesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdeiglenesMentesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.IdeiglenesMentesButton.Location = new System.Drawing.Point(22, 339);
+            this.IdeiglenesMentesButton.Name = "IdeiglenesMentesButton";
+            this.IdeiglenesMentesButton.Size = new System.Drawing.Size(96, 33);
+            this.IdeiglenesMentesButton.TabIndex = 22;
+            this.IdeiglenesMentesButton.Text = "Mentés";
+            this.IdeiglenesMentesButton.UseVisualStyleBackColor = true;
+            this.IdeiglenesMentesButton.Click += new System.EventHandler(this.IdeiglenesMentesButton_Click);
+            // 
+            // ideiglenesMentesBetoltesLabel
+            // 
+            this.ideiglenesMentesBetoltesLabel.AutoSize = true;
+            this.ideiglenesMentesBetoltesLabel.Location = new System.Drawing.Point(11, 292);
+            this.ideiglenesMentesBetoltesLabel.Name = "ideiglenesMentesBetoltesLabel";
+            this.ideiglenesMentesBetoltesLabel.Size = new System.Drawing.Size(599, 34);
+            this.ideiglenesMentesBetoltesLabel.TabIndex = 21;
+            this.ideiglenesMentesBetoltesLabel.Text = "Amennyiben el szeretné menteni eddigi munkáját, vagy betölteni az előzőt, kérjük " +
+    "válassza \r\nki az ehhez megfelelő gombot!\r\n";
+            // 
             // phpTallozasButton
             // 
             this.phpTallozasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("phpTallozasButton.BackgroundImage")));
@@ -1136,46 +1172,10 @@
             this.mentesLabel.TabIndex = 4;
             this.mentesLabel.Text = "Mentés";
             // 
-            // ideiglenesMentesBetoltesLabel
-            // 
-            this.ideiglenesMentesBetoltesLabel.AutoSize = true;
-            this.ideiglenesMentesBetoltesLabel.Location = new System.Drawing.Point(11, 292);
-            this.ideiglenesMentesBetoltesLabel.Name = "ideiglenesMentesBetoltesLabel";
-            this.ideiglenesMentesBetoltesLabel.Size = new System.Drawing.Size(599, 34);
-            this.ideiglenesMentesBetoltesLabel.TabIndex = 21;
-            this.ideiglenesMentesBetoltesLabel.Text = "Amennyiben el szeretné menteni eddigi munkáját, vagy betölteni az előzőt, kérjük " +
-    "válassza \r\nki az ehhez megfelelő gombot!\r\n";
-            // 
-            // IdeiglenesMentesButton
-            // 
-            this.IdeiglenesMentesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.IdeiglenesMentesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IdeiglenesMentesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.IdeiglenesMentesButton.Location = new System.Drawing.Point(22, 339);
-            this.IdeiglenesMentesButton.Name = "IdeiglenesMentesButton";
-            this.IdeiglenesMentesButton.Size = new System.Drawing.Size(96, 33);
-            this.IdeiglenesMentesButton.TabIndex = 22;
-            this.IdeiglenesMentesButton.Text = "Mentés";
-            this.IdeiglenesMentesButton.UseVisualStyleBackColor = true;
-            this.IdeiglenesMentesButton.Click += new System.EventHandler(this.IdeiglenesMentesButton_Click);
-            // 
-            // betoltesButton
-            // 
-            this.betoltesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.betoltesButton.Enabled = false;
-            this.betoltesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.betoltesButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.betoltesButton.Location = new System.Drawing.Point(128, 339);
-            this.betoltesButton.Name = "betoltesButton";
-            this.betoltesButton.Size = new System.Drawing.Size(96, 33);
-            this.betoltesButton.TabIndex = 23;
-            this.betoltesButton.Text = "Betöltés";
-            this.betoltesButton.UseVisualStyleBackColor = true;
-            // 
             // ideiglenesSaveFileDialog
             // 
-            this.ideiglenesSaveFileDialog.DefaultExt = "sql";
-            this.ideiglenesSaveFileDialog.Filter = "SQL fájl |*.sql;";
+            this.ideiglenesSaveFileDialog.DefaultExt = "txt";
+            this.ideiglenesSaveFileDialog.Filter = "Szövegfájl |*.txt";
             // 
             // PHPSQLSeged
             // 
