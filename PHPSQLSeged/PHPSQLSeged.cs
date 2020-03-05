@@ -50,7 +50,6 @@ namespace PHPSQLSeged
             ideiglenesMentes();
             Betoltes();
             sqlMentes();
-            
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
         {
@@ -516,7 +515,7 @@ namespace PHPSQLSeged
                 case "INTEGER":
                     modositottAutoIncrementCheckBox.Enabled = true;
                     modositottPrimaryKeyCheckBox.Enabled = true;
-                    oszlopModositottHosszaNumericUpDown.Maximum = 64;
+                    oszlopModositottHosszaNumericUpDown.Maximum = 7;
                     oszlopModositottHosszaNumericUpDown.Enabled = true;
                     break;
                 case "BOOLEAN":
@@ -528,7 +527,7 @@ namespace PHPSQLSeged
                     modositottPrimaryKeyCheckBox.Enabled = false;
                     break;
                 case "VARCHAR":
-                    oszlopModositottHosszaNumericUpDown.Maximum = 128;
+                    oszlopModositottHosszaNumericUpDown.Maximum = 255;
                     modositottAutoIncrementCheckBox.Checked = false;
                     modositottPrimaryKeyCheckBox.Checked = false;
                     modositottAutoIncrementCheckBox.Enabled = false;
@@ -829,29 +828,55 @@ namespace PHPSQLSeged
             {
                 try
                 {
-                    string fileName = ideiglenesSaveFileDialog.FileName;
+                    
+                    string fileName = sqlSaveFileDialog.FileName;
                     using (var sw = new StreamWriter(fileName))
                     {
-                        List<int> tablaid = new List<int>();
-                        List<string> tablanevek = new List<string>();
+                        sw.WriteLine("DROP DATABASE {0};", adatbazisNeveTextBox.Text);
+                        sw.WriteLine("CREATE DATABASE {0};", adatbazisNeveTextBox.Text);
                         var cmd = conn.CreateCommand();
                         cmd.CommandText = "SELECT * FROM tablak";
+                        var oszlopKereses_cmd = conn.CreateCommand();
+                        oszlopKereses_cmd.CommandText = "SELECT * FROM oszlopok WHERE tablaid = @id";
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 int id = reader.GetInt32(0);
                                 string tablanev = reader.GetString(1);
-                                tablaid.Add(id);
-                                tablanevek.Add(tablanev);
+                                oszlopKereses_cmd.Parameters.AddWithValue("@id", id);
+                                sw.WriteLine("CREATE TABLE IF NOT EXISTs {0} (", tablanev);
+                                int db = 1;
+                                 using (var oszlopReader = oszlopKereses_cmd.ExecuteReader())
+                                 {
+                                    while (oszlopReader.Read())
+                                    {
+                                        string oszlopnev = oszlopReader.GetString(1);
+                                        string kiterjesztes = oszlopReader.GetString(2);
+                                        int hossz = oszlopReader.GetInt32(3);
+                                        string autoinc = "";
+                                        string prikey = "";
+                                        if (oszlopReader.GetBoolean(4))
+                                        {
+                                            autoinc = " AUTO_INCREMENT ";
+                                        }
+                                        if (oszlopReader.GetBoolean(5))
+                                        {
+                                            prikey = " PRIMARY KEY";
+                                        }
+                                        if (db < OszlopMennyiseg(id))
+                                        {
+                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + prikey + autoinc + ",");
+                                        }
+                                        else
+                                        {
+                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + prikey + autoinc);
+                                        }
+                                        db++;
+                                    }
+                                }
+                                sw.WriteLine(");");
                             }
-                        }
-                        sw.WriteLine("CREATE DATABASE {0};", adatbazisNeveTextBox.Text);
-                        for (int i = 0; i < tablanevek.Count; i++)
-                        { 
-                            sw.WriteLine("CREATE TABLE IF NOT EXIST {0}(" +
-                                "\n" +
-                                "\n)", tablanevek[i]);
                         }
                     }
                 }
@@ -860,6 +885,15 @@ namespace PHPSQLSeged
                     MessageBox.Show("Nem sikerült a fájl mentése");
                 }
             };
+        }
+        public long OszlopMennyiseg(int tablaid)
+        {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @id";
+            cmd.Parameters.AddWithValue("@id", tablaid);
+            long db = (long)cmd.ExecuteScalar();
+
+            return db;
         }
 
     }
