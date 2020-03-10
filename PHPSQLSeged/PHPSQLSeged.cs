@@ -933,9 +933,42 @@ namespace PHPSQLSeged
                             string[] tablaAdatok = TablakKivalasztasa()[i].Split(';');
                             sw.WriteLine("\t\t<option value = \""+tablaAdatok[1]+"\">" + tablaAdatok[1] + "</option>");
                         }
+                        sw.WriteLine("<input type = \"hidden\" name = \"action\" value = \"cmd_tabla_kivalasztas\">" +
+                                     "\n<button type = \"submit\" > Küldés </button>");
                         sw.WriteLine("\t</select>" +
                             "\n</form>");
-
+                        sw.WriteLine("<?php");
+                        sw.WriteLine("class Osztaly{");
+                        sw.WriteLine("\tvar $servername = \"localhost\";");
+                        sw.WriteLine("\tvar $dbname = \""+ adatbazisNeveTextBox.Text +"\";");
+                        sw.WriteLine("\tvar $username = \"root\";");
+                        sw.WriteLine("\tvar $password = \"\";");
+                        string kapcsolodasbontas = File.ReadAllText("kapcsolodasbontas.txt");
+                        sw.WriteLine(kapcsolodasbontas);
+                        for (int i = 0; i < TablakKivalasztasa().Count; i++)
+                        {
+                            string[] tablaAdatok = TablakKivalasztasa()[i].Split(';');
+                            if (Convert.ToBoolean(tablaAdatok[2]))
+                            {
+                                string select = File.ReadAllText("select.txt");
+                                select = select.Replace("[tabla]", tablaAdatok[1]);
+                                select = select.Replace("[select]", "Select_" + tablaAdatok[1]);
+                                sw.WriteLine(select);
+                            }
+                        }
+                        sw.WriteLine("}");
+                        for (int i = 0; i < TablakKivalasztasa().Count; i++)
+                        {
+                            string[] tablaAdatok = TablakKivalasztasa()[i].Split(';');
+                            if (Convert.ToBoolean(tablaAdatok[2]))
+                            {
+                                string select = File.ReadAllText("selectaction.txt");
+                                select = select.Replace("[select]", "Select_" + tablaAdatok[1]);
+                                select = select.Replace("[tabla]", tablaAdatok[1]);
+                                sw.WriteLine(select);
+                            }
+                        }
+                        sw.WriteLine("?>");
                     }
                 }
                 catch (Exception)
