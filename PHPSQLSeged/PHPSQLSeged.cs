@@ -50,6 +50,7 @@ namespace PHPSQLSeged
             ideiglenesMentes();
             Betoltes();
             sqlMentes();
+            phpMentes();
         }
         private void KezdolapButton_Click(object sender, EventArgs e)
         {
@@ -71,15 +72,17 @@ namespace PHPSQLSeged
             Oldalvaltas(4);
         }
 
-        public void Oldalvaltas(int oldal) {
+        public void Oldalvaltas(int oldal)
+        {
             kezdolap = false;
             sql = false;
             php = false;
             mentes = false;
-            switch (oldal) {
+            switch (oldal)
+            {
                 case 1: kezdolap = true; break;
-                case 2: sql = true;  break;
-                case 3: php = true;  break;
+                case 2: sql = true; break;
+                case 3: php = true; break;
                 case 4: mentes = true; break;
             }
             kezdolapJelolo.Visible = kezdolap;
@@ -145,7 +148,8 @@ namespace PHPSQLSeged
         }
         private void TablaNeveTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) {
+            if (e.KeyCode == Keys.Enter)
+            {
                 TablaHozzaAdas();
             }
         }
@@ -255,7 +259,8 @@ namespace PHPSQLSeged
             }
         }
 
-        public void OszlopListazas(int index) {
+        public void OszlopListazas(int index)
+        {
             OszlopokListBox.Items.Clear();
             var cmd = conn.CreateCommand();
             cmd.CommandText = "SELECT id, oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid FROM oszlopok WHERE tablaid = @tablaid";
@@ -276,7 +281,8 @@ namespace PHPSQLSeged
                 }
             }
         }
-        public void OszlopHozzaadReset() {
+        public void OszlopHozzaadReset()
+        {
             oszlopNevTextBox.Clear();
             oszlopNeveAlahuzasPanel.BackColor = Color.Black;
             oszlopKiterjesztesComboBox.SelectedIndex = -1;
@@ -294,7 +300,8 @@ namespace PHPSQLSeged
         {
             TablaHozzaAdas();
         }
-        public void TablaHozzaAdas() {
+        public void TablaHozzaAdas()
+        {
             if (tablaNeveAlahuzasPanel.BackColor == Color.Green)
             {
                 var cmd = conn.CreateCommand();
@@ -372,7 +379,8 @@ namespace PHPSQLSeged
                 tablaModositottNeveTextBox.Clear();
                 tablaHozzaadasPanel.Visible = true;
             }
-            else {
+            else
+            {
                 MessageBox.Show("Nem megfelelő adatot adott meg próbálja újra");
             }
         }
@@ -380,16 +388,17 @@ namespace PHPSQLSeged
         private void OszlopokListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (OszlopokListBox.SelectedIndex != -1)
-            if (OszlopokListBox.SelectedIndex != -1)
+                if (OszlopokListBox.SelectedIndex != -1)
                 {
-                oszlopTorlesButton.Enabled = true;
-                oszlopModositasButton.Enabled = true;
-                var oszlop = (Oszlopok)OszlopokListBox.SelectedItem;
-                kivalasztottOszlopID = oszlop.Id;
-            }
-            else{
-                MessageBox.Show("Kérjük válasszon ki egy érvényes oszlopot");
-            }
+                    oszlopTorlesButton.Enabled = true;
+                    oszlopModositasButton.Enabled = true;
+                    var oszlop = (Oszlopok)OszlopokListBox.SelectedItem;
+                    kivalasztottOszlopID = oszlop.Id;
+                }
+                else
+                {
+                    MessageBox.Show("Kérjük válasszon ki egy érvényes oszlopot");
+                }
         }
 
         private void OszlopTorlesButton_Click(object sender, EventArgs e)
@@ -454,14 +463,15 @@ namespace PHPSQLSeged
 
         private void PhpTablakListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (phpTablakListBox.SelectedIndex != -1) {
+            if (phpTablakListBox.SelectedIndex != -1)
+            {
                 selectCheckBox.Enabled = true;
                 insertCheckBox.Enabled = true;
                 deleteCheckBox.Enabled = true;
                 updateCheckBox.Enabled = true;
                 var tabla = (Tablak)phpTablakListBox.SelectedItem;
                 kivalasztottPHPTablaID = tabla.Id;
-                
+
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "SELECT cmd_select FROM tablak WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
@@ -580,7 +590,8 @@ namespace PHPSQLSeged
                 oszlopModositasGroupBox.Visible = false;
                 oszlopHozzaadasGroupBox.Visible = true;
             }
-            else {
+            else
+            {
                 MessageBox.Show("Kérjük érvényes adatokkat adjon meg!");
             }
         }
@@ -620,13 +631,13 @@ namespace PHPSQLSeged
                     case "cmd_delete":
                         cmd.CommandText = "UPDATE tablak SET cmd_delete = true WHERE id = @id";
                         break;
-                    case "cmd_update": 
+                    case "cmd_update":
                         cmd.CommandText = "UPDATE tablak SET cmd_update = true WHERE id = @id";
                         break;
                 }
                 cmd.Parameters.AddWithValue("@id", kivalasztottPHPTablaID);
                 cmd.ExecuteNonQuery();
-                        
+
             }
             else
             {
@@ -741,7 +752,7 @@ namespace PHPSQLSeged
                 {
                     MessageBox.Show("Hiba, nem sikerült a mentés");
                 }
-                
+
             };
         }
 
@@ -762,7 +773,7 @@ namespace PHPSQLSeged
                     adatbazisNeveTextBox.Text = sorok[0];
                     int index = 1;
                     while (sorok[index] != "#")
-                    { 
+                    {
                         string[] adatok = sorok[index].Split(';');
                         var cmd = conn.CreateCommand();
                         cmd.CommandText = "INSERT INTO tablak (id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) " +
@@ -791,14 +802,14 @@ namespace PHPSQLSeged
                         cmd.Parameters.AddWithValue("@tablaid", Convert.ToInt32(adatok2[6]));
                         cmd.ExecuteNonQuery();
                         index++;
-                        
+
                     }
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Nem sikerült megnyitni a fájlt");
                 }
-        };
+            };
         }
         public void ResetComponents(Panel panel)
         {
@@ -828,7 +839,7 @@ namespace PHPSQLSeged
             {
                 try
                 {
-                    
+
                     string fileName = sqlSaveFileDialog.FileName;
                     using (var sw = new StreamWriter(fileName))
                     {
@@ -847,8 +858,8 @@ namespace PHPSQLSeged
                                 oszlopKereses_cmd.Parameters.AddWithValue("@id", id);
                                 sw.WriteLine("CREATE TABLE IF NOT EXISTs {0} (", tablanev);
                                 int db = 1;
-                                 using (var oszlopReader = oszlopKereses_cmd.ExecuteReader())
-                                 {
+                                using (var oszlopReader = oszlopKereses_cmd.ExecuteReader())
+                                {
                                     while (oszlopReader.Read())
                                     {
                                         string oszlopnev = oszlopReader.GetString(1);
@@ -858,7 +869,7 @@ namespace PHPSQLSeged
                                         string prikey = "";
                                         if (oszlopReader.GetBoolean(4))
                                         {
-                                            autoinc = " AUTO_INCREMENT ";
+                                            autoinc = " AUTO_INCREMENT";
                                         }
                                         if (oszlopReader.GetBoolean(5))
                                         {
@@ -879,6 +890,7 @@ namespace PHPSQLSeged
                             }
                         }
                     }
+                    sqlPathTextBox.Text = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileName(fileName);
                 }
                 catch (Exception)
                 {
@@ -886,6 +898,12 @@ namespace PHPSQLSeged
                 }
             };
         }
+
+        private void PhpTallozasButton_Click(object sender, EventArgs e)
+        {
+            phpSaveFileDialog.ShowDialog();
+        }
+
         public long OszlopMennyiseg(int tablaid)
         {
             var cmd = conn.CreateCommand();
@@ -896,5 +914,56 @@ namespace PHPSQLSeged
             return db;
         }
 
+        public void phpMentes()
+        {
+            phpSaveFileDialog.FileOk += (senderFile, eFile) =>
+            {
+                try
+                {
+                    string fileName = phpSaveFileDialog.FileName;
+                    using (var sw = new StreamWriter(fileName))
+                    {
+                        sw.WriteLine("<!DOCTYPE html>"+
+                        "\n<body>" +
+                        "\n<form method = \"POST\">" + 
+                        "\n\tVálassza ki a táblát:" +
+                        "\n\t<select name = \"input_tabla\">");
+                        for (int i = 0; i < TablakKivalasztasa().Count; i++)
+                        {
+                            string[] tablaAdatok = TablakKivalasztasa()[i].Split(';');
+                            sw.WriteLine("\t\t<option value = \""+tablaAdatok[1]+"\">" + tablaAdatok[1] + "</option>");
+                        }
+                        sw.WriteLine("\t</select>" +
+                            "\n</form>");
+
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Nem sikerült elmenteni a fájlt");
+                }
+            };
+        }
+
+        public List<string> TablakKivalasztasa()
+        {
+            List<string> tablak = new List<string>();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT * FROM tablak";
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string tablanev = reader.GetString(1);
+                    bool select = reader.GetBoolean(2);
+                    bool insert = reader.GetBoolean(3);
+                    bool delete = reader.GetBoolean(4);
+                    bool update = reader.GetBoolean(5);
+                    tablak.Add(id + ";" + tablanev + ";" + select + ";" + insert + ";" + delete + ";" + update);
+                }
+            }
+            return tablak;
+        }
     }
 }

@@ -117,6 +117,7 @@
             this.ideiglenesSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.betoltesOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.sqlSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.phpSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.vezerloPanel.SuspendLayout();
             this.kezdolapPanel.SuspendLayout();
             this.sqlPanel.SuspendLayout();
@@ -1079,7 +1080,6 @@
             // 
             this.phpTallozasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("phpTallozasButton.BackgroundImage")));
             this.phpTallozasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.phpTallozasButton.Enabled = false;
             this.phpTallozasButton.FlatAppearance.BorderSize = 0;
             this.phpTallozasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.phpTallozasButton.Location = new System.Drawing.Point(418, 188);
@@ -1087,6 +1087,7 @@
             this.phpTallozasButton.Size = new System.Drawing.Size(44, 33);
             this.phpTallozasButton.TabIndex = 20;
             this.phpTallozasButton.UseVisualStyleBackColor = true;
+            this.phpTallozasButton.Click += new System.EventHandler(this.PhpTallozasButton_Click);
             // 
             // phpFajlMentesiHelyeLabel
             // 
@@ -1183,6 +1184,16 @@
             // betoltesOpenFileDialog
             // 
             this.betoltesOpenFileDialog.FileName = "openFileDialog1";
+            // 
+            // sqlSaveFileDialog
+            // 
+            this.sqlSaveFileDialog.DefaultExt = "sql";
+            this.sqlSaveFileDialog.Filter = "SQL fájl |*.sql";
+            // 
+            // phpSaveFileDialog
+            // 
+            this.phpSaveFileDialog.DefaultExt = "php";
+            this.phpSaveFileDialog.Filter = "PHP-fájl | *.php";
             // 
             // PHPSQLSeged
             // 
@@ -1315,6 +1326,7 @@
         private System.Windows.Forms.SaveFileDialog ideiglenesSaveFileDialog;
         private System.Windows.Forms.OpenFileDialog betoltesOpenFileDialog;
         private System.Windows.Forms.SaveFileDialog sqlSaveFileDialog;
+        private System.Windows.Forms.SaveFileDialog phpSaveFileDialog;
     }
 }
 
