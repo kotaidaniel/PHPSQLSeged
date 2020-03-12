@@ -953,6 +953,21 @@ namespace PHPSQLSeged
                                 string select = File.ReadAllText("select.txt");
                                 select = select.Replace("[tabla]", tablaAdatok[1]);
                                 select = select.Replace("[select]", "Select_" + tablaAdatok[1]);
+                                string kiiratas = "echo ";
+                                for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0])).Count; j++)
+                                {
+                                    string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0]))[j].Split(';');
+                                    if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j + 1)
+                                    {
+                                        kiiratas += "$row[\"" + oszlopadatok[1] + "\"] . \", \" . ";
+
+                                    }
+                                    else
+                                    {
+                                        kiiratas += "$row[\"" + oszlopadatok[1] + "\"]";
+                                    }
+                                }
+                                select = select.Replace("[kiiratas]", kiiratas);
                                 sw.WriteLine(select);
                             }
                         }
@@ -997,6 +1012,30 @@ namespace PHPSQLSeged
                 }
             }
             return tablak;
+        }
+
+        public List<string> OszlopokKivalasztasa(int index)
+        {
+            List<string> oszlopok = new List<string>();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT * FROM oszlopok WHERE tablaid = @id";
+            cmd.Parameters.AddWithValue("@id", index);
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string oszlopnev = reader.GetString(1);
+                    string kiterjesztes = reader.GetString(2);
+                    int hossz = reader.GetInt32(3);
+                    bool autoinc = reader.GetBoolean(4);
+                    bool prikey = reader.GetBoolean(5);
+                    oszlopok.Add(id + ";" + oszlopnev + ";" + kiterjesztes + ";" + hossz + ";" + autoinc + ";" + prikey);
+                }
+            }
+
+
+            return oszlopok;
         }
     }
 }
