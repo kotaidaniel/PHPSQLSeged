@@ -849,6 +849,7 @@ namespace PHPSQLSeged
                         cmd.CommandText = "SELECT * FROM tablak";
                         var oszlopKereses_cmd = conn.CreateCommand();
                         oszlopKereses_cmd.CommandText = "SELECT * FROM oszlopok WHERE tablaid = @id";
+                        string prikeyoszlopnev = "";
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -856,8 +857,9 @@ namespace PHPSQLSeged
                                 int id = reader.GetInt32(0);
                                 string tablanev = reader.GetString(1);
                                 oszlopKereses_cmd.Parameters.AddWithValue("@id", id);
-                                sw.WriteLine("CREATE TABLE IF NOT EXISTs {0} (", tablanev);
+                                sw.WriteLine("CREATE TABLE IF NOT EXISTS {0}.{1} (", adatbazisNeveTextBox.Text, tablanev);
                                 int db = 1;
+                                bool prikey = false;
                                 using (var oszlopReader = oszlopKereses_cmd.ExecuteReader())
                                 {
                                     while (oszlopReader.Read())
@@ -866,25 +868,31 @@ namespace PHPSQLSeged
                                         string kiterjesztes = oszlopReader.GetString(2);
                                         int hossz = oszlopReader.GetInt32(3);
                                         string autoinc = "";
-                                        string prikey = "";
                                         if (oszlopReader.GetBoolean(4))
                                         {
                                             autoinc = " AUTO_INCREMENT";
                                         }
                                         if (oszlopReader.GetBoolean(5))
                                         {
-                                            prikey = " PRIMARY KEY";
+                                            prikey = true;
+                                            prikeyoszlopnev = oszlopnev;
                                         }
-                                        if (db < OszlopMennyiseg(id))
+                                        if (kiterjesztes == "BOOLEAN")
                                         {
-                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + prikey + autoinc + ",");
+                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + ",");
+
                                         }
                                         else
                                         {
-                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + prikey + autoinc);
+                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + ",");
+
                                         }
                                         db++;
                                     }
+                                }
+                                if (prikey)
+                                {
+                                    sw.WriteLine("PRIMARY KEY({0})", prikeyoszlopnev);
                                 }
                                 sw.WriteLine(");");
                             }
@@ -937,6 +945,40 @@ namespace PHPSQLSeged
                                      "\n<button type = \"submit\" > Küldés </button>");
                         sw.WriteLine("\t</select>" +
                             "\n</form>");
+                        for (int i = 0; i < TablakKivalasztasa().Count; i++)
+                        {
+                            string[] tablaadatok = TablakKivalasztasa()[i].Split(';');
+                            if (Convert.ToBoolean(tablaadatok[3]))
+                            {
+                                sw.WriteLine(tablaadatok[1] + ":</br>");
+                                sw.WriteLine("<form method = \"POST\">");
+                                for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaadatok[0])).Count; j++)
+                                {
+                                    string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaadatok[0]))[j].Split(';');
+                                    if (oszlopadatok[2] == "INTEGER")
+                                    {
+                                        sw.WriteLine(oszlopadatok[1]);
+                                        sw.WriteLine("\t<input type = \"number\" name = \"input_" + oszlopadatok[1] + "\"></br>");
+                                    }
+                                    if (oszlopadatok[2] == "VARCHAR" || oszlopadatok[2] == "TEXT")
+                                    {
+                                        sw.WriteLine(oszlopadatok[1]);
+                                        sw.WriteLine("\t<input type = \"text\" name = \"input_" + oszlopadatok[1] + "\"></br>");
+                                    }
+                                    if (oszlopadatok[2] == "BOOLEAN")
+                                    {
+                                        sw.WriteLine(oszlopadatok[1]);
+                                        sw.WriteLine("\t<select name = \"input_" + oszlopadatok[1] + "\">");
+                                        sw.WriteLine("\t\t<option value = \"0\">Hamis</option>");
+                                        sw.WriteLine("\t\t<option value = \"1\">Igaz</option>");
+                                        sw.WriteLine("\t</select></br>");
+                                    }
+                                }
+                                sw.WriteLine("\t<input type = \"hidden\" name = \"action\" value = \"cmd_insert_"+ tablaadatok[1] +"\">" +
+                                     "\n\t</br><button type = \"submit\" > Felvétel </button>");
+                                sw.WriteLine("</form>");
+                            }
+                        }
                         sw.WriteLine("<?php");
                         sw.WriteLine("class Osztaly{");
                         sw.WriteLine("\tvar $servername = \"localhost\";");
@@ -970,6 +1012,32 @@ namespace PHPSQLSeged
                                 select = select.Replace("[kiiratas]", kiiratas);
                                 sw.WriteLine(select);
                             }
+                            if (Convert.ToBoolean(tablaAdatok[3]))
+                            {
+                                string insert = File.ReadAllText("insert.txt");
+                                insert = insert.Replace("[tablanev]", tablaAdatok[1]);
+                                insert = insert.Replace("[insert]", "Insert_" + tablaAdatok[1]);
+                                string oszlopok = "";
+                                string inputok = "";
+                                for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0])).Count; j++)
+                                {
+                                    string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0]))[j].Split(';');
+                                    if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j+1)
+                                    {
+                                        oszlopok += oszlopadatok[1] + ", ";
+                                        inputok += "\'\".$_POST[\"input_" + oszlopadatok[1] + "\"].\"\', ";
+                                        //'".$_POST["input_megnevezes"]."'
+                                    }
+                                    else
+                                    {
+                                        oszlopok += oszlopadatok[1];
+                                        inputok += "\'\".$_POST[\"input_" + oszlopadatok[1] + "\"].\"\'";
+                                    }
+                                }
+                                insert = insert.Replace("[oszlopnev]", oszlopok);
+                                insert = insert.Replace("[input_mezok]", inputok);
+                                sw.WriteLine(insert);
+                            }
                         }
                         sw.WriteLine("}");
                         for (int i = 0; i < TablakKivalasztasa().Count; i++)
@@ -981,6 +1049,13 @@ namespace PHPSQLSeged
                                 select = select.Replace("[select]", "Select_" + tablaAdatok[1]);
                                 select = select.Replace("[tabla]", tablaAdatok[1]);
                                 sw.WriteLine(select);
+                            }
+                            if (Convert.ToBoolean(tablaAdatok[3]))
+                            {
+                                string insert = File.ReadAllText("insertaction.txt");
+                                insert = insert.Replace("[insert]", "Insert_" + tablaAdatok[1]);
+                                insert = insert.Replace("[cmd_insert]", "cmd_insert_" + tablaAdatok[1]);
+                                sw.WriteLine(insert);
                             }
                         }
                         sw.WriteLine("?>");
@@ -1033,8 +1108,6 @@ namespace PHPSQLSeged
                     oszlopok.Add(id + ";" + oszlopnev + ";" + kiterjesztes + ";" + hossz + ";" + autoinc + ";" + prikey);
                 }
             }
-
-
             return oszlopok;
         }
     }
