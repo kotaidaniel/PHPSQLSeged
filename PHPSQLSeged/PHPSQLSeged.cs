@@ -996,9 +996,12 @@ namespace PHPSQLSeged
                                 select = select.Replace("[tabla]", tablaAdatok[1]);
                                 select = select.Replace("[select]", "Select_" + tablaAdatok[1]);
                                 string kiiratas = "echo ";
+                                string delete;
+                                List<string> oszlopok = new List<string>();
                                 for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0])).Count; j++)
                                 {
                                     string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0]))[j].Split(';');
+                                    oszlopok.Add(oszlopadatok[1]);
                                     if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j + 1)
                                     {
                                         kiiratas += "$row[\"" + oszlopadatok[1] + "\"] . \", \" . ";
@@ -1007,11 +1010,23 @@ namespace PHPSQLSeged
                                     else
                                     {
                                         kiiratas += "$row[\"" + oszlopadatok[1] + "\"]";
+                                        if (Convert.ToBoolean(tablaAdatok[4]))
+                                        {
+                                            delete = File.ReadAllText("deletebutton.txt");
+                                            delete = delete.Replace("cmd_delete", "cmd_delete_" + tablaAdatok[1]);
+                                            delete = delete.Replace("[ertek]", oszlopok[0]);
+                                            select = select.Replace("[delete]", delete);
+                                        }
+                                        else
+                                        {
+                                            select = select.Replace("[delete]", "");
+                                        }
                                     }
                                 }
                                 select = select.Replace("[kiiratas]", kiiratas);
                                 sw.WriteLine(select);
                             }
+                            List<string> oszlopNevek = new List<string>();
                             if (Convert.ToBoolean(tablaAdatok[3]))
                             {
                                 string insert = File.ReadAllText("insert.txt");
@@ -1022,11 +1037,11 @@ namespace PHPSQLSeged
                                 for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0])).Count; j++)
                                 {
                                     string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0]))[j].Split(';');
+                                    oszlopNevek.Add(oszlopadatok[1]);
                                     if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j+1)
                                     {
                                         oszlopok += oszlopadatok[1] + ", ";
                                         inputok += "\'\".$_POST[\"input_" + oszlopadatok[1] + "\"].\"\', ";
-                                        //'".$_POST["input_megnevezes"]."'
                                     }
                                     else
                                     {
@@ -1038,6 +1053,15 @@ namespace PHPSQLSeged
                                 insert = insert.Replace("[input_mezok]", inputok);
                                 sw.WriteLine(insert);
                             }
+                            if (Convert.ToBoolean(tablaAdatok[4]))
+                            {
+                                string delete = File.ReadAllText("delete.txt");
+                                delete = delete.Replace("delete", "Delete_" + tablaAdatok[1]);
+                                delete = delete.Replace("[tablanev]", tablaAdatok[1]);
+                                delete = delete.Replace("[oszlop]", oszlopNevek[0]);
+                                sw.WriteLine(delete);
+                            }
+
                         }
                         sw.WriteLine("}");
                         for (int i = 0; i < TablakKivalasztasa().Count; i++)
@@ -1056,6 +1080,13 @@ namespace PHPSQLSeged
                                 insert = insert.Replace("[insert]", "Insert_" + tablaAdatok[1]);
                                 insert = insert.Replace("[cmd_insert]", "cmd_insert_" + tablaAdatok[1]);
                                 sw.WriteLine(insert);
+                            }
+                            if (Convert.ToBoolean(tablaAdatok[4]))
+                            {
+                                string delete = File.ReadAllText("deleteaction.txt");
+                                delete = delete.Replace("[delete]", "Delete_" + tablaAdatok[1]);
+                                delete = delete.Replace("[cmd_delete]", "cmd_delete_" + tablaAdatok[1]);
+                                sw.WriteLine(delete);
                             }
                         }
                         sw.WriteLine("?>");
