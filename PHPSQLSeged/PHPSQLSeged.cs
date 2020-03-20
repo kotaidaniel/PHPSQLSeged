@@ -1011,28 +1011,28 @@ namespace PHPSQLSeged
                                     else
                                     {
                                         kiiratas += "$row[\"" + oszlopadatok[1] + "\"]";
-                                        if (Convert.ToBoolean(tablaAdatok[4]))
-                                        {
-                                            delete = File.ReadAllText("deletebutton.txt");
-                                            delete = delete.Replace("cmd_delete", "cmd_delete_" + tablaAdatok[1]);
-                                            delete = delete.Replace("[ertek]", oszlopok[0]);
-                                            select = select.Replace("[delete]", delete);
-                                        }
-                                        else
-                                        {
-                                            select = select.Replace("[delete]", "");
-                                        }
-                                        if (Convert.ToBoolean(tablaAdatok[5]))
-                                        {
-                                            update = File.ReadAllText("updatebutton.txt");
-                                            update = update.Replace("cmd_update", "cmd_update_form_" + tablaAdatok[1]);
-                                            update = update.Replace("[ertek]", oszlopok[0]);
-                                            select = select.Replace("[update]", update);
-                                        }
-                                        else
-                                        {
-                                            select = select.Replace("[update]", "");
-                                        }
+                                    }
+                                    if (Convert.ToBoolean(tablaAdatok[4]))
+                                    {
+                                        delete = File.ReadAllText("deletebutton.txt");
+                                        delete = delete.Replace("cmd_delete", "cmd_delete_" + tablaAdatok[1]);
+                                        delete = delete.Replace("[ertek]", oszlopok[0]);
+                                        select = select.Replace("[delete]", delete);
+                                    }
+                                    else
+                                    {
+                                        select = select.Replace("[delete]", "");
+                                    }
+                                    if (Convert.ToBoolean(tablaAdatok[5]))
+                                    {
+                                        update = File.ReadAllText("updatebutton.txt");
+                                        update = update.Replace("cmd_update", "cmd_update_form_" + tablaAdatok[1]);
+                                        update = update.Replace("[ertek]", oszlopok[0]);
+                                        select = select.Replace("[update]", update);
+                                    }
+                                    else
+                                    {
+                                        select = select.Replace("[update]", "");
                                     }
                                 }
                                 select = select.Replace("[kiiratas]", kiiratas);
@@ -1050,7 +1050,7 @@ namespace PHPSQLSeged
                                 {
                                     string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0]))[j].Split(';');
                                     oszlopNevek.Add(oszlopadatok[1]);
-                                    if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j+1)
+                                    if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j + 1)
                                     {
                                         oszlopok += oszlopadatok[1] + ", ";
                                         inputok += "\'\".$_POST[\"input_" + oszlopadatok[1] + "\"].\"\', ";
@@ -1073,13 +1073,19 @@ namespace PHPSQLSeged
                                 delete = delete.Replace("[oszlop]", oszlopNevek[0]);
                                 sw.WriteLine(delete);
                             }
-                            List<string> updateOszlopNevek= new List<string>();
                             if (Convert.ToBoolean(tablaAdatok[5]))
                             {
+                                List<string> updateOszlopNevek = new List<string>();
+                                for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0])).Count; j++)
+                                {
+                                    string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0]))[j].Split(';');
+                                    updateOszlopNevek.Add(oszlopadatok[1]);
+                                }
                                 sw.WriteLine("function Update_" + tablaAdatok[1] + "_form(){");
                                 string updateform = File.ReadAllText("updateform.txt");
-                                updateform.Replace("[tabla]", tablaAdatok[1]);
-                                
+                                updateform = updateform.Replace("[tabla]", tablaAdatok[1]);
+                                updateform = updateform.Replace("[oszlop]", updateOszlopNevek[0]);
+                                sw.WriteLine(updateform);
                                 sw.WriteLine("echo \"" + tablaAdatok[1] + ":</br>\";");
                                 sw.WriteLine("echo \"<form method = \'POST\'>\";");
                                 string ertekadas = "";
@@ -1090,12 +1096,12 @@ namespace PHPSQLSeged
                                             if (oszlopadatok[2] == "INTEGER")
                                             {
                                                 sw.WriteLine("\techo \"" + oszlopadatok[1] + "\";");
-                                                sw.WriteLine("\techo \"<input type = \'number\' name = \'input_" + oszlopadatok[1] + "\'></br>\";");
+                                                sw.WriteLine("\techo \"<input type = \'number\' name = \'input_" + oszlopadatok[1] + "\' value = \'\".$row[\""+ oszlopadatok[1] +"\"].\"\'></br>\";");
                                             }
                                             if (oszlopadatok[2] == "VARCHAR" || oszlopadatok[2] == "TEXT")
                                             {
                                                 sw.WriteLine("\techo \"" + oszlopadatok[1] + "\";");
-                                                sw.WriteLine("\techo \"<input type = \'text\' name = \'input_" + oszlopadatok[1] + "\'></br>\";");
+                                                sw.WriteLine("\techo \"<input type = \'text\' name = \'input_" + oszlopadatok[1] + "\' value = \'\".$row[\"" + oszlopadatok[1] + "\"].\"\'></br>\";");
                                             }
                                             if (oszlopadatok[2] == "BOOLEAN")
                                             {
@@ -1116,8 +1122,11 @@ namespace PHPSQLSeged
                                             }
                                 }
                                 sw.WriteLine("\techo \"<input type = \'hidden\' name = \'action\' value = \'cmd_update_" + tablaAdatok[1] + "\'>\";" +
+                                    "\techo \"<input type = \'hidden\' name = \'input_azon\'" + "\' value = \'\".$row[\"" + updateOszlopNevek[0] + "\"].\"\'></br>\";" +
                                     "\n\techo \"</br><button type = \'submit\' > Módosítás </button>\";");
                                 sw.WriteLine("echo \"</form>\";");   
+                                sw.WriteLine("}");
+                                sw.WriteLine("}");
                                 sw.WriteLine("}");
                                 string update = File.ReadAllText("update.txt");
                                 update = update.Replace("[update]", "Update_" + tablaAdatok[1]);
@@ -1159,10 +1168,15 @@ namespace PHPSQLSeged
                                 updateform = updateform.Replace("[cmd_update]", "cmd_update_form_" + tablaAdatok[1]);
                                 updateform = updateform.Replace("[update_form]", "Update_" + tablaAdatok[1] + "_form");
                                 sw.WriteLine(updateform);
+                                string update = File.ReadAllText("updateaction.txt");
+                                update = update.Replace("[cmd_update]", "cmd_update_" + tablaAdatok[1]);
+                                update = update.Replace("[update]", "Update_" + tablaAdatok[1]);
+                                sw.WriteLine(update);
                             }
                         }
                         sw.WriteLine("?>");
                     }
+                    phpPathTextBox.Text = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileName(fileName);
                 }
                 catch (Exception)
                 {
