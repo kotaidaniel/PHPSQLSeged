@@ -30,7 +30,7 @@ namespace PHPSQLSeged
             var command = conn.CreateCommand();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS tablak(
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    tablanev VARCHAR(128) NOT NULL,
+                                    tablanev VARCHAR(128),
                                     cmd_select BOOLEAN,
                                     cmd_insert BOOLEAN,
                                     cmd_delete BOOLEAN,
