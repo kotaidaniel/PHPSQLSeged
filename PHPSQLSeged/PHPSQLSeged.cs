@@ -40,10 +40,10 @@ namespace PHPSQLSeged
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                     oszlopnev VARCHAR(128),
                                     kiterjesztes VARCHAR(128),
-                                    hossz INTEGER NOT NULL,
+                                    hossz INTEGER,
                                     autoinc BOOLEAN,
                                     prikey BOOLEAN,
-                                    tablaid INTEGER NOT NULL
+                                    tablaid INTEGER
                                     );";
             command.ExecuteNonQuery();
 
