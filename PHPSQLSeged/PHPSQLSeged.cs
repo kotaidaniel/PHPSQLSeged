@@ -38,8 +38,8 @@ namespace PHPSQLSeged
                                     );
                                     CREATE TABLE IF NOT EXISTS oszlopok(
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    oszlopnev VARCHAR(128) NOT NULL,
-                                    kiterjesztes VARCHAR(128) NOT NULL,
+                                    oszlopnev VARCHAR(128),
+                                    kiterjesztes VARCHAR(128),
                                     hossz INTEGER NOT NULL,
                                     autoinc BOOLEAN,
                                     prikey BOOLEAN,
