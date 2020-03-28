@@ -843,7 +843,6 @@ namespace PHPSQLSeged
                     string fileName = sqlSaveFileDialog.FileName;
                     using (var sw = new StreamWriter(fileName))
                     {
-                        sw.WriteLine("DROP DATABASE {0};", adatbazisNeveTextBox.Text);
                         sw.WriteLine("CREATE DATABASE {0};", adatbazisNeveTextBox.Text);
                         var cmd = conn.CreateCommand();
                         cmd.CommandText = "SELECT * FROM tablak";
@@ -864,6 +863,7 @@ namespace PHPSQLSeged
                                 {
                                     while (oszlopReader.Read())
                                     {
+                                        
                                         string oszlopnev = oszlopReader.GetString(1);
                                         string kiterjesztes = oszlopReader.GetString(2);
                                         int hossz = oszlopReader.GetInt32(3);
@@ -879,13 +879,26 @@ namespace PHPSQLSeged
                                         }
                                         if (kiterjesztes == "BOOLEAN")
                                         {
-                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + ",");
+                                            if (OszlopMennyiseg(id) > db)
+                                            {
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + ",");
+                                            }
+                                            else
+                                            {
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes);
+                                            }
 
                                         }
                                         else
                                         {
-                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + ",");
-
+                                            if (OszlopMennyiseg(id) > db)
+                                            {
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + ",");
+                                            }
+                                            else
+                                            {
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc);
+                                            }
                                         }
                                         db++;
                                     }
