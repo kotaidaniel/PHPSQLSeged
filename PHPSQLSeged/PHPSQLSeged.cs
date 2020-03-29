@@ -141,6 +141,31 @@ namespace PHPSQLSeged
                 tablaNeveAlahuzasPanel.BackColor = Color.Red;
             }
         }
+        private void TablaNeveTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TablaHozzaAdas();
+            }
+        }
+        private void TablaHozzaadasButton_Click(object sender, EventArgs e)
+        {
+            TablaHozzaAdas();
+        }
+        public void TablaHozzaAdas()
+        {
+            if (tablaNeveAlahuzasPanel.BackColor == Color.Green)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO tablak(id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (NULL, @tablanev, 0, 0, 0, 0)";
+                cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
+                cmd.ExecuteNonQuery();
+
+                TablakListazasa();
+                tablaNeveTextBox.Clear();
+                tablaNeveAlahuzasPanel.BackColor = Color.Black;
+            }
+        }
         public void TablakListazasa()
         {
             tablakListBox.Items.Clear();
@@ -159,14 +184,6 @@ namespace PHPSQLSeged
                 }
             }
         }
-        private void TablaNeveTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                TablaHozzaAdas();
-            }
-        }
-
         private void TablakListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tablakListBox.SelectedIndex != -1)
@@ -183,7 +200,76 @@ namespace PHPSQLSeged
                 tablaModositottNeveTextBox.Text = nev;
             }
         }
+        private void TablaTorlesButton_Click(object sender, EventArgs e)
+        {
+            if (DeleteMessageBox())
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM tablak WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "DELETE FROM oszlopok WHERE tablaid = @tablaid";
+                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                TablakListazasa();
+                OszlopListazas(-1);
+            }
+        }
+        private void TablakModositasButton_Click(object sender, EventArgs e)
+        {
+            tablaHozzaadasPanel.Visible = false;
+            tablaModositasPanel.Visible = true;
+            tablaModositottNeveTextBox.Enabled = true;
+            tablaNeveModositasVegrehajtasButton.Enabled = true;
+            tablaModositottNeveEllenorzoPanel.Enabled = true;
+            tablaModositottNeveEllenorzoPanel.BackColor = Color.Black;
+        }
 
+        private void TablaModositottNeveTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SzovegEllenorzes(tablaModositottNeveTextBox.Text))
+            {
+                tablaModositottNeveEllenorzoPanel.BackColor = Color.Green;
+            }
+            else
+            {
+                tablaModositottNeveEllenorzoPanel.BackColor = Color.Red;
+            }
+        }
+        private void TablaNeveModositasVegrehajtasButton_Click(object sender, EventArgs e)
+        {
+            if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
+                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                TablakListazasa();
+                tablaModositasPanel.Visible = false;
+                tablaModositottNeveTextBox.Clear();
+                tablaHozzaadasPanel.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Nem megfelelő adatot adott meg próbálja újra");
+            }
+        }
+        private void TablaModositottNeveTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green && e.KeyCode == Keys.Enter)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
+                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                cmd.ExecuteNonQuery();
+                TablakListazasa();
+                tablaModositasPanel.Visible = false;
+                tablaModositottNeveTextBox.Clear();
+                tablaHozzaadasPanel.Visible = true;
+            }
+        }
         private void OszlopNevTextBox_TextChanged(object sender, EventArgs e)
         {
             if (SzovegEllenorzes(oszlopNevTextBox.Text))
@@ -196,7 +282,6 @@ namespace PHPSQLSeged
                 oszlopNeveAlahuzasPanel.BackColor = Color.Red;
             }
         }
-
         private void OszlopKiterjesztesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             oszlopHozzaadasButton.Enabled = true;
@@ -293,96 +378,6 @@ namespace PHPSQLSeged
             primaryKeyCheckBox.Enabled = false;
             oszlopHozzaadasButton.Enabled = false;
         }
-
-        private void TablaHozzaadasButton_Click(object sender, EventArgs e)
-        {
-            TablaHozzaAdas();
-        }
-        public void TablaHozzaAdas()
-        {
-            if (tablaNeveAlahuzasPanel.BackColor == Color.Green)
-            {
-                var cmd = conn.CreateCommand();
-
-                /*cmd.CommandText = "SELECT id, tablanev FROM tablak";
-                using (var reader = cmd.ExecuteReader())
-                {
-                    string nev = reader.GetString(1);
-                    var megadottTablaNev = tablaNeveTextBox.Text.ToUpper();
-                    if (nev.Equals(megadottTablaNev))
-                    {
-                        MessageBox.Show("Ilyen tábla már létre lett hozva egyszer");
-                    }
-                }
-                */
-                cmd.CommandText = "INSERT INTO tablak(id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (NULL, @tablanev, 0, 0, 0, 0)";
-                cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
-                cmd.ExecuteNonQuery();
-
-                TablakListazasa();
-                tablaNeveTextBox.Clear();
-                tablaNeveAlahuzasPanel.BackColor = Color.Black;
-            }
-        }
-
-        private void TablaTorlesButton_Click(object sender, EventArgs e)
-        {
-            if (DeleteMessageBox())
-            {
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = "DELETE FROM tablak WHERE id = @id";
-                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "DELETE FROM oszlopok WHERE tablaid = @tablaid";
-                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
-                TablakListazasa();
-                OszlopListazas(-1);
-            }
-        }
-
-        private void TablakModositasButton_Click(object sender, EventArgs e)
-        {
-            tablaHozzaadasPanel.Visible = false;
-            tablaModositasPanel.Visible = true;
-            tablaModositottNeveTextBox.Enabled = true;
-            tablaNeveModositasVegrehajtasButton.Enabled = true;
-            tablaModositottNeveEllenorzoPanel.Enabled = true;
-            tablaModositottNeveEllenorzoPanel.BackColor = Color.Black;
-        }
-
-        private void TablaModositottNeveTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (SzovegEllenorzes(tablaModositottNeveTextBox.Text))
-            {
-                tablaModositottNeveEllenorzoPanel.BackColor = Color.Green;
-            }
-            else
-            {
-                tablaModositottNeveEllenorzoPanel.BackColor = Color.Red;
-            }
-        }
-
-        private void TablaNeveModositasVegrehajtasButton_Click(object sender, EventArgs e)
-        {
-            if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green)
-            {
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
-                cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
-                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
-                TablakListazasa();
-                tablaModositasPanel.Visible = false;
-                tablaModositottNeveTextBox.Clear();
-                tablaHozzaadasPanel.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Nem megfelelő adatot adott meg próbálja újra");
-            }
-        }
-
         private void OszlopokListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (OszlopokListBox.SelectedIndex != -1)
@@ -410,30 +405,13 @@ namespace PHPSQLSeged
                 OszlopListazas(kivalasztottTablaID);
             }
         }
-
-        private void TablaModositottNeveTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green && e.KeyCode == Keys.Enter)
-            {
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
-                cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
-                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
-                TablakListazasa();
-                tablaModositasPanel.Visible = false;
-                tablaModositottNeveTextBox.Clear();
-                tablaHozzaadasPanel.Visible = true;
-            }
-        }
-
         private void OszlopModositasButton_Click(object sender, EventArgs e)
         {
             oszlopHozzaadasGroupBox.Visible = false;
             oszlopModositasGroupBox.Visible = true;
             var oszlop = (Oszlopok)OszlopokListBox.SelectedItem;
             oszlopModositottNeveTextBox.Text = oszlop.OszlopNeve;
-            oszlopModositottKiterjesztésComboBox.SelectedItem = oszlop.Kiterjesztes;
+            oszlopModositottKiterjesztesComboBox.SelectedItem = oszlop.Kiterjesztes;
             oszlopModositottHosszaNumericUpDown.Value = oszlop.Hossz;
             modositottOszlopNeveEllenorzoPanel.BackColor = Color.Black;
             if (oszlop.Autoincrement)
@@ -451,11 +429,69 @@ namespace PHPSQLSeged
             if (SzovegEllenorzes(oszlopModositottNeveTextBox.Text))
             {
                 modositottOszlopNeveEllenorzoPanel.BackColor = Color.Green;
-                oszlopModositottKiterjesztésComboBox.Enabled = true;
+                oszlopModositottKiterjesztesComboBox.Enabled = true;
             }
             else
             {
                 modositottOszlopNeveEllenorzoPanel.BackColor = Color.Red;
+            }
+        }
+        private void OszlopModositottKiterjesztesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            oszlopModositasokVegrehajtasaButton.Enabled = true;
+            switch (oszlopModositottKiterjesztesComboBox.Text)
+            {
+                case "INTEGER":
+                    modositottAutoIncrementCheckBox.Enabled = true;
+                    modositottPrimaryKeyCheckBox.Enabled = true;
+                    oszlopModositottHosszaNumericUpDown.Maximum = 7;
+                    oszlopModositottHosszaNumericUpDown.Enabled = true;
+                    break;
+                case "BOOLEAN":
+                    oszlopModositottHosszaNumericUpDown.Value = 1;
+                    oszlopModositottHosszaNumericUpDown.Enabled = false;
+                    modositottAutoIncrementCheckBox.Checked = false;
+                    modositottPrimaryKeyCheckBox.Checked = false;
+                    modositottAutoIncrementCheckBox.Enabled = false;
+                    modositottPrimaryKeyCheckBox.Enabled = false;
+                    break;
+                case "VARCHAR":
+                    oszlopModositottHosszaNumericUpDown.Maximum = 255;
+                    modositottAutoIncrementCheckBox.Checked = false;
+                    modositottPrimaryKeyCheckBox.Checked = false;
+                    modositottAutoIncrementCheckBox.Enabled = false;
+                    modositottPrimaryKeyCheckBox.Enabled = false;
+                    oszlopModositottHosszaNumericUpDown.Enabled = true;
+                    break;
+                case "TEXT":
+                    modositottAutoIncrementCheckBox.Checked = false;
+                    modositottPrimaryKeyCheckBox.Checked = false;
+                    modositottAutoIncrementCheckBox.Enabled = false;
+                    modositottPrimaryKeyCheckBox.Enabled = false;
+                    oszlopModositottHosszaNumericUpDown.Enabled = true;
+                    break;
+            }
+        }
+        private void OszlopModositasokVegrehajtasaButton_Click(object sender, EventArgs e)
+        {
+            if (modositottOszlopNeveEllenorzoPanel.BackColor == Color.Green || modositottOszlopNeveEllenorzoPanel.BackColor == Color.Black)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE oszlopok SET oszlopnev = @oszlopnev, kiterjesztes = @kiterjesztes, hossz = @hossz, autoinc = @autoinc, prikey = @prikey WHERE id = @id";
+                cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
+                cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztesComboBox.SelectedItem);
+                cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
+                cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
+                cmd.ExecuteNonQuery();
+                OszlopListazas(kivalasztottTablaID);
+                oszlopModositasGroupBox.Visible = false;
+                oszlopHozzaadasGroupBox.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Kérjük érvényes adatokkat adjon meg!");
             }
         }
 
@@ -514,43 +550,6 @@ namespace PHPSQLSeged
                 }
             }
         }
-
-        private void OszlopModositottKiterjesztésComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            oszlopModositasokVegrehajtasaButton.Enabled = true;
-            switch (oszlopModositottKiterjesztésComboBox.Text)
-            {
-                case "INTEGER":
-                    modositottAutoIncrementCheckBox.Enabled = true;
-                    modositottPrimaryKeyCheckBox.Enabled = true;
-                    oszlopModositottHosszaNumericUpDown.Maximum = 7;
-                    oszlopModositottHosszaNumericUpDown.Enabled = true;
-                    break;
-                case "BOOLEAN":
-                    oszlopModositottHosszaNumericUpDown.Value = 1;
-                    oszlopModositottHosszaNumericUpDown.Enabled = false;
-                    modositottAutoIncrementCheckBox.Checked = false;
-                    modositottPrimaryKeyCheckBox.Checked = false;
-                    modositottAutoIncrementCheckBox.Enabled = false;
-                    modositottPrimaryKeyCheckBox.Enabled = false;
-                    break;
-                case "VARCHAR":
-                    oszlopModositottHosszaNumericUpDown.Maximum = 255;
-                    modositottAutoIncrementCheckBox.Checked = false;
-                    modositottPrimaryKeyCheckBox.Checked = false;
-                    modositottAutoIncrementCheckBox.Enabled = false;
-                    modositottPrimaryKeyCheckBox.Enabled = false;
-                    oszlopModositottHosszaNumericUpDown.Enabled = true;
-                    break;
-                case "TEXT":
-                    modositottAutoIncrementCheckBox.Checked = false;
-                    modositottPrimaryKeyCheckBox.Checked = false;
-                    modositottAutoIncrementCheckBox.Enabled = false;
-                    modositottPrimaryKeyCheckBox.Enabled = false;
-                    oszlopModositottHosszaNumericUpDown.Enabled = true;
-                    break;
-            }
-        }
         private void SelectCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             CheckBoxEsemeny(selectCheckBox, selectCheckBox.Checked, "cmd_select");
@@ -570,48 +569,6 @@ namespace PHPSQLSeged
         {
             CheckBoxEsemeny(updateCheckBox, updateCheckBox.Checked, "cmd_update");
         }
-
-        private void OszlopModositasokVegrehajtasaButton_Click(object sender, EventArgs e)
-        {
-            if (modositottOszlopNeveEllenorzoPanel.BackColor == Color.Green || modositottOszlopNeveEllenorzoPanel.BackColor == Color.Black)
-            {
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE oszlopok SET oszlopnev = @oszlopnev, kiterjesztes = @kiterjesztes, hossz = @hossz, autoinc = @autoinc, prikey = @prikey WHERE id = @id";
-                cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
-                cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztésComboBox.SelectedItem);
-                cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
-                cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
-                cmd.ExecuteNonQuery();
-                OszlopListazas(kivalasztottTablaID);
-                oszlopModositasGroupBox.Visible = false;
-                oszlopHozzaadasGroupBox.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Kérjük érvényes adatokkat adjon meg!");
-            }
-        }
-
-        private bool SzovegEllenorzes(string szoveg)
-        {
-            var regexItem = new Regex("^[a-z_]*$");
-            if (regexItem.IsMatch(szoveg) && szoveg.Length >= 2 && szoveg.Length < 128)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void IdeiglenesMentesButton_Click(object sender, EventArgs e)
-        {
-            ideiglenesSaveFileDialog.ShowDialog();
-        }
-
         private void CheckBoxEsemeny(CheckBox checkbox, bool valasz, string command)
         {
             if (valasz)
@@ -660,23 +617,18 @@ namespace PHPSQLSeged
                 cmd.ExecuteNonQuery();
             }
         }
-
-        private void BetoltesButton_Click(object sender, EventArgs e)
+        private bool SzovegEllenorzes(string szoveg)
         {
-            string uzenet = "Biztosan be szeretné tölteni a fájlt? Betöltésnél a nem mentett munkák törlésre kerülnek!";
-            string cim = "Betöltés";
-            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (ablak == DialogResult.Yes)
+            var regexItem = new Regex("^[a-z_]*$");
+            if (regexItem.IsMatch(szoveg) && szoveg.Length >= 2 && szoveg.Length < 128)
             {
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = "DELETE FROM tablak WHERE 1";
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "DELETE FROM oszlopok WHERE 1";
-                cmd.ExecuteNonQuery();
-                betoltesOpenFileDialog.ShowDialog();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-
         public bool DeleteMessageBox()
         {
             bool valasz = false;
@@ -690,6 +642,10 @@ namespace PHPSQLSeged
             return valasz;
 
 
+        }
+        private void IdeiglenesMentesButton_Click(object sender, EventArgs e)
+        {
+            ideiglenesSaveFileDialog.ShowDialog();
         }
         public void ideiglenesMentes()
         {
@@ -754,11 +710,21 @@ namespace PHPSQLSeged
             };
         }
 
-        private void SqlTallozasButton_Click(object sender, EventArgs e)
+        private void BetoltesButton_Click(object sender, EventArgs e)
         {
-            sqlSaveFileDialog.ShowDialog();
+            string uzenet = "Biztosan be szeretné tölteni a fájlt? Betöltésnél a nem mentett munkák törlésre kerülnek!";
+            string cim = "Betöltés";
+            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (ablak == DialogResult.Yes)
+            {
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM tablak WHERE 1";
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "DELETE FROM oszlopok WHERE 1";
+                cmd.ExecuteNonQuery();
+                betoltesOpenFileDialog.ShowDialog();
+            }
         }
-
         public void Betoltes()
         {
             betoltesOpenFileDialog.FileOk += (senderFile, eFile) =>
@@ -830,6 +796,10 @@ namespace PHPSQLSeged
                 }
             }
             OszlopHozzaadReset();
+        }
+        private void SqlTallozasButton_Click(object sender, EventArgs e)
+        {
+            sqlSaveFileDialog.ShowDialog();
         }
         public void sqlMentes()
         {

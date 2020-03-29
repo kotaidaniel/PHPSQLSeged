@@ -50,7 +50,7 @@
             this.modositottOszlopHosszaLabel = new System.Windows.Forms.Label();
             this.oszlopModositottHosszaNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.figyelmeztetesModositottLabel = new System.Windows.Forms.Label();
-            this.oszlopModositottKiterjesztésComboBox = new System.Windows.Forms.ComboBox();
+            this.oszlopModositottKiterjesztesComboBox = new System.Windows.Forms.ComboBox();
             this.modositottOszlopKiterjeszteseLabel = new System.Windows.Forms.Label();
             this.modositottOszlopNeveEllenorzoPanel = new System.Windows.Forms.Panel();
             this.oszlopModositottNeveTextBox = new System.Windows.Forms.TextBox();
@@ -317,7 +317,7 @@
             this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopHosszaLabel);
             this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottHosszaNumericUpDown);
             this.oszlopModositasGroupBox.Controls.Add(this.figyelmeztetesModositottLabel);
-            this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottKiterjesztésComboBox);
+            this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottKiterjesztesComboBox);
             this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopKiterjeszteseLabel);
             this.oszlopModositasGroupBox.Controls.Add(this.modositottOszlopNeveEllenorzoPanel);
             this.oszlopModositasGroupBox.Controls.Add(this.oszlopModositottNeveTextBox);
@@ -411,21 +411,21 @@
             this.figyelmeztetesModositottLabel.TabIndex = 23;
             this.figyelmeztetesModositottLabel.Text = "*kérjük válasszon ki egy táblát";
             // 
-            // oszlopModositottKiterjesztésComboBox
+            // oszlopModositottKiterjesztesComboBox
             // 
-            this.oszlopModositottKiterjesztésComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.oszlopModositottKiterjesztésComboBox.Enabled = false;
-            this.oszlopModositottKiterjesztésComboBox.FormattingEnabled = true;
-            this.oszlopModositottKiterjesztésComboBox.Items.AddRange(new object[] {
+            this.oszlopModositottKiterjesztesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.oszlopModositottKiterjesztesComboBox.Enabled = false;
+            this.oszlopModositottKiterjesztesComboBox.FormattingEnabled = true;
+            this.oszlopModositottKiterjesztesComboBox.Items.AddRange(new object[] {
             "INTEGER",
             "VARCHAR",
             "BOOLEAN",
             "TEXT"});
-            this.oszlopModositottKiterjesztésComboBox.Location = new System.Drawing.Point(188, 74);
-            this.oszlopModositottKiterjesztésComboBox.Name = "oszlopModositottKiterjesztésComboBox";
-            this.oszlopModositottKiterjesztésComboBox.Size = new System.Drawing.Size(107, 25);
-            this.oszlopModositottKiterjesztésComboBox.TabIndex = 22;
-            this.oszlopModositottKiterjesztésComboBox.SelectedIndexChanged += new System.EventHandler(this.OszlopModositottKiterjesztésComboBox_SelectedIndexChanged);
+            this.oszlopModositottKiterjesztesComboBox.Location = new System.Drawing.Point(188, 74);
+            this.oszlopModositottKiterjesztesComboBox.Name = "oszlopModositottKiterjesztesComboBox";
+            this.oszlopModositottKiterjesztesComboBox.Size = new System.Drawing.Size(107, 25);
+            this.oszlopModositottKiterjesztesComboBox.TabIndex = 22;
+            this.oszlopModositottKiterjesztesComboBox.SelectedIndexChanged += new System.EventHandler(this.OszlopModositottKiterjesztésComboBox_SelectedIndexChanged);
             // 
             // modositottOszlopKiterjeszteseLabel
             // 
@@ -1295,7 +1295,7 @@
         private System.Windows.Forms.Label modositottOszlopHosszaLabel;
         private System.Windows.Forms.NumericUpDown oszlopModositottHosszaNumericUpDown;
         private System.Windows.Forms.Label figyelmeztetesModositottLabel;
-        private System.Windows.Forms.ComboBox oszlopModositottKiterjesztésComboBox;
+        private System.Windows.Forms.ComboBox oszlopModositottKiterjesztesComboBox;
         private System.Windows.Forms.Label modositottOszlopKiterjeszteseLabel;
         private System.Windows.Forms.Panel modositottOszlopNeveEllenorzoPanel;
         private System.Windows.Forms.TextBox oszlopModositottNeveTextBox;
