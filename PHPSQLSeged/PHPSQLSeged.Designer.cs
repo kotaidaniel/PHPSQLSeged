@@ -425,7 +425,7 @@
             this.oszlopModositottKiterjesztesComboBox.Name = "oszlopModositottKiterjesztesComboBox";
             this.oszlopModositottKiterjesztesComboBox.Size = new System.Drawing.Size(107, 25);
             this.oszlopModositottKiterjesztesComboBox.TabIndex = 22;
-            this.oszlopModositottKiterjesztesComboBox.SelectedIndexChanged += new System.EventHandler(this.OszlopModositottKiterjesztésComboBox_SelectedIndexChanged);
+            this.oszlopModositottKiterjesztesComboBox.SelectedIndexChanged += new System.EventHandler(this.OszlopModositottKiterjesztesComboBox_SelectedIndexChanged);
             // 
             // modositottOszlopKiterjeszteseLabel
             // 
@@ -1209,6 +1209,7 @@
             this.Controls.Add(this.kezdolapPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PHPSQLSeged";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

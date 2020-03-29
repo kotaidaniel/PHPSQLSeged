@@ -766,7 +766,6 @@ namespace PHPSQLSeged
                         cmd.Parameters.AddWithValue("@tablaid", Convert.ToInt32(adatok2[6]));
                         cmd.ExecuteNonQuery();
                         index++;
-
                     }
                 }
                 catch (Exception)
@@ -807,7 +806,6 @@ namespace PHPSQLSeged
             {
                 try
                 {
-
                     string fileName = sqlSaveFileDialog.FileName;
                     using (var sw = new StreamWriter(fileName))
                     {
@@ -892,17 +890,6 @@ namespace PHPSQLSeged
         {
             phpSaveFileDialog.ShowDialog();
         }
-
-        public long OszlopMennyiseg(int tablaid)
-        {
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @id";
-            cmd.Parameters.AddWithValue("@id", tablaid);
-            long db = (long)cmd.ExecuteScalar();
-
-            return db;
-        }
-
         public void phpMentes()
         {
             phpSaveFileDialog.FileOk += (senderFile, eFile) =>
@@ -1208,5 +1195,15 @@ namespace PHPSQLSeged
             }
             return oszlopok;
         }
+        public long OszlopMennyiseg(int tablaid)
+        {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @id";
+            cmd.Parameters.AddWithValue("@id", tablaid);
+            long db = (long)cmd.ExecuteScalar();
+
+            return db;
+        }
+
     }
 }
