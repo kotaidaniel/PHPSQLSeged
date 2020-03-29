@@ -94,7 +94,20 @@ namespace PHPSQLSeged
             mentesJelolo.Visible = mentes;
             mentesPanel.Visible = mentes;
         }
-
+        private void KilepesButton_Click_1(object sender, EventArgs e)
+        {
+            string uzenet = "Biztosan ki szeretne lépni az alkalmazásból? Kilépésnél a nem mentett munkák törlésre kerülnek!";
+            string cim = "Kilépés";
+            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (ablak == DialogResult.Yes)
+            {
+                conn.Close();
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
+                File.Delete("sql.db");
+                Application.Exit();
+            }
+        }
 
         private void AdatbazisNeveTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -151,21 +164,6 @@ namespace PHPSQLSeged
             if (e.KeyCode == Keys.Enter)
             {
                 TablaHozzaAdas();
-            }
-        }
-
-        private void KilepesButton_Click_1(object sender, EventArgs e)
-        {
-            string uzenet = "Biztosan ki szeretne lépni az alkalmazásból? Kilépésnél a nem mentett munkák törlésre kerülnek!";
-            string cim = "Kilépés";
-            var ablak = MessageBox.Show(uzenet, cim, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (ablak == DialogResult.Yes)
-            {
-                conn.Close();
-                System.GC.Collect();
-                System.GC.WaitForPendingFinalizers();
-                File.Delete("sql.db");
-                Application.Exit();
             }
         }
 
