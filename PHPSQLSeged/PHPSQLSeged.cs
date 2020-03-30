@@ -157,13 +157,23 @@ namespace PHPSQLSeged
             if (tablaNeveAlahuzasPanel.BackColor == Color.Green)
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO tablak(id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (NULL, @tablanev, 0, 0, 0, 0)";
+                cmd.CommandText = "SELECT COUNT(*) FROM tablak WHERE tablanev = @tablanev";
                 cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
-                cmd.ExecuteNonQuery();
+                long db = (long)cmd.ExecuteScalar();
+                if (db != 0)
+                {
+                    MessageBox.Show("Ilyen tábla már fel lett véve");
+                }
+                else
+                {
+                    cmd.CommandText = "INSERT INTO tablak(id, tablanev, cmd_select, cmd_insert, cmd_delete, cmd_update) VALUES (NULL, @tablanev, 0, 0, 0, 0)";
+                    cmd.Parameters.AddWithValue("@tablanev", tablaNeveTextBox.Text);
+                    cmd.ExecuteNonQuery();
 
-                TablakListazasa();
-                tablaNeveTextBox.Clear();
-                tablaNeveAlahuzasPanel.BackColor = Color.Black;
+                    TablakListazasa();
+                    tablaNeveTextBox.Clear();
+                    tablaNeveAlahuzasPanel.BackColor = Color.Black;
+                }
             }
         }
         public void TablakListazasa()
@@ -241,14 +251,24 @@ namespace PHPSQLSeged
             if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green)
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                cmd.CommandText = "SELECT COUNT(*) FROM tablak WHERE tablanev = @tablanev";
                 cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
-                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
-                TablakListazasa();
-                tablaModositasPanel.Visible = false;
-                tablaModositottNeveTextBox.Clear();
-                tablaHozzaadasPanel.Visible = true;
+                long db = (long)cmd.ExecuteScalar();
+                if (db != 0)
+                {
+                    MessageBox.Show("Ilyen tábla már fel lett véve");
+                }
+                else
+                {
+                    cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
+                    cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                    cmd.ExecuteNonQuery();
+                    TablakListazasa();
+                    tablaModositasPanel.Visible = false;
+                    tablaModositottNeveTextBox.Clear();
+                    tablaHozzaadasPanel.Visible = true;
+                }
             }
             else
             {
@@ -260,14 +280,24 @@ namespace PHPSQLSeged
             if (tablaModositottNeveEllenorzoPanel.BackColor == Color.Green && e.KeyCode == Keys.Enter)
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                cmd.CommandText = "SELECT COUNT(*) FROM tablak WHERE tablanev = @tablanev";
                 cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
-                cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
-                TablakListazasa();
-                tablaModositasPanel.Visible = false;
-                tablaModositottNeveTextBox.Clear();
-                tablaHozzaadasPanel.Visible = true;
+                long db = (long)cmd.ExecuteScalar();
+                if (db != 0)
+                {
+                    MessageBox.Show("Ilyen tábla már fel lett véve");
+                }
+                else
+                {
+                    cmd.CommandText = "UPDATE tablak SET tablanev = @tablanev WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@tablanev", tablaModositottNeveTextBox.Text);
+                    cmd.Parameters.AddWithValue("@id", kivalasztottTablaID);
+                    cmd.ExecuteNonQuery();
+                    TablakListazasa();
+                    tablaModositasPanel.Visible = false;
+                    tablaModositottNeveTextBox.Clear();
+                    tablaHozzaadasPanel.Visible = true;
+                }
             }
         }
         private void OszlopNevTextBox_TextChanged(object sender, EventArgs e)
@@ -324,17 +354,28 @@ namespace PHPSQLSeged
             if (oszlopNeveAlahuzasPanel.BackColor == Color.Green && kivalasztottTablaID >= 0)
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO oszlopok(oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid) VALUES (@oszlopnev, @kiterjesztes, @hossz, @autoinc, @prikey, @tablaid)";
-                cmd.Parameters.AddWithValue("@oszlopnev", oszlopNevTextBox.Text);
-                cmd.Parameters.AddWithValue("@kiterjesztes", oszlopKiterjesztesComboBox.SelectedItem);
-                cmd.Parameters.AddWithValue("@hossz", oszlopHosszNumericUpDown.Value);
-                cmd.Parameters.AddWithValue("@autoinc", autoIncrementCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@prikey", primaryKeyCheckBox.Checked);
+                cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @tablaid AND oszlopnev = @oszlopnev";
                 cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@oszlopnev", oszlopNevTextBox.Text);
+                long db = (long)cmd.ExecuteScalar();
+                if (db != 0)
+                {
+                    MessageBox.Show("Ilyen tábla már fel lett véve");
+                }
+                else
+                {
+                    cmd.CommandText = "INSERT INTO oszlopok(oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid) VALUES (@oszlopnev, @kiterjesztes, @hossz, @autoinc, @prikey, @tablaid)";
+                    cmd.Parameters.AddWithValue("@oszlopnev", oszlopNevTextBox.Text);
+                    cmd.Parameters.AddWithValue("@kiterjesztes", oszlopKiterjesztesComboBox.SelectedItem);
+                    cmd.Parameters.AddWithValue("@hossz", oszlopHosszNumericUpDown.Value);
+                    cmd.Parameters.AddWithValue("@autoinc", autoIncrementCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@prikey", primaryKeyCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                    cmd.ExecuteNonQuery();
 
-                OszlopListazas(kivalasztottTablaID);
-                OszlopHozzaadReset();
+                    OszlopListazas(kivalasztottTablaID);
+                    OszlopHozzaadReset();
+                }
             }
             else
             {
@@ -477,17 +518,28 @@ namespace PHPSQLSeged
             if (modositottOszlopNeveEllenorzoPanel.BackColor == Color.Green || modositottOszlopNeveEllenorzoPanel.BackColor == Color.Black)
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE oszlopok SET oszlopnev = @oszlopnev, kiterjesztes = @kiterjesztes, hossz = @hossz, autoinc = @autoinc, prikey = @prikey WHERE id = @id";
+                cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @tablaid AND oszlopnev = @oszlopnev";
+                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
                 cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
-                cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztesComboBox.SelectedItem);
-                cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
-                cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
-                cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
-                cmd.ExecuteNonQuery();
-                OszlopListazas(kivalasztottTablaID);
-                oszlopModositasGroupBox.Visible = false;
-                oszlopHozzaadasGroupBox.Visible = true;
+                long db = (long)cmd.ExecuteScalar();
+                if (db != 0)
+                {
+                    MessageBox.Show("Ilyen tábla már fel lett véve");
+                }
+                else
+                {
+                    cmd.CommandText = "UPDATE oszlopok SET oszlopnev = @oszlopnev, kiterjesztes = @kiterjesztes, hossz = @hossz, autoinc = @autoinc, prikey = @prikey WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
+                    cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztesComboBox.SelectedItem);
+                    cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
+                    cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
+                    cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
+                    cmd.ExecuteNonQuery();
+                    OszlopListazas(kivalasztottTablaID);
+                    oszlopModositasGroupBox.Visible = false;
+                    oszlopHozzaadasGroupBox.Visible = true;
+                }
             }
             else
             {
@@ -814,7 +866,6 @@ namespace PHPSQLSeged
                         cmd.CommandText = "SELECT * FROM tablak";
                         var oszlopKereses_cmd = conn.CreateCommand();
                         oszlopKereses_cmd.CommandText = "SELECT * FROM oszlopok WHERE tablaid = @id";
-                        string prikeyoszlopnev = "";
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -824,7 +875,6 @@ namespace PHPSQLSeged
                                 oszlopKereses_cmd.Parameters.AddWithValue("@id", id);
                                 sw.WriteLine("CREATE TABLE IF NOT EXISTS {0}.{1} (", adatbazisNeveTextBox.Text, tablanev);
                                 int db = 1;
-                                bool prikey = false;
                                 using (var oszlopReader = oszlopKereses_cmd.ExecuteReader())
                                 {
                                     while (oszlopReader.Read())
@@ -834,14 +884,14 @@ namespace PHPSQLSeged
                                         string kiterjesztes = oszlopReader.GetString(2);
                                         int hossz = oszlopReader.GetInt32(3);
                                         string autoinc = "";
+                                        string prikey = "";
                                         if (oszlopReader.GetBoolean(4))
                                         {
                                             autoinc = " AUTO_INCREMENT";
                                         }
                                         if (oszlopReader.GetBoolean(5))
                                         {
-                                            prikey = true;
-                                            prikeyoszlopnev = oszlopnev;
+                                            prikey = " PRIMARY KEY";
                                         }
                                         if (kiterjesztes == "BOOLEAN")
                                         {
@@ -853,25 +903,18 @@ namespace PHPSQLSeged
                                             {
                                                 sw.WriteLine(oszlopnev + " " + kiterjesztes);
                                             }
-
+                                        }
+                                        if (OszlopMennyiseg(id) > db)
+                                        {
+                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + prikey + ",");
                                         }
                                         else
                                         {
-                                            if (OszlopMennyiseg(id) > db)
-                                            {
-                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + ",");
-                                            }
-                                            else
-                                            {
-                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc);
-                                            }
+                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + prikey);
                                         }
+                                        
                                         db++;
                                     }
-                                }
-                                if (prikey)
-                                {
-                                    sw.WriteLine("PRIMARY KEY({0})", prikeyoszlopnev);
                                 }
                                 sw.WriteLine(");");
                             }
