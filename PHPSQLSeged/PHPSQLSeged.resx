@@ -244,11 +244,27 @@ instrukciókat, hogy akadálymentesen tudja véghezvinni a generálást:
         használjon, valamintne használjon speciális
         karaktereket, kivéve '_')!
      - A menteni kívánt fájlokat megfelelő helyre mentse el!
-     -Betöltés során csak ezzel az alkalmazással elmentett szöveges
-      formátumú fájlokat töltse be!
+     - Betöltés során csak ezzel az alkalmazással elmentett szöveges
+        formátumú fájlokat töltse be!
 
 Amennyiben kérdésük, problémájuk van a programmal kérjük jelezze
 a phpsqlseged@support.hu e-mail címen.</value>
+  </data>
+  <data name="oszlopHozzaadasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAIRJREFUSEu1lUEKhDAUxXp7YcATK8z8iBUpb1GYNBAoKlkoD9ske3mW31vOn1Lj
+        He8epcYY72qkOGqkOGqkOGqkOGqkOGqkOE4xjsjyGeOKePcaY7phGi+arn9FfAgO6YF/pLmVU6QAaqQ4
+        aqQ4aqQ4aqQ4aqQ4aqQ4aiz/6Y9jnBxRaz+8APclBAJkmgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tablaHozzaadasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAIRJREFUSEu1lUEKhDAUxXp7YcATK8z8iBUpb1GYNBAoKlkoD9ske3mW31vOn1Lj
+        He8epcYY72qkOGqkOGqkOGqkOGqkOGqkOE4xjsjyGeOKePcaY7phGi+arn9FfAgO6YF/pLmVU6QAaqQ4
+        aqQ4aqQ4aqQ4aqQ4aqQ4aiz/6Y9jnBxRaz+8APclBAJkmgAAAABJRU5ErkJggg==
+</value>
   </data>
   <data name="oszlopModositasokVegrehajtasaButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -267,14 +283,6 @@ a phpsqlseged@support.hu e-mail címen.</value>
         mwm0cZXS8Lvl4xJtVkrDZ2hngQ4o2Yaq2WduPxl+HuiQM8JsQ92mL1R7gqxoz7ahJ6gbajaFG95jBlnR
         X7+jXeIb2hZuZFlpUWu+oQPsQueCrKg18xz7oDNBWiwkzUqLhaRZWvxNgzfMGrbxBYML3OR/uUsLt0X9
         a6rqBx/tDsL6jn8uAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="tablaHozzaadasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAIRJREFUSEu1lUEKhDAUxXp7YcATK8z8iBUpb1GYNBAoKlkoD9ske3mW31vOn1Lj
-        He8epcYY72qkOGqkOGqkOGqkOGqkOGqkOE4xjsjyGeOKePcaY7phGi+arn9FfAgO6YF/pLmVU6QAaqQ4
-        aqQ4aqQ4aqQ4aqQ4aqQ4aiz/6Y9jnBxRaz+8APclBAJkmgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="oszlopTorlesButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -325,14 +333,6 @@ a phpsqlseged@support.hu e-mail címen.</value>
         mwm0cZXS8Lvl4xJtVkrDZ2hngQ4o2Yaq2WduPxl+HuiQM8JsQ92mL1R7gqxoz7ahJ6gbajaFG95jBlnR
         X7+jXeIb2hZuZFlpUWu+oQPsQueCrKg18xz7oDNBWiwkzUqLhaRZWvxNgzfMGrbxBYML3OR/uUsLt0X9
         a6rqBx/tDsL6jn8uAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="oszlopHozzaadasButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAIRJREFUSEu1lUEKhDAUxXp7YcATK8z8iBUpb1GYNBAoKlkoD9ske3mW31vOn1Lj
-        He8epcYY72qkOGqkOGqkOGqkOGqkOGqkOE4xjsjyGeOKePcaY7phGi+arn9FfAgO6YF/pLmVU6QAaqQ4
-        aqQ4aqQ4aqQ4aqQ4aqQ4aiz/6Y9jnBxRaz+8APclBAJkmgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="kilepesButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
