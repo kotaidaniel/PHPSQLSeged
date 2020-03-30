@@ -193,7 +193,7 @@
             this.mentesButton.Location = new System.Drawing.Point(1, 298);
             this.mentesButton.Margin = new System.Windows.Forms.Padding(0);
             this.mentesButton.Name = "mentesButton";
-            this.mentesButton.Size = new System.Drawing.Size(171, 99);
+            this.mentesButton.Size = new System.Drawing.Size(171, 108);
             this.mentesButton.TabIndex = 4;
             this.mentesButton.UseVisualStyleBackColor = false;
             this.mentesButton.Click += new System.EventHandler(this.MentesButton_Click);

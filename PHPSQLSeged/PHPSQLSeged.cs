@@ -990,19 +990,19 @@ namespace PHPSQLSeged
                             if (Convert.ToBoolean(tablaadatok[3]))
                             {
                                 sw.WriteLine(tablaadatok[1] + ":</br>");
-                                sw.WriteLine("<form method = \"POST\">");
+                                sw.WriteLine("<form method = \"POST\" style=\"display: inline; \">");
                                 for (int j = 0; j < OszlopokKivalasztasa(Convert.ToInt32(tablaadatok[0])).Count; j++)
                                 {
                                     string[] oszlopadatok = OszlopokKivalasztasa(Convert.ToInt32(tablaadatok[0]))[j].Split(';');
                                     if (oszlopadatok[2] == "INTEGER")
                                     {
                                         sw.WriteLine(oszlopadatok[1]);
-                                        sw.WriteLine("\t<input type = \"number\" name = \"input_" + oszlopadatok[1] + "\"></br>");
+                                        sw.WriteLine("\t<input type = \"number\" name = \"input_" + oszlopadatok[1] + "\">");
                                     }
                                     if (oszlopadatok[2] == "VARCHAR" || oszlopadatok[2] == "TEXT")
                                     {
                                         sw.WriteLine(oszlopadatok[1]);
-                                        sw.WriteLine("\t<input type = \"text\" name = \"input_" + oszlopadatok[1] + "\"></br>");
+                                        sw.WriteLine("\t<input type = \"text\" name = \"input_" + oszlopadatok[1] + "\">");
                                     }
                                     if (oszlopadatok[2] == "BOOLEAN")
                                     {
@@ -1010,14 +1010,15 @@ namespace PHPSQLSeged
                                         sw.WriteLine("\t<select name = \"input_" + oszlopadatok[1] + "\">");
                                         sw.WriteLine("\t\t<option value = \"0\">Hamis</option>");
                                         sw.WriteLine("\t\t<option value = \"1\">Igaz</option>");
-                                        sw.WriteLine("\t</select></br>");
+                                        sw.WriteLine("\t</select>");
                                     }
                                 }
                                 sw.WriteLine("\t<input type = \"hidden\" name = \"action\" value = \"cmd_insert_"+ tablaadatok[1] +"\">" +
-                                     "\n\t</br><button type = \"submit\" > Felvétel </button>");
+                                     "\n\t<button type = \"submit\" > Felvétel </button></br>");
                                 sw.WriteLine("</form>");
                             }
                         }
+                        sw.WriteLine("<table>");
                         sw.WriteLine("<?php");
                         sw.WriteLine("class Osztaly{");
                         sw.WriteLine("\tvar $servername = \"localhost\";");
@@ -1044,12 +1045,12 @@ namespace PHPSQLSeged
                                     oszlopok.Add(oszlopadatok[1]);
                                     if (OszlopMennyiseg(Convert.ToInt32(tablaAdatok[0])) > j + 1)
                                     {
-                                        kiiratas += "$row[\"" + oszlopadatok[1] + "\"] . \", \" . ";
+                                        kiiratas += "\"<td>\".$row[\"" + oszlopadatok[1] + "\"] . \"</td>\" . ";
 
                                     }
                                     else
                                     {
-                                        kiiratas += "$row[\"" + oszlopadatok[1] + "\"]";
+                                        kiiratas += "\"<td>\".$row[\"" + oszlopadatok[1] + "\"].\"</td>\"";
                                     }
                                     if (Convert.ToBoolean(tablaAdatok[4]))
                                     {
@@ -1074,6 +1075,7 @@ namespace PHPSQLSeged
                                         select = select.Replace("[update]", "");
                                     }
                                 }
+                                
                                 select = select.Replace("[kiiratas]", kiiratas);
                                 sw.WriteLine(select);
                             }
@@ -1126,7 +1128,7 @@ namespace PHPSQLSeged
                                 updateform = updateform.Replace("[oszlop]", updateOszlopNevek[0]);
                                 sw.WriteLine(updateform);
                                 sw.WriteLine("echo \"" + tablaAdatok[1] + ":</br>\";");
-                                sw.WriteLine("echo \"<form method = \'POST\'>\";");
+                                sw.WriteLine("echo \"<form method = \'POST\' style=\'display: inline;\'>\";");
                                 string ertekadas = "";
                                 for (int k = 0; k < OszlopokKivalasztasa(Convert.ToInt32(tablaAdatok[0])).Count; k++)
                                     {
@@ -1161,8 +1163,8 @@ namespace PHPSQLSeged
                                             }
                                 }
                                 sw.WriteLine("\techo \"<input type = \'hidden\' name = \'action\' value = \'cmd_update_" + tablaAdatok[1] + "\'>\";" +
-                                    "\techo \"<input type = \'hidden\' name = \'input_azon\'" + "\' value = \'\".$row[\"" + updateOszlopNevek[0] + "\"].\"\'></br>\";" +
-                                    "\n\techo \"</br><button type = \'submit\' > Módosítás </button>\";");
+                                    "\techo \"<input type = \'hidden\' name = \'input_azon\'" + "\' value = \'\".$row[\"" + updateOszlopNevek[0] + "\"].\"\'>\";" +
+                                    "\n\techo \"</br><button type = \'submit\' > Módosítás </button></br>\";");
                                 sw.WriteLine("echo \"</form>\";");   
                                 sw.WriteLine("}");
                                 sw.WriteLine("}");
@@ -1214,6 +1216,7 @@ namespace PHPSQLSeged
                             }
                         }
                         sw.WriteLine("?>");
+                        sw.WriteLine("</table>");
                     }
                     phpPathTextBox.Text = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileName(fileName);
                 }
