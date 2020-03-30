@@ -118,6 +118,7 @@ namespace PHPSQLSeged
                 tablaNeveAlahuzasPanel.BackColor = Color.Black;
                 tablaHozzaadasButton.Enabled = true;
                 tablakListBox.Enabled = true;
+                sqlTallozasButton.Enabled = true;
             }
             else
             {
@@ -127,6 +128,7 @@ namespace PHPSQLSeged
                 tablaHozzaadasButton.Enabled = false;
                 tablakListBox.Enabled = false;
                 oszlopHozzaadasGroupBox.Enabled = false;
+                sqlTallozasButton.Enabled = false;
             }
         }
 
@@ -344,7 +346,7 @@ namespace PHPSQLSeged
                     primaryKeyCheckBox.Checked = false;
                     autoIncrementCheckBox.Enabled = false;
                     primaryKeyCheckBox.Enabled = false;
-                    oszlopHosszNumericUpDown.Enabled = true;
+                    oszlopHosszNumericUpDown.Enabled = false;
                     break;
             }
         }
@@ -364,17 +366,27 @@ namespace PHPSQLSeged
                 }
                 else
                 {
-                    cmd.CommandText = "INSERT INTO oszlopok(oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid) VALUES (@oszlopnev, @kiterjesztes, @hossz, @autoinc, @prikey, @tablaid)";
-                    cmd.Parameters.AddWithValue("@oszlopnev", oszlopNevTextBox.Text);
-                    cmd.Parameters.AddWithValue("@kiterjesztes", oszlopKiterjesztesComboBox.SelectedItem);
-                    cmd.Parameters.AddWithValue("@hossz", oszlopHosszNumericUpDown.Value);
-                    cmd.Parameters.AddWithValue("@autoinc", autoIncrementCheckBox.Checked);
-                    cmd.Parameters.AddWithValue("@prikey", primaryKeyCheckBox.Checked);
+                    cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @tablaid AND prikey = 1";
                     cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
-                    cmd.ExecuteNonQuery();
+                    long prikeydb = (long)cmd.ExecuteScalar();
+                    if (prikeydb == 1 && primaryKeyCheckBox.Checked == true)
+                    {
+                        MessageBox.Show("Egy táblán belül nem lehet több elsődleges kulcs!");
+                    }
+                    else
+                    {
+                        cmd.CommandText = "INSERT INTO oszlopok(oszlopnev, kiterjesztes, hossz, autoinc, prikey, tablaid) VALUES (@oszlopnev, @kiterjesztes, @hossz, @autoinc, @prikey, @tablaid)";
+                        cmd.Parameters.AddWithValue("@oszlopnev", oszlopNevTextBox.Text);
+                        cmd.Parameters.AddWithValue("@kiterjesztes", oszlopKiterjesztesComboBox.SelectedItem);
+                        cmd.Parameters.AddWithValue("@hossz", oszlopHosszNumericUpDown.Value);
+                        cmd.Parameters.AddWithValue("@autoinc", autoIncrementCheckBox.Checked);
+                        cmd.Parameters.AddWithValue("@prikey", primaryKeyCheckBox.Checked);
+                        cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                        cmd.ExecuteNonQuery();
 
-                    OszlopListazas(kivalasztottTablaID);
-                    OszlopHozzaadReset();
+                        OszlopListazas(kivalasztottTablaID);
+                        OszlopHozzaadReset();
+                    }
                 }
             }
             else
@@ -509,7 +521,7 @@ namespace PHPSQLSeged
                     modositottPrimaryKeyCheckBox.Checked = false;
                     modositottAutoIncrementCheckBox.Enabled = false;
                     modositottPrimaryKeyCheckBox.Enabled = false;
-                    oszlopModositottHosszaNumericUpDown.Enabled = true;
+                    oszlopModositottHosszaNumericUpDown.Enabled = false;
                     break;
             }
         }
@@ -518,9 +530,13 @@ namespace PHPSQLSeged
             if (modositottOszlopNeveEllenorzoPanel.BackColor == Color.Green || modositottOszlopNeveEllenorzoPanel.BackColor == Color.Black)
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @tablaid AND oszlopnev = @oszlopnev";
-                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE oszlopnev = @oszlopnev AND kiterjesztes = @kiterjesztes AND hossz = @hossz AND autoinc = @autoinc AND prikey = @prikey AND tablaid = @tablaid";
                 cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
+                cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztesComboBox.SelectedItem);
+                cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
+                cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
+                cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
                 long db = (long)cmd.ExecuteScalar();
                 if (db != 0)
                 {
@@ -528,17 +544,27 @@ namespace PHPSQLSeged
                 }
                 else
                 {
-                    cmd.CommandText = "UPDATE oszlopok SET oszlopnev = @oszlopnev, kiterjesztes = @kiterjesztes, hossz = @hossz, autoinc = @autoinc, prikey = @prikey WHERE id = @id";
-                    cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
-                    cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztesComboBox.SelectedItem);
-                    cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
-                    cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
-                    cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
-                    cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
-                    cmd.ExecuteNonQuery();
-                    OszlopListazas(kivalasztottTablaID);
-                    oszlopModositasGroupBox.Visible = false;
-                    oszlopHozzaadasGroupBox.Visible = true;
+                    cmd.CommandText = "SELECT COUNT(*) FROM oszlopok WHERE tablaid = @tablaid AND prikey = 1";
+                    cmd.Parameters.AddWithValue("@tablaid", kivalasztottTablaID);
+                    long prikeydb = (long)cmd.ExecuteScalar();
+                    if (prikeydb == 1 && modositottPrimaryKeyCheckBox.Checked == true)
+                    {
+                        MessageBox.Show("Egy táblán belül nem lehet több elsődleges kulcs!");
+                    }
+                    else
+                    {
+                        cmd.CommandText = "UPDATE oszlopok SET oszlopnev = @oszlopnev, kiterjesztes = @kiterjesztes, hossz = @hossz, autoinc = @autoinc, prikey = @prikey WHERE id = @id";
+                        cmd.Parameters.AddWithValue("@oszlopnev", oszlopModositottNeveTextBox.Text);
+                        cmd.Parameters.AddWithValue("@kiterjesztes", oszlopModositottKiterjesztesComboBox.SelectedItem);
+                        cmd.Parameters.AddWithValue("@hossz", oszlopModositottHosszaNumericUpDown.Value);
+                        cmd.Parameters.AddWithValue("@autoinc", modositottAutoIncrementCheckBox.Checked);
+                        cmd.Parameters.AddWithValue("@prikey", modositottPrimaryKeyCheckBox.Checked);
+                        cmd.Parameters.AddWithValue("@id", kivalasztottOszlopID);
+                        cmd.ExecuteNonQuery();
+                        OszlopListazas(kivalasztottTablaID);
+                        oszlopModositasGroupBox.Visible = false;
+                        oszlopHozzaadasGroupBox.Visible = true;
+                    }
                 }
             }
             else
@@ -879,7 +905,7 @@ namespace PHPSQLSeged
                                 {
                                     while (oszlopReader.Read())
                                     {
-                                        
+
                                         string oszlopnev = oszlopReader.GetString(1);
                                         string kiterjesztes = oszlopReader.GetString(2);
                                         int hossz = oszlopReader.GetInt32(3);
@@ -893,34 +919,36 @@ namespace PHPSQLSeged
                                         {
                                             prikey = " PRIMARY KEY";
                                         }
-                                        if (kiterjesztes == "BOOLEAN")
+                                        if (OszlopMennyiseg(id) > db)
                                         {
-                                            if (OszlopMennyiseg(id) > db)
+                                            if (kiterjesztes == "BOOLEAN" || kiterjesztes == "TEXT")
                                             {
                                                 sw.WriteLine(oszlopnev + " " + kiterjesztes + ",");
                                             }
                                             else
                                             {
-                                                sw.WriteLine(oszlopnev + " " + kiterjesztes);
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + prikey + ",");
                                             }
-                                        }
-                                        if (OszlopMennyiseg(id) > db)
-                                        {
-                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + prikey + ",");
                                         }
                                         else
                                         {
-                                            sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + prikey);
+                                            if (kiterjesztes == "BOOLEAN" || kiterjesztes == "TEXT")
+                                            {
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes);
+                                            }
+                                            else
+                                            {
+                                                sw.WriteLine(oszlopnev + " " + kiterjesztes + "(" + hossz + ")" + autoinc + prikey);
+                                            }
                                         }
-                                        
                                         db++;
                                     }
+                                    sw.WriteLine(");");
                                 }
-                                sw.WriteLine(");");
                             }
                         }
+                        sqlPathTextBox.Text = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileName(fileName);
                     }
-                    sqlPathTextBox.Text = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileName(fileName);
                 }
                 catch (Exception)
                 {
@@ -1195,7 +1223,6 @@ namespace PHPSQLSeged
                 }
             };
         }
-
         public List<string> TablakKivalasztasa()
         {
             List<string> tablak = new List<string>();

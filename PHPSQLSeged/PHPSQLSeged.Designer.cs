@@ -184,7 +184,7 @@
             // 
             // mentesButton
             // 
-            this.mentesButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.mentesButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.mentesButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mentesButton.BackgroundImage")));
             this.mentesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mentesButton.FlatAppearance.BorderSize = 0;
@@ -200,7 +200,7 @@
             // 
             // kezdolapButton
             // 
-            this.kezdolapButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.kezdolapButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.kezdolapButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("kezdolapButton.BackgroundImage")));
             this.kezdolapButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.kezdolapButton.FlatAppearance.BorderSize = 0;
@@ -216,7 +216,7 @@
             // 
             // phpButton
             // 
-            this.phpButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.phpButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.phpButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("phpButton.BackgroundImage")));
             this.phpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.phpButton.FlatAppearance.BorderSize = 0;
@@ -232,7 +232,7 @@
             // 
             // sqlButton
             // 
-            this.sqlButton.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.sqlButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.sqlButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sqlButton.BackgroundImage")));
             this.sqlButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.sqlButton.FlatAppearance.BorderSize = 0;
@@ -253,7 +253,7 @@
             this.kezdolapPanel.Controls.Add(this.udvozloSzovegAlahuzasPanel);
             this.kezdolapPanel.Location = new System.Drawing.Point(187, 8);
             this.kezdolapPanel.Name = "kezdolapPanel";
-            this.kezdolapPanel.Size = new System.Drawing.Size(611, 358);
+            this.kezdolapPanel.Size = new System.Drawing.Size(611, 382);
             this.kezdolapPanel.TabIndex = 1;
             // 
             // udvozloLabel
@@ -270,9 +270,9 @@
             // 
             this.instrukcioLabel.AutoSize = true;
             this.instrukcioLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.instrukcioLabel.Location = new System.Drawing.Point(31, 100);
+            this.instrukcioLabel.Location = new System.Drawing.Point(27, 93);
             this.instrukcioLabel.Name = "instrukcioLabel";
-            this.instrukcioLabel.Size = new System.Drawing.Size(551, 252);
+            this.instrukcioLabel.Size = new System.Drawing.Size(551, 273);
             this.instrukcioLabel.TabIndex = 2;
             this.instrukcioLabel.Text = resources.GetString("instrukcioLabel.Text");
             // 
@@ -286,14 +286,14 @@
             // 
             // sqlPanel
             // 
+            this.sqlPanel.Controls.Add(this.oszlopHozzaadasGroupBox);
+            this.sqlPanel.Controls.Add(this.tablaHozzaadasPanel);
             this.sqlPanel.Controls.Add(this.oszlopModositasGroupBox);
             this.sqlPanel.Controls.Add(this.tablaModositasPanel);
-            this.sqlPanel.Controls.Add(this.tablaHozzaadasPanel);
             this.sqlPanel.Controls.Add(this.oszlopTorlesButton);
             this.sqlPanel.Controls.Add(this.oszlopModositasButton);
             this.sqlPanel.Controls.Add(this.tablaTorlesButton);
             this.sqlPanel.Controls.Add(this.tablakModositasButton);
-            this.sqlPanel.Controls.Add(this.oszlopHozzaadasGroupBox);
             this.sqlPanel.Controls.Add(this.oszlopokLabel);
             this.sqlPanel.Controls.Add(this.OszlopokListBox);
             this.sqlPanel.Controls.Add(this.tablakLabel);
@@ -447,7 +447,7 @@
             // 
             // oszlopModositottNeveTextBox
             // 
-            this.oszlopModositottNeveTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.oszlopModositottNeveTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.oszlopModositottNeveTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.oszlopModositottNeveTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.oszlopModositottNeveTextBox.Location = new System.Drawing.Point(136, 41);
@@ -505,7 +505,7 @@
             // 
             // tablaModositottNeveTextBox
             // 
-            this.tablaModositottNeveTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.tablaModositottNeveTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.tablaModositottNeveTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tablaModositottNeveTextBox.Enabled = false;
             this.tablaModositottNeveTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -561,7 +561,7 @@
             // 
             // tablaNeveTextBox
             // 
-            this.tablaNeveTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.tablaNeveTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.tablaNeveTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tablaNeveTextBox.Enabled = false;
             this.tablaNeveTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -772,7 +772,7 @@
             // 
             // oszlopNevTextBox
             // 
-            this.oszlopNevTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.oszlopNevTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.oszlopNevTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.oszlopNevTextBox.Enabled = false;
             this.oszlopNevTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -845,7 +845,7 @@
             // 
             // adatbazisNeveTextBox
             // 
-            this.adatbazisNeveTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.adatbazisNeveTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.adatbazisNeveTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.adatbazisNeveTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.adatbazisNeveTextBox.Location = new System.Drawing.Point(151, 56);
@@ -985,7 +985,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(157, 71);
+            this.label2.Location = new System.Drawing.Point(150, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 22);
             this.label2.TabIndex = 4;
@@ -1013,7 +1013,7 @@
             // 
             this.phpTablakListBox.FormattingEnabled = true;
             this.phpTablakListBox.ItemHeight = 17;
-            this.phpTablakListBox.Location = new System.Drawing.Point(106, 92);
+            this.phpTablakListBox.Location = new System.Drawing.Point(103, 92);
             this.phpTablakListBox.Name = "phpTablakListBox";
             this.phpTablakListBox.Size = new System.Drawing.Size(165, 242);
             this.phpTablakListBox.TabIndex = 0;
@@ -1109,7 +1109,7 @@
             // 
             // phpPathTextBox
             // 
-            this.phpPathTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.phpPathTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.phpPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.phpPathTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.phpPathTextBox.Location = new System.Drawing.Point(59, 192);
@@ -1121,6 +1121,7 @@
             // 
             this.sqlTallozasButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sqlTallozasButton.BackgroundImage")));
             this.sqlTallozasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.sqlTallozasButton.Enabled = false;
             this.sqlTallozasButton.FlatAppearance.BorderSize = 0;
             this.sqlTallozasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.sqlTallozasButton.Location = new System.Drawing.Point(415, 101);
@@ -1150,7 +1151,7 @@
             // 
             // sqlPathTextBox
             // 
-            this.sqlPathTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.sqlPathTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.sqlPathTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sqlPathTextBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.sqlPathTextBox.Location = new System.Drawing.Point(56, 105);
@@ -1199,7 +1200,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(836, 405);
             this.Controls.Add(this.mentesPanel);
             this.Controls.Add(this.sqlPanel);
