@@ -1274,6 +1274,5 @@ namespace PHPSQLSeged
 
             return db;
         }
-
     }
 }
