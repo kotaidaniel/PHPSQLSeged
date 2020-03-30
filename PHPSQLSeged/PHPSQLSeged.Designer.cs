@@ -144,7 +144,7 @@
             this.vezerloPanel.Location = new System.Drawing.Point(0, 1);
             this.vezerloPanel.Margin = new System.Windows.Forms.Padding(4);
             this.vezerloPanel.Name = "vezerloPanel";
-            this.vezerloPanel.Size = new System.Drawing.Size(183, 401);
+            this.vezerloPanel.Size = new System.Drawing.Size(183, 406);
             this.vezerloPanel.TabIndex = 0;
             // 
             // mentesJelolo
@@ -152,7 +152,7 @@
             this.mentesJelolo.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mentesJelolo.Location = new System.Drawing.Point(170, 298);
             this.mentesJelolo.Name = "mentesJelolo";
-            this.mentesJelolo.Size = new System.Drawing.Size(10, 99);
+            this.mentesJelolo.Size = new System.Drawing.Size(10, 108);
             this.mentesJelolo.TabIndex = 8;
             this.mentesJelolo.Visible = false;
             // 
